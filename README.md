@@ -77,3 +77,162 @@ For correct flow of the SDK add the folowing lines in the `<android>` section of
         <!-- SDK DEFENITIONS -->
 	</manifest>
 ``` 
+
+
+#Initializing the SDK
+Sdk should be initialized only once
+When initializing the SDK, please make sure to use your given `publisherID` and `securityToken`, which can be retrieve by contacting with SDK@kidoz.net.
+
+Initiate SDK by creating `SdkControler` instance
+
+```javascript
+
+ 	/** Initiate Kidoz SDK by creating an SdkControler instance
+	 * 
+	 * @throws RuntimeException in case of invalid or missing publisher_id or security token
+	 *  */
+	static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
+```
+
+#KIDOZ Panel
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/panel_view_sample_image.png" align="right" height="121" width="200" ></a>
+
+`PaneView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
+The `PanelView` can be place on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`,`PANEL_TYPE.RIGHT`,`PANEL_TYPE.LEFT` 
+</br>
+The `PanelView` can be controled via a special `Handle` button can that can be located in any of the 3 following positions -  
+`HANDLE_POSITION.START`,`HANDLE_POSITION.CENTER`,`HANDLE_POSITION.END` depending on the `PaneView` initial Screen location.
+</br>
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_panel_layout.jpg" align="center" height="500" width="433" ></a>
+</br>
+
+#####To add Panel to your view use : 
+
+```javascript
+     /** Add feed Panel to View  */
+     controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
+```
+
+- You can change Color of the Panel on runtime by using:
+```javascript
+     controller.setPanelViewColor("#FF9F3087");
+```
+
+- To invoke `PaneView` programmatically use:
+```javascript
+    /**
+     * Expand panel view programmatically
+     */
+     controller.expandPanelView();	
+```
+and
+
+```javascript
+     /**
+     * Collapse panel view programmatically
+     */
+     controller.collapsePanelView();
+```
+
+- To check the `PaneView` current view state use:
+```javascript
+     /**
+     * Check if panel expanded or colapssed
+     */
+     controller.isPanelExpanded();
+```
+
+You can implement `IPanelViewInterface` interface if you want to be informed when the `PanelView` is collapsed/Expanded a by creating a class that implements the interface.
+
+```javascript
+ 	import com.kidoz.sdk.api.platforms.IPanelViewInterface;
+	import com.kidoz.sdk.api.platforms.SdkController;
+	
+	/** Example Implementation of the Feed events listener  */
+	/** Example Implementation of the PAnel View events listener  */
+	public class PanelViewActionListener implements IPanelViewInterface
+	{		
+		var mController:SdkController;
+		
+		public function PanelViewActionListener(controller:SdkController)
+		{
+			mController = controller;
+		}
+		
+		/** On Panel expanded view callback */
+		public function onPanelViewExpanded():void {
+			mController.printToastDebugLog("Feed Panel Expanded");
+		} 
+		
+		/** On Panel collapsed view callback */
+		public function onPanelViewCollapsed():void {
+			mController.printToastDebugLog("Feed Panel Collapsed");
+		} 
+	}
+```
+
+
+#KIDOZ Feed
+##Calling the Feed View Programmatically
+```javascript
+ 	controller.showFeedView();
+```
+
+You can implement `IFeedViewIntefrace` interface if you want to be informed when the `FeedView` is dismissed and/or about to be open by creating a class that implements the interface.
+
+```javascript
+ 	import com.kidoz.sdk.api.platforms.IFeedViewIntefrace;
+	import com.kidoz.sdk.api.platforms.SdkController;
+	
+	/** Example Implementation of the Feed events listener  */
+	public class FeedActionListener implements IFeedViewIntefrace
+	{	
+		var mController:SdkController;
+		
+		public function FeedActionListener(controller:SdkController)
+		{
+			mController = controller;
+		}	 		
+		public function onDismissView():void {
+			mController.printToastDebugLog("Feed view dismissed");
+		} 
+		public function onReadyToShow():void {
+			mController.printToastDebugLog("Feed view shown");
+		} 
+	}
+```
+
+
+##Adding the KIDOZ Feed Button
+<a href="url"><img src="https://kidoz-cdn.s3.amazonaws.com/sdk/btn_animation.gif" align="right" height="96" width="96" ></a>
+You can also call the `Feed View` by adding the `Feed Button` - in this case the `Feed View` will be shown following a click on the `Feed Button`. 
+
+- 	Add `FeedButton` by:
+	
+```javascript
+ 	/** Add feed default Button to view  */
+	controller.addFeedButton(20,90);	
+```
+
+It's recommended to use KIDOZ's default button - the `Feed Button` which is a custom animatable button.
+
+For any question or assistance, please contact us at SDK@kidoz.net.
+</br>
+
+License
+--------
+
+    Copyright 2015 KIDOZ, Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
