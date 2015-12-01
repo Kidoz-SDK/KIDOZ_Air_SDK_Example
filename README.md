@@ -142,7 +142,7 @@ and
      controller.isPanelExpanded();
 ```
 
-You can implement `IPanelViewInterface` interface if you want to be informed when the `PanelView` is collapsed/Expanded a by creating a class that implements the interface.
+You can implement `IPanelViewInterface` interface if you want to be informed when the `PanelView` is Collapsed/Expanded by creating a class that implements the interface.
 
 ```javascript
  	import com.kidoz.sdk.api.platforms.IPanelViewInterface;
@@ -175,6 +175,7 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 #KIDOZ Feed
 ##Calling the Feed View Programmatically
 ```javascript
+	/** Show kidoz feed view */
  	controller.showFeedView();
 ```
 
