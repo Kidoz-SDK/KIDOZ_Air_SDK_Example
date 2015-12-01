@@ -38,10 +38,14 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 2. In opened widnow Select Flex Build Path and then click Native Extensions.
 3. Click (Add ANE) and select `KidozSdkAir.ane`  
 
+</br>
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_1.jpg" align="left" height="450" width="777" ></a>
 </br>
+
 4. Select Flex Build Packaging and then click Native Extensions and check the empty box of recently added ANE.
- </br>
+
+
+</br>
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_2.jpg" align="left" height="450" width="742" ></a>
 </br>
 
