@@ -159,16 +159,30 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 			mController = controller;
 		}
 		
-		/** On Panel expanded view callback */
+		/** On Panel view expanded callback */
 		public function onPanelViewExpanded():void {
 			mController.printToastDebugLog("Feed Panel Expanded");
 		} 
 		
-		/** On Panel collapsed view callback */
+		/** On Panel view collapsed callback */
 		public function onPanelViewCollapsed():void {
 			mController.printToastDebugLog("Feed Panel Collapsed");
 		} 
+		
+		/** On Panel view ready callback */
+		public function onPanelViewReady():void {
+			mController.printToastDebugLog("Feed Panel Ready");
+		} 
 	}
+```
+
+- Set interface by:
+```javascript
+        /**
+	 * Set Panel View events listener
+	 * Used to catch panel view events (Expand/Collaps)
+	 *  */
+	controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
 ```
 
 
@@ -203,6 +217,14 @@ You can implement `IFeedViewIntefrace` interface if you want to be informed when
 	}
 ```
 
+- Set interface by:
+```javascript
+        /**
+	 * Set Feed events listener
+	 * Used to catch feed view events (Show/Dismiss)
+	 *  */
+	controller.setOnFeedViewEventListener(new FeedActionListener(controller));
+```
 
 ##Adding the KIDOZ Feed Button
 <a href="url"><img src="https://kidoz-cdn.s3.amazonaws.com/sdk/btn_animation.gif" align="right" height="96" width="96" ></a>
