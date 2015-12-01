@@ -26,9 +26,23 @@ KIDOZ SDK - Getting Started
  
 	The easiest way to use the SDK is following this 3 steps:
 
-1. Copy `KidozSdkAir.ane` android extension file from the sample to Your project.
+1. Copy `KidozSdkAir.ane` android extension file from the sample application to Your project.
 1. Include the `KidozSdkAir.ane  (KIDOZ SDK)` library inside your project
 2. Inititiate the `SdkController`
 3. Open the `Feed View` programmatically , adding the `KIDOZ Feed Button` or `KIDOZ Panel View` to your `Main Activity`
+
+
+####Include the library
+Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
+1. Right click on the project and select `Properties`
+2. In opened widnow Select Flex Build Path and then click Native Extensions.
+3. Click (Add ANE) and select `KidozSdkAir.ane`  
+
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_1" align="left" height="564" width="975" ></a>
+
+4. Select Flex Build Packaging and then click Native Extensions and check the empty box of recently added ANE.
+ 
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_2" align="left" height="618" width="980" ></a>
+
 
 
