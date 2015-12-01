@@ -44,17 +44,16 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 
 
 </br>
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_1.jpg" align="left" height="450" width="777" ></a>
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_1.jpg" align="left" height="564" width="975" ></a>
 </br>
 
 
-
 </br>
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_2.jpg" align="left" height="450" width="742" ></a>
-</br>
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_2.jpg" align="left" height="618" width="980" ></a>
+ 
 
 
-#### ..-app.xml  Defenitions (IMPORTANT)
+#### Application File Manifets Defenitions:  `..-app.xml` (IMPORTANT)
 For correct flow of the SDK add the folowing lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
 
 ```xml
