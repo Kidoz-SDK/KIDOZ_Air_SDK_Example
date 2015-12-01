@@ -37,9 +37,9 @@ KIDOZ SDK - Getting Started
 Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 
 1. Right click on the project and select `Properties`.
-2. In opened widnow Select Flex Build Path and then click Native Extensions. ( Figure 1).
-3. Click (Add ANE) and select `KidozSdkAir.ane`  .
-4. Select Flex Build Packaging and then click Native Extensions and check the empty box of recently added ANE. ( Figure 2).
+2. In opened widnow Select `Flex Build Path` and then click `Native Extensions`. ( Figure 1).
+3. Click (Add ANE) and select `KidozSdkAir.ane` file .
+4. Select `Flex Build Packaging` and then click `Native Extensions` and check the empty box of recently added ANE. ( Figure 2).
 
 
 
@@ -54,3 +54,27 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 </br>
 
 
+#### ..-app.xml  Defenitions (IMPORTANT)
+For correct flow of the SDK add the folowing lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
+
+```xml
+ 	<manifest android:installLocation="auto">	
+ 	     <!-- SDK Requierd  permissions -->
+	    <uses-permission android:name="android.permission.INTERNET"/>
+	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	    
+	     <!-- Config changes requiered for correct SDK flow -->
+	    <activity android:configChanges="screenLayout|screenSize|orientation|keyboard"/> 
+	    
+	    <!-- SDK DEFENITIONS -->
+        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- SDK DEFENITIONS -->
+	</manifest>
+``` 
