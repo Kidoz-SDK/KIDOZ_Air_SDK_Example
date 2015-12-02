@@ -40,6 +40,7 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 2. In opened widnow Select `Flex Build Path` and then click `Native Extensions`. ( Figure 1).
 3. Click (Add ANE) and select `KidozSdkAir.ane` file .
 4. Select `Flex Build Packaging` and then click `Native Extensions` and check the empty box of recently added ANE. ( Figure 2).
+5. Add to compiler arguments `-swf-version` that adjusted to currently used Air SDK. For Air SDK version `19.0` set `-swf-version 30` (Figure 3)
 
 
 
@@ -50,7 +51,11 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 
 </br>
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_2.jpg" align="left" height="618" width="980" ></a>
- 
+</br>
+
+</br>
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_3.jpg" align="left" height="564" width="932" ></a>
+</br>
 
 
 #### Application File Manifets Defenitions:  `..-app.xml` (IMPORTANT)
