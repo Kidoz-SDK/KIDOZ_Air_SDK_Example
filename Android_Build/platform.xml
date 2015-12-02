@@ -1,0 +1,22 @@
+<platform xmlns="http://ns.adobe.com/air/extension/19.0">
+    <packagedDependencies>
+		<packagedDependency>okhttp-2.5.0.jar</packagedDependency>
+		<packagedDependency>okio-1.6.0.jar</packagedDependency>
+		<packagedDependency>android-support-v4.jar</packagedDependency>
+		<packagedDependency>android-support-v7-recyclerview.jar</packagedDependency>		
+    </packagedDependencies>
+
+    <packagedResources>
+		<packagedResource>
+            <packageName>android.support.v7.recyclerview</packageName>  
+            <folderName>res</folderName>
+        </packagedResource>
+    </packagedResources>
+</platform>
+
+
+
+ 
+
+
+ 

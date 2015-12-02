@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="Kidoz AirSdk Sample App">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">		
+		<s:Button id="showFeedView" label="Show Feed View Programmatically" click="showView();"/>
+		<s:Button id="expandPanel" label="Open Panel Programmatically" click="expandMyPanelView();"/>
+		<s:Button id="colapsePanel" label="Close Panel Programmatically" click="colapseMyPanelView();"/>
+		<s:Button id="panelStatus" label="Check Panel Status" click="checlPanelViewStatus();"/>
+		
+	</s:VGroup>
+	
+	<fx:Script>		
+		<![CDATA[
+			import com.kidoz.sdk.api.platforms.SdkController;
+			
+			/** Initiate Kidoz SDK by creating an SdkControler instance
+			 * 
+			 * @throws RuntimeException in case of invalid or missing publisher_id or security token
+			 *  */
+			static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
+			
+			/** Add feed default Button to view  */
+			controller.addFeedButton(20,90);	
+			
+			/** Add feed Panel to View  */
+			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
+			
+			/** Set desired panel color (Optional) */
+			controller.setPanelViewColor("#FF9F3087");
+			
+			/**
+			 * Set Feed events listener
+			 * Used to catch feed view events (Show/Dismiss)
+			 *  */
+			controller.setOnFeedViewEventListener(new FeedActionListener(controller));
+			
+			/**
+			 * Set Panel View events listener
+			 * Used to catch panel view events (Expand/Collaps)
+			 *  */
+			controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
+			
+			private function showView():void {
+				/**
+				 * Lounch feed view programmatically
+				 * */
+				controller.showFeedView();						 
+			}
+			
+			private function expandMyPanelView():void { 	
+				/**
+				 * Expand panel view programmatically
+				 * */
+				controller.expandPanelView();	
+			}
+			
+			private function colapseMyPanelView():void {				
+				/**
+				 * Collapse panel view programmatically
+				 * */
+				controller.collapsePanelView();
+			}	
+			
+			private function checlPanelViewStatus():void {				
+				/**
+				 * Check panel view state
+				 * */
+				if(controller.isPanelExpanded()) {
+					controller.printToastDebugLog("Panel status OPENED");
+				}else {
+					controller.printToastDebugLog("Panel status CLOSED");
+				}
+			}
+		]]>
+	</fx:Script>
+	
+</s:View>
+
+
+
+
+ 
+
+
