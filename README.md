@@ -7,13 +7,13 @@ KIDOZ SDK + Sample Application (ANE)
 *Updated to KIDOZ SDK version 0.2.2*
 
 This Flex Mobile application  project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
-F
+
 The example application contains the following creative tools:
 * KIDOZ's Feed view content tool - the `Feed View`
 * KIDOZ's Panel view (+Family) content tool - the `Panel View`
 
 
-The sample application `KidozSdkSampleApp` containes the `Android Native Extension (ANE)` of the Kidoz SDK called  `KidozSdkAir.ane` ,  This file should be taken and copied to Your project in order to use Kidoz SDK functionality.
+The sample application `KidozSdkSampleApp` containes the `KidozSdkAir.ane` file which is the `Android Native Extension (ANE)` for KIDOZ SDK, this file should be downloaded and copied to your project to integrate the KIDOZ SDK.
 
 ###Running the sample app
 Add it to Flash® Builder™® 4.7 and run it as mobile android application on Device. (Only `Google Android` Target platform And `On Device` Launch method is supported).
