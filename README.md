@@ -10,10 +10,10 @@ This Flex Mobile application  project provides an example of the [KIDOZ](http://
 
 The example application contains the following creative tools:
 * KIDOZ's Feed view content tool - the `Feed View`
-* KIDOZ's Panel view content tool - the `Panel View`
+* KIDOZ's Panel view (+Family) content tool - the `Panel View`
 
 
-The sample application `KidozSdkSampleApp` containes the `Android Native Extension (ANE)` of the Kidoz SDK called  `KidozSdkAir.ane`. This file should be taken and copied to Your project in order to use Kidoz SDK functionality.
+The sample application `KidozSdkSampleApp` containes the `Android Native Extension (ANE)` of the Kidoz SDK called  `KidozSdkAir.ane` ,  This file should be taken and copied to Your project in order to use Kidoz SDK functionality.
 
 ###Running the sample app
 Add it to Flash® Builder™® 4.7 and run it as mobile android application on Device. (Only `Google Android` Target platform And `On Device` Launch method is supported).
@@ -28,8 +28,8 @@ KIDOZ SDK - Getting Started
 
 1. Copy `KidozSdkAir.ane` android extension file from the sample application to Your project.
 1. Include the `KidozSdkAir.ane  (KIDOZ SDK)` library inside your project
-2. Inititiate the `SdkController`
-3. Open the `Feed View` programmatically , adding the `KIDOZ Feed Button` or `KIDOZ Panel View` to your `Main Activity`
+2. Initalize the `SdkController`
+3. Open the `Feed View` programmatically , add the `KIDOZ Feed Button` or `KIDOZ Panel View` to your `Main Activity`
 
 
 ####Include the library
