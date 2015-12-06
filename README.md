@@ -59,7 +59,7 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 </br>
 
 
-#### Application File Manifets Defenitions:  `..-app.xml` (IMPORTANT)
+#### App Manifest Defenitions:  `..-app.xml` (IMPORTANT)
 For correct flow of the SDK add the folowing lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
 
 ```xml
