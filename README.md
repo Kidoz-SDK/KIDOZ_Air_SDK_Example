@@ -111,7 +111,8 @@ The `PanelView` can be controled via a special `Handle` button can that can be l
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_panel_layout.jpg" align="center" height="500" width="433" ></a>
 </br>
 
-Kidoz Panel View support 2 modes `Normal Panel View` and `Family Panel View` that defined by Google Family restriciton standart.
+Kidoz Panel View support 2 modes `Normal Panel View` and `Family Panel View` 
+Family Definition is implemented by Google Family restriciton standart.
 
 #####To add Panel to your view use : 
 
