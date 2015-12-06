@@ -140,10 +140,11 @@ package com.kidoz.sdk.api.platforms
 		 * 
 		 * @param panel_type panel type (TOP,BOTTOM,RIGHT,LEFT)
 		 * @param handle_position handle position (CENTER,START,STOP)
+		 * @param isFamily set for family compatibale panel
 		 */
-		public function addPanleView(panel_type:Number,handle_position:Number):void {
+		public function addPanleView(panel_type:Number,handle_position:Number,isFamily:Boolean):void {
 			if(extContext != null) {
-				extContext.call("addPanelView",panel_type,handle_position);
+				extContext.call("addPanelView",panel_type,handle_position,isFamily);
 			}			
 		}
 		

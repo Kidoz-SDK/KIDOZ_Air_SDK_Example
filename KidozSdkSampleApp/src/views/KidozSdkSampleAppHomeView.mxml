@@ -28,7 +28,7 @@
 			controller.addFeedButton(20,90);	
 			
 			/** Add feed Panel to View  */
-			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
+			controller.addPanleView(SdkController.PANEL_TYPE_LEFT,SdkController.HANDLE_POSITION_END,true);	
 			
 			/** Set desired panel color (Optional) */
 			controller.setPanelViewColor("#FF9F3087");

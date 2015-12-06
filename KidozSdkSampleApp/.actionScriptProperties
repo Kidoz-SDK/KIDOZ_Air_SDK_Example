@@ -28,7 +28,7 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="5" linkType="2" path="C:/Users/Eugine/Desktop/KidozAirSdkExtension/Android_Build/KidozSdkAir.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="C:/Users/Eugine/Desktop/KidozAirSdk/Android_Build/KidozSdkAir.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -46,7 +46,7 @@
       <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
-          <anePathEntry path="C:/Users/Eugine/Desktop/KidozAirSdkExtension/Android_Build/KidozSdkAir.ane"/>
+          <anePathEntry path="C:/Users/Eugine/Desktop/KidozAirSdk/Android_Build/KidozSdkAir.ane"/>
         </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
