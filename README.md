@@ -16,7 +16,10 @@ The example application contains the following creative tools:
 The sample application `KidozSdkSampleApp` containes the `KidozSdkAir.ane` file which is the `Android Native Extension (ANE)` for KIDOZ SDK, this file should be downloaded and copied to your project to integrate the KIDOZ SDK.
 
 ###Running the sample app
-Add it to Flash® Builder™® 4.7 and run it as mobile android application on Device. (Only `Google Android` Target platform And `On Device` Launch method is supported).
+
+1. Download / Clone the `KidozSdkSampleApp`
+2. Add it to your Flash® Builder™® 
+3. Run the application as a mobile android application (Only `Google Android` Target platform And `On Device` Launch method is supported).
 
 </br>
 
@@ -27,9 +30,9 @@ KIDOZ SDK - Getting Started
 	The easiest way to use the SDK is following this 3 steps:
 
 1. Copy `KidozSdkAir.ane` android extension file from the sample application to Your project.
-1. Include the `KidozSdkAir.ane  (KIDOZ SDK)` library inside your project
-2. Initalize the `SdkController`
-3. Open the `Feed View` programmatically , add the `KIDOZ Feed Button` or `KIDOZ Panel View` to your `Main Activity`
+2. Include the `KidozSdkAir.ane  (KIDOZ SDK)` library inside your project
+3. Initalize the `SdkController`
+4. Open the `Feed View` programmatically , add the `KIDOZ Feed Button` or `KIDOZ Panel View` to your `Main Activity`
 
 
 ####Include the library
