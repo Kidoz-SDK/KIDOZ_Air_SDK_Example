@@ -7,7 +7,7 @@ KIDOZ SDK + Sample Application (ANE)
 *Updated to KIDOZ SDK version 0.2.2*
 
 This Flex Mobile application  project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
-
+F
 The example application contains the following creative tools:
 * KIDOZ's Feed view content tool - the `Feed View`
 * KIDOZ's Panel view (+Family) content tool - the `Panel View`
@@ -112,13 +112,20 @@ The `PanelView` can be controled via a special `Handle` button can that can be l
 </br>
 
 Kidoz Panel View support 2 modes `Normal Panel View` and `Family Panel View` 
-Family Definition is implemented by Google Family restriciton standart.
+`Family Panel View` is a unit designed to comply with Google's Designed for Families Policy
 
-#####To add Panel to your view use : 
+#####To add the Normal Panel to your view use : 
 
 ```javascript
-     /** Add feed Panel to View  */
+     /** Add Panel to View  */
      controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END,false);	
+```
+
+#####To add the Family Panel to your view use : 
+
+```javascript
+     /** Add Panel to View  */
+     controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END,true);	
 ```
 
 - You can change Color of the Panel on runtime by using:
