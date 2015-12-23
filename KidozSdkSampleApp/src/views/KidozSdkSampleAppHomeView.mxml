@@ -9,9 +9,13 @@
 	<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">		
 		<s:Button id="showFeedView" label="Show Feed View Programmatically" click="showView();"/>
 		<s:Button id="expandPanel" label="Open Panel Programmatically" click="expandMyPanelView();"/>
-		<s:Button id="colapsePanel" label="Close Panel Programmatically" click="colapseMyPanelView();"/>
+		<s:Button id="colapsePanel" label="Close Panel Programmatically"
+				  click="colapseMyPanelView();"/>
 		<s:Button id="panelStatus" label="Check Panel Status" click="checkPanelViewStatus();"/>
-		<s:Button id="changePos" label="Change Banner Anchor Pos" click="changeBannerAnchorPosition();"/> 
+		<s:Button id="changePos" label="Change Banner Anchor Pos"
+				  click="changeBannerAnchorPosition();"/> 
+		<s:Button id="hide_Banner" label="Show Banner" click="showBanner();"/> 
+		<s:Button id="show_wBanner" label="Hide Banner" click="hideBanner();"/> 
 		
 	</s:VGroup>
 	
@@ -106,6 +110,24 @@
 					currentPosition = 0;
 				}
 				controller.changeBannerViewPosition(currentPosition);
+			}
+			
+			
+			/**
+			 * Show banner view
+			 *  */
+			private function showBanner():void {	
+				 
+				controller.showBannerView();
+			}
+			
+			
+			/**
+			 * Hide banner view
+			 *  */
+			private function hideBanner():void {	
+				 
+				controller.hideBannerView();
 			}
 		]]>
 	</fx:Script>

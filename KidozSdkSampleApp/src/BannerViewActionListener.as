@@ -3,7 +3,7 @@ package
 	import com.kidoz.sdk.api.platforms.IBannerViewInterface;
 	import com.kidoz.sdk.api.platforms.SdkController;
 	
-	/** Example Implementation of the Panel View events listener  */
+	/** Example Implementation of the Banner events listener  */
 	public class BannerViewActionListener implements IBannerViewInterface
 	{		
 		var mController:SdkController;

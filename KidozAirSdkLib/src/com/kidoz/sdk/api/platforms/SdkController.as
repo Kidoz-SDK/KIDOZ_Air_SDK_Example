@@ -270,6 +270,26 @@ package com.kidoz.sdk.api.platforms
 				extContext.call("changeBannerPosition",banner_anchor_pos);
 			} 
 		}
+		
+		
+		/**
+		 * Show banner view		 
+		 */
+		public function showBannerView():void {
+			if(extContext != null) {
+				extContext.call("showBannerView");
+			}
+		}
+		
+		/**
+		 * Hide banner view		 
+		 */
+		public function hideBannerView():void {
+			if(extContext != null) {
+				extContext.call("hideBannerView");
+			}
+		}
+		
 	 	
 		/**
 		 * Set on panel view event listener
