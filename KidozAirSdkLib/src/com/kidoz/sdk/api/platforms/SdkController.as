@@ -3,6 +3,9 @@ package com.kidoz.sdk.api.platforms
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 
+	/**
+	 * Sdk Controller Version 0.3.0
+	 * */
 	public class SdkController  
 	{
 		// Panel Types
@@ -16,6 +19,14 @@ package com.kidoz.sdk.api.platforms
 		public static const HANDLE_POSITION_CENTER:int = 1; 
 		public static const HANDLE_POSITION_END:int = 2; 		
 		
+		// Banner Anchor Position
+		public static const BANNER_POSITION_TOP:int = 0; 
+		public static const BANNER_POSITION_BOTTOM:int = 1; 
+		public static const BANNER_POSITION_TOP_LEFT:int = 2; 	
+		public static const BANNER_POSITION_TOP_RIGHT:int = 3; 		
+		public static const BANNER_POSITION_BOTTOM_LEFT:int = 4; 		
+		public static const BANNER_POSITION_BOTTOM_RIGHT:int = 5; 		
+		
         //-------------------------------------------------		
 		private static var instance:SdkController;
 		private static var extContext:ExtensionContext = null;	
@@ -23,16 +34,28 @@ package com.kidoz.sdk.api.platforms
 		private static var mToken:String;		
 		private var mFeedViewListener:IFeedViewIntefrace = null;
 		private var mPanelViewListener:IPanelViewInterface = null;
+		private var mBannerViewListener:IBannerViewInterface = null;
+		 
 		
+		// Used for Panel interface listener
 		private static const PANEL_VIEW_EVENT:String = "PANEL_VIEW_EVENT"; 
 		private static const PANEL_VIEW_EVENT_EXPANDED:String = "PANEL_VIEW_EVENT_EXPANDED";
 		private static const PANEL_VIEW_EVENT_COLLAPSED:String = "PANEL_VIEW_EVENT_COLLAPSED";
 		private static const PANEL_VIEW_EVENT_PANEL_READY:String = "PANEL_VIEW_EVENT_PANEL_READY";
 		
+		// Used for Feed interface listener
 		private static const FEED_VIEW_EVENT:String = "FEED_VIEW_EVENT"; 
 		private static const FEED_VIEW_EVENT_READY_TOSHOW:String = "FEED_VIEW_EVENT_READY_TOSHOW"; 
 		private static const FEED_VIEW_EVENT_DISMISS:String = "FEED_VIEW_EVENT_DISMISS"; 
-				
+		private static const FEED_VIEW_EVENT_OBJECT_READY:String = "FEED_VIEW_EVENT_OBJECT_READY"; 
+		
+		// Used for Banner interface listener
+		private static const BANNER_VIEW_EVENT:String = "BANNER_VIEW_EVENT";
+		private static const BANNER_VIEW_EVENT_READY:String = "BANNER_VIEW_EVENT_READY"; 
+		private static const BANNER_VIEW_EVENT_SHOW:String = "BANNER_VIEW_EVENT_SHOW"; 
+		private static const BANNER_VIEW_EVENT_HIDE:String = "BANNER_VIEW_EVENT_HIDE"; 
+		private static const BANNER_VIEW_EVENT_CONTENT_LOADED:String = "BANNER_VIEW_EVENT_CONTENT_LOADED"; 
+		private static const BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED:String = "BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED"; 
 		
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
@@ -88,7 +111,21 @@ package com.kidoz.sdk.api.platforms
 						mPanelViewListener.onPanelViewReady();
 					}	
 				}
-			}					
+			}else if(event.code == BANNER_VIEW_EVENT){	
+				if(mBannerViewListener) {
+					if(event.level == BANNER_VIEW_EVENT_SHOW) {
+						mBannerViewListener.onBannerShow();
+					}else if(event.level == BANNER_VIEW_EVENT_HIDE){
+						mBannerViewListener.onBannerHide();
+					}else if(event.level == BANNER_VIEW_EVENT_READY){
+						mBannerViewListener.onBannerReady();
+					}else if(event.level == BANNER_VIEW_EVENT_CONTENT_LOADED){
+						mBannerViewListener.onBannerContentLoaded();
+					}else if(event.level == BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED){
+						mBannerViewListener.onBannerContentLoadFailed();
+					}	
+				}
+			}
 		} 
 		
 		/**
@@ -102,6 +139,7 @@ package com.kidoz.sdk.api.platforms
 				extContext.call("addFeedButton",x_coord,y_coord);
 			}			
 		}
+			 
 		
 		/**
 		 * Add feed button with size
@@ -140,13 +178,13 @@ package com.kidoz.sdk.api.platforms
 		 * 
 		 * @param panel_type panel type (TOP,BOTTOM,RIGHT,LEFT)
 		 * @param handle_position handle position (CENTER,START,STOP)
-		 * @param isFamily set for family compatibale panel
 		 */
-		public function addPanleView(panel_type:Number,handle_position:Number,isFamily:Boolean):void {
+		public function addPanleView(panel_type:Number,handle_position:Number):void {
 			if(extContext != null) {
-				extContext.call("addPanelView",panel_type,handle_position,isFamily);
+				extContext.call("addPanelView",panel_type,handle_position);
 			}			
 		}
+		
 		
 		/**
 		 * Set panl view color in hexa representation 
@@ -161,6 +199,7 @@ package com.kidoz.sdk.api.platforms
 		/**
 		 * Change panel visibility state
 		 * 
+		 * @param visible
 		 */
 		public function changePanelVisivilityState(visible:Boolean):void {
 			if(extContext != null) {
@@ -170,6 +209,8 @@ package com.kidoz.sdk.api.platforms
  
 		/**
 		 * Change feed button visibility state
+		 * 
+		 * @param visible
 		 */
 		public function changeFeedButtonVisivilityState(visible:Boolean):void {
 			if(extContext != null) {
@@ -196,7 +237,9 @@ package com.kidoz.sdk.api.platforms
 		}
 		
 		/**
-		 * Expand panel view
+		 * Get panel viee current state (Expanded/Collapsed)
+		 * 
+		 * @return if panel expanded or not
 		 */
 		public function isPanelExpanded():Boolean {
 			if(extContext != null) {
@@ -204,6 +247,28 @@ package com.kidoz.sdk.api.platforms
 			}else {
 				return false;
 			}
+		}
+		
+		/**
+		 * Add Banner view to screen
+		 * 
+		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
+		 */
+		public function addBannerView(banner_anchor_pos:Number):void {
+			if(extContext != null) {
+				 extContext.call("addBannerView",banner_anchor_pos);
+			} 
+		}
+		
+		/**
+		 * Change Banner view anchor position on screen
+		 * 
+		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
+		 */
+		public function changeBannerViewPosition(banner_anchor_pos:Number):void {
+			if(extContext != null) {
+				extContext.call("changeBannerPosition",banner_anchor_pos);
+			} 
 		}
 	 	
 		/**
@@ -222,6 +287,15 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function setOnFeedViewEventListener(listener:IFeedViewIntefrace):void {
 			mFeedViewListener = listener;
+		}
+		
+		/**
+		 * Set on Banner view event listener
+		 * 
+		 * @param listener class that implemets "IBannerViewInterface" interface 
+		 */
+		public function setOnBannerViewEventListener(listener:IBannerViewInterface):void {
+			mBannerViewListener = listener;
 		}
 		
 		/**

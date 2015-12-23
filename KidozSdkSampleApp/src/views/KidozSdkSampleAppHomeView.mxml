@@ -10,7 +10,8 @@
 		<s:Button id="showFeedView" label="Show Feed View Programmatically" click="showView();"/>
 		<s:Button id="expandPanel" label="Open Panel Programmatically" click="expandMyPanelView();"/>
 		<s:Button id="colapsePanel" label="Close Panel Programmatically" click="colapseMyPanelView();"/>
-		<s:Button id="panelStatus" label="Check Panel Status" click="checlPanelViewStatus();"/>
+		<s:Button id="panelStatus" label="Check Panel Status" click="checkPanelViewStatus();"/>
+		<s:Button id="changePos" label="Change Banner Anchor Pos" click="changeBannerAnchorPosition();"/> 
 		
 	</s:VGroup>
 	
@@ -22,17 +23,9 @@
 			 * 
 			 * @throws RuntimeException in case of invalid or missing publisher_id or security token
 			 *  */
-			static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
+			static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");				
 			
-			/** Add feed default Button to view  */
-			controller.addFeedButton(20,90);	
-			
-			/** Add feed Panel to View  */
-			controller.addPanleView(SdkController.PANEL_TYPE_LEFT,SdkController.HANDLE_POSITION_END,true);	
-			
-			/** Set desired panel color (Optional) */
-			controller.setPanelViewColor("#FF9F3087");
-			
+	
 			/**
 			 * Set Feed events listener
 			 * Used to catch feed view events (Show/Dismiss)
@@ -44,6 +37,30 @@
 			 * Used to catch panel view events (Expand/Collaps)
 			 *  */
 			controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
+			
+			/**
+			 * Set Banner View events listener
+			 * Used to catch banner view events
+			 *  */
+			controller.setOnBannerViewEventListener(new BannerViewActionListener(controller));
+			
+			
+			/** Add feed default Button to view  */
+			controller.addFeedButton(20,500);	
+			
+			/** Add feed Panel to View  */
+			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
+			
+			/** Set desired panel color (Optional) */
+			controller.setPanelViewColor("#FF9F3087");
+			
+			/**
+			 * Add banner view
+			 * */
+			controller.addBannerView(SdkController.BANNER_POSITION_TOP_RIGHT);
+			
+			
+			
 			
 			private function showView():void {
 				/**
@@ -66,7 +83,7 @@
 				controller.collapsePanelView();
 			}	
 			
-			private function checlPanelViewStatus():void {				
+			private function checkPanelViewStatus():void {				
 				/**
 				 * Check panel view state
 				 * */
@@ -75,6 +92,20 @@
 				}else {
 					controller.printToastDebugLog("Panel status CLOSED");
 				}
+			}		
+			
+			static var currentPosition:Number = 0;
+			
+			
+			/**
+			 * Example of changing banner anchor position on runtime
+			 *  */
+			private function changeBannerAnchorPosition():void {	
+				currentPosition++;
+				if(currentPosition > SdkController.BANNER_POSITION_BOTTOM_RIGHT) {
+					currentPosition = 0;
+				}
+				controller.changeBannerViewPosition(currentPosition);
 			}
 		]]>
 	</fx:Script>
