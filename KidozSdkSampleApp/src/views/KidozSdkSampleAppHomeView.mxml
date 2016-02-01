@@ -7,17 +7,20 @@
 	</fx:Declarations>
 	
 	<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">		
-		<s:Button id="showFeedView" label="Show Feed View Programmatically" click="showView();"/>
-		<s:Button id="expandPanel" label="Open Panel Programmatically" click="expandMyPanelView();"/>
-		<s:Button id="colapsePanel" label="Close Panel Programmatically"
-				  click="colapseMyPanelView();"/>
-		<s:Button id="panelStatus" label="Check Panel Status" click="checkPanelViewStatus();"/>
-		<s:Button id="changePos" label="Change Banner Anchor Pos"
-				  click="changeBannerAnchorPosition();"/> 
+		<s:Button id="showFeedView" label="Show Feed" click="showView();"/>		 	
+		<s:Button id="expandPanel" label="Expand Panel" click="expandPanelView();"/>
+		<s:Button id="colapsePanel" label="Close Panel" click="colapsePanelView();"/>		 	 
+		<s:Button id="panelStatus" label="Get Panel Status" click="checkPanelViewStatus();"/>
+		<s:Button id="addBanner" label="Add Banner" click="addBannerView();"/> 
+		<s:Button id="changePos" label="Change Banner Pos" click="changeBannerAnchorPosition();"/> 
 		<s:Button id="hide_Banner" label="Show Banner" click="showBanner();"/> 
-		<s:Button id="show_wBanner" label="Hide Banner" click="hideBanner();"/> 
-		
+		<s:Button id="show_Banner" label="Hide Banner" click="hideBanner();"/> 
+		<s:Button id="add_FlexiView" label="Add Flexi" click="addFlexiView();"/> 
+		<s:Button id="show_FlexiView" label="show Flexi" click="showFlexiView();"/> 
+		<s:Button id="hide_FlexiView" label="hide Flexi" click="hideFlexiView();"/>
+		<s:Button id="is_FlexiViewVisible" label="Get Flexi State" click="checkFlexiViewStatus();"/> 	
 	</s:VGroup>
+	
 	
 	<fx:Script>		
 		<![CDATA[
@@ -26,6 +29,7 @@
 			/** Initiate Kidoz SDK by creating an SdkControler instance
 			 * 
 			 * @throws RuntimeException in case of invalid or missing publisher_id or security token
+			 * (Please Set you our developer id and security token provided !!)
 			 *  */
 			static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");				
 			
@@ -49,8 +53,15 @@
 			controller.setOnBannerViewEventListener(new BannerViewActionListener(controller));
 			
 			
-			/** Add feed default Button to view  */
-			controller.addFeedButton(20,500);	
+			/**
+			 * Set Flexi Point View events listener
+			 * Used to catch Flexi point view events
+			 *  */
+			controller.setOnFlexiViewEventListener(new FlexiViewActionListener(controller));
+			
+			// For example purposes we add Feed Button And Panel View on application Start
+			/** Add feed default Button to view */
+			controller.addFeedButton(20,60);	
 			
 			/** Add feed Panel to View  */
 			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
@@ -59,38 +70,30 @@
 			controller.setPanelViewColor("#FF9F3087");
 			
 			/**
-			 * Add banner view
+			 * Lounch feed view programmatically
 			 * */
-			controller.addBannerView(SdkController.BANNER_POSITION_TOP_RIGHT);
-			
-			
-			
-			
-			private function showView():void {
-				/**
-				 * Lounch feed view programmatically
-				 * */
+			private function showView():void {			
 				controller.showFeedView();						 
 			}
 			
-			private function expandMyPanelView():void { 	
-				/**
-				 * Expand panel view programmatically
-				 * */
+			/**
+			 * Expand panel view programmatically
+			 * */
+			private function expandPanelView():void { 				
 				controller.expandPanelView();	
 			}
 			
-			private function colapseMyPanelView():void {				
-				/**
-				 * Collapse panel view programmatically
-				 * */
+			/**
+			 * Collapse panel view programmatically
+			 * */
+			private function colapsePanelView():void {						
 				controller.collapsePanelView();
 			}	
 			
-			private function checkPanelViewStatus():void {				
-				/**
-				 * Check panel view state
-				 * */
+			/**
+			 * Check panel view state
+			 * */
+			private function checkPanelViewStatus():void {							
 				if(controller.isPanelExpanded()) {
 					controller.printToastDebugLog("Panel status OPENED");
 				}else {
@@ -98,9 +101,17 @@
 				}
 			}		
 			
+			
+			/**
+			 * Add banner to view
+			 *  */
+			private function addBannerView():void {					
+				controller.addBannerView(SdkController.BANNER_POSITION_TOP_RIGHT);
+			}
+			
+			// Help variable for position changes
 			static var currentPosition:Number = 0;
-			
-			
+				
 			/**
 			 * Example of changing banner anchor position on runtime
 			 *  */
@@ -128,6 +139,43 @@
 			private function hideBanner():void {	
 				 
 				controller.hideBannerView();
+			}
+			
+			/**
+			 * Hide banner view
+			 *  */
+			private function addFlexiView():void {	
+				
+				controller.addFlexiView(true,SdkController.FLEXI_VIEW_POSITION_TOP_END);
+			}
+			
+			/**
+			 * Hide banner view
+			 *  */
+			private function showFlexiView():void {	
+				
+				controller.showFlexiView();
+			}
+			
+			
+			/**
+			 * Hide banner view
+			 *  */
+			private function hideFlexiView():void {	
+				
+				controller.hideFlexiView();
+			}
+			
+			/**
+			 * Check flexi view status
+			 *  */
+			private function checkFlexiViewStatus():void {	
+				
+				if(controller.getIsFlexiViewVisible()) {
+					controller.printToastDebugLog("FlexiView Status : VISIBLE");
+				}else {
+					controller.printToastDebugLog("FlexiView Status : HIDDEN");
+				}		
 			}
 		]]>
 	</fx:Script>

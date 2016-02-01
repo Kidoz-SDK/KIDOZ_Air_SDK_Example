@@ -1,6 +1,6 @@
 <platform xmlns="http://ns.adobe.com/air/extension/19.0">
     <packagedDependencies>
-		<packagedDependency>okhttp-2.7.0.jar</packagedDependency>
+		<packagedDependency>okhttp-2.7.2.jar</packagedDependency>
 		<packagedDependency>okio-1.6.0.jar</packagedDependency>
 		<packagedDependency>eventbus-2.4.1.jar</packagedDependency>
 		<packagedDependency>android-support-v4.jar</packagedDependency>

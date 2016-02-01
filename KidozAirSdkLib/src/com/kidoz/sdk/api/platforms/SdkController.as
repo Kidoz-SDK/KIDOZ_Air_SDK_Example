@@ -4,7 +4,7 @@ package com.kidoz.sdk.api.platforms
 	import flash.external.ExtensionContext;
 
 	/**
-	 * Sdk Controller Version 0.3.0
+	 * Sdk Controller Version 0.4.0
 	 * */
 	public class SdkController  
 	{
@@ -25,7 +25,18 @@ package com.kidoz.sdk.api.platforms
 		public static const BANNER_POSITION_TOP_LEFT:int = 2; 	
 		public static const BANNER_POSITION_TOP_RIGHT:int = 3; 		
 		public static const BANNER_POSITION_BOTTOM_LEFT:int = 4; 		
-		public static const BANNER_POSITION_BOTTOM_RIGHT:int = 5; 		
+		public static const BANNER_POSITION_BOTTOM_RIGHT:int = 5; 	
+		
+		// Flexi View Anchor Position
+		public static const FLEXI_VIEW_POSITION_TOP_START:int = 0; 
+		public static const FLEXI_VIEW_POSITION_TOP_CENTER:int = 1; 
+		public static const FLEXI_VIEW_POSITION_TOP_END:int = 2; 	
+		public static const FLEXI_VIEW_POSITION_MID_START:int = 3; 		
+		public static const FLEXI_VIEW_POSITION_MID_CENTER:int = 4; 		
+		public static const FLEXI_VIEW_POSITION_MID_END:int = 5; 
+		public static const FLEXI_VIEW_POSITION_BOTTOM_START:int = 6; 		
+		public static const FLEXI_VIEW_POSITION_BOTTOM_CENTER:int = 7; 		
+		public static const FLEXI_VIEW_POSITION_BOTTOM_END:int = 8;
 		
         //-------------------------------------------------		
 		private static var instance:SdkController;
@@ -35,8 +46,8 @@ package com.kidoz.sdk.api.platforms
 		private var mFeedViewListener:IFeedViewIntefrace = null;
 		private var mPanelViewListener:IPanelViewInterface = null;
 		private var mBannerViewListener:IBannerViewInterface = null;
-		 
-		
+		private var mFlexiViewListener:IFlexiViewInterface = null;
+		 	
 		// Used for Panel interface listener
 		private static const PANEL_VIEW_EVENT:String = "PANEL_VIEW_EVENT"; 
 		private static const PANEL_VIEW_EVENT_EXPANDED:String = "PANEL_VIEW_EVENT_EXPANDED";
@@ -57,6 +68,12 @@ package com.kidoz.sdk.api.platforms
 		private static const BANNER_VIEW_EVENT_CONTENT_LOADED:String = "BANNER_VIEW_EVENT_CONTENT_LOADED"; 
 		private static const BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED:String = "BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED"; 
 		
+		// Used for Flexi view interface listener
+		private static const FLEXI_VIEW_EVENT:String = "FLEXI_VIEW_EVENT";
+		private static const FLEXI_VIEW_EVENT_READY:String = "FLEXI_VIEW_EVENT_READY"; 
+		private static const FLEXI_VIEW_EVENT_VISIBLE:String = "FLEXI_VIEW_EVENT_VISIBLE"; 
+		private static const FLEXI_VIEW_EVENT_HIDDEN:String = "FLEXI_VIEW_EVENT_HIDDEN"; 
+	 
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
 		{
@@ -124,6 +141,17 @@ package com.kidoz.sdk.api.platforms
 					}else if(event.level == BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED){
 						mBannerViewListener.onBannerContentLoadFailed();
 					}	
+				}
+			}
+			else if(event.code == FLEXI_VIEW_EVENT){	
+				if(mFlexiViewListener) {
+					if(event.level == FLEXI_VIEW_EVENT_READY) {
+						mFlexiViewListener.onFlexiViewReady();
+					}else if(event.level == FLEXI_VIEW_EVENT_VISIBLE){
+						mFlexiViewListener.onFlexiViewVisible();
+					}else if(event.level == FLEXI_VIEW_EVENT_HIDDEN){
+						mFlexiViewListener.onFlexiViewHidden();
+					}
 				}
 			}
 		} 
@@ -269,8 +297,7 @@ package com.kidoz.sdk.api.platforms
 			if(extContext != null) {
 				extContext.call("changeBannerPosition",banner_anchor_pos);
 			} 
-		}
-		
+		}	
 		
 		/**
 		 * Show banner view		 
@@ -289,7 +316,50 @@ package com.kidoz.sdk.api.platforms
 				extContext.call("hideBannerView");
 			}
 		}
+			
+		/**
+		 * Add Flexi point view to screen
+		 * 
+		 * @param isAutoShow notify if to show the flexi view right away when its ready 
+		 * @param initial_pos the initial position of the flexi view on screen (FLEXI_VIEW_POSITION_TOP_START... )
+		 */
+		public function addFlexiView(isAutoShow:Boolean,initial_pos:Number):void {
+			if(extContext != null) {
+				extContext.call("addFlexiView",isAutoShow,initial_pos);
+			} 
+		}
 		
+		
+		/**
+		 * Show and make visible flexi view on screen
+		 */
+		public function showFlexiView():void {
+			if(extContext != null) {
+				extContext.call("showFlexiView");
+			} 
+		}
+		
+		
+		/**
+		 * Hide and make invisible flexi point view 
+		 */
+		public function hideFlexiView():void {
+			if(extContext != null) {
+				extContext.call("hideFlexiView");
+			} 
+		}
+		
+		/**
+		 * Get is felxi ciew currently visible
+		 */
+		public function getIsFlexiViewVisible():Boolean {
+			if(extContext != null) {
+				return extContext.call("getIsFlexiViewVisible");
+			}else {
+				return false;
+			}
+		}	
+			
 	 	
 		/**
 		 * Set on panel view event listener
@@ -316,6 +386,16 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function setOnBannerViewEventListener(listener:IBannerViewInterface):void {
 			mBannerViewListener = listener;
+		}
+		
+		
+		/**
+		 * Set on Flexi view event listener
+		 * 
+		 * @param listener class that implemets "IFlexiViewInterface" interface 
+		 */
+		public function setOnFlexiViewEventListener(listener:IFlexiViewInterface):void {
+			mFlexiViewListener = listener;
 		}
 		
 		/**
