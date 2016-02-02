@@ -9,9 +9,10 @@ KIDOZ SDK + Sample Application (ANE)
 This Flex Mobile application  project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
 The example application contains the following creative tools:
-* KIDOZ's Feed view (+Family) content tool - the `Feed View`
-* KIDOZ's Panel view (+Family) content tool - the `Panel View`
-* KIDOZ's Banner view  content tool - the `Banner View`
+* KIDOZ's Feed view (+Family) content tool - the `FeedView`
+* KIDOZ's Panel view (+Family) content tool - the `PanelView`
+* KIDOZ's Banner view  content tool - the `KidozBanner`
+* KIDOZ's Flexi Point view content tool - the `FlexiView`
 
 
 The sample application `KidozSdkSampleApp` containes the `KidozSdkAir.ane` file which is the `Android Native Extension (ANE)` for KIDOZ SDK, this file should be downloaded and copied to your project to integrate the KIDOZ SDK.
@@ -353,6 +354,92 @@ You can implement `IBannerViewInterface` interface if you want to be informed of
  * Used to catch banner view events
  */
 controller.setOnBannerViewEventListener(new BannerViewActionListener(controller));
+```
+
+
+#KIDOZ Flexi Point View
+<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/flexi_sample_preview.png" align="right" height="300" width="300" ></a>
+
+`FlexiView` is a small interactable single content view , that hovers over the screen content.  
+
+##Adding the Flexi View Programmatically
+
+`FlexiView`  accepts an anchor position, there are 8 initial positions available
+
+```javascript
+	// Flexi View Anchor Position
+	public static const FLEXI_VIEW_POSITION_TOP_START; 
+	public static const FLEXI_VIEW_POSITION_TOP_CENTER; 
+	public static const FLEXI_VIEW_POSITION_TOP_END; 	
+	public static const FLEXI_VIEW_POSITION_MID_START; 		
+	public static const FLEXI_VIEW_POSITION_MID_CENTER; 		
+	public static const FLEXI_VIEW_POSITION_MID_END; 
+	public static const FLEXI_VIEW_POSITION_BOTTOM_START; 		
+	public static const FLEXI_VIEW_POSITION_BOTTOM_CENTER; 		
+	public static const FLEXI_VIEW_POSITION_BOTTOM_END;
+ ```
+
+
+```javascript
+/**
+ * Add Fexi view
+ * */
+controller.addFlexiView(true,SdkController.FLEXI_VIEW_POSITION_TOP_START);
+```
+
+- To Show / Hide Flexi View use:
+```javascript
+/**
+ * Show banner view (Make it visible)
+ *  */
+controller.showFlexiView();
+
+ /**
+ * Hide banner view (Make it visible)
+ *  */
+controller.hideFlexiView();
+```
+
+You can implement `IFlexiViewInterface` interface if you want to be informed of `Flexi View` events by creating a class that implements the interface.
+
+```javascript
+ 	import com.kidoz.sdk.api.platforms.IFlexiViewInterface;
+	import com.kidoz.sdk.api.platforms.SdkController;
+	
+	/** Example Implementation of the Flexi View events listener  */
+	public class FlexiViewActionListener implements IFlexiViewInterface
+	{		
+		var mController:SdkController;
+		
+		public function FlexiViewActionListener(controller:SdkController)
+		{
+			mController = controller;
+		}	
+	
+		/** On Flexi view ready callback */
+		public function onFlexiViewReady():void {
+			mController.printToastDebugLog("Flexi view Ready");
+		} 
+		
+		/** On Flexi view visible callback */
+		public function onFlexiViewVisible():void {
+			mController.printToastDebugLog("Flexi view Visible");
+		} 
+		
+		/** On Flexi view hidden callback */
+		public function onFlexiViewHidden():void {
+			mController.printToastDebugLog("Flexi view Hidden");
+		} 
+	}
+```
+
+- Set interface by:
+```javascript
+	/**
+	 * Set Flexi Point View events listener
+	 * Used to catch Flexi point view events
+	 *  */
+	controller.setOnFlexiViewEventListener(new FlexiViewActionListener(controller));
 ```
 
 For any question or assistance, please contact us at SDK@kidoz.net.
