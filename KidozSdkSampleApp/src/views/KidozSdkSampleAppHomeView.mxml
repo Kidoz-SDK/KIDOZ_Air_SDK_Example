@@ -59,6 +59,14 @@
 			 *  */
 			controller.setOnFlexiViewEventListener(new FlexiViewActionListener(controller));
 			
+			
+			/**
+			 * Set General events listener
+			 * Used to catch General SDK events. In our case there are 2 (Player opened , Player closed)
+			 *  */
+			controller.setOnGeneralEventListener(new GeneralEventActionListener(controller));
+			
+			
 			// For example purposes we add Feed Button And Panel View on application Start
 			/** Add feed default Button to view */
 			controller.addFeedButton(20,60);	

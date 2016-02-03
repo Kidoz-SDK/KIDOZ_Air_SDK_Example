@@ -3,7 +3,7 @@ package
 	import com.kidoz.sdk.api.platforms.IFlexiViewInterface;
 	import com.kidoz.sdk.api.platforms.SdkController;
 	
-	/** Example Implementation of the Panel View events listener  */
+	/** Example Implementation of the Flexi View events listener  */
 	public class FlexiViewActionListener implements IFlexiViewInterface
 	{		
 		var mController:SdkController;

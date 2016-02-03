@@ -47,6 +47,7 @@ package com.kidoz.sdk.api.platforms
 		private var mPanelViewListener:IPanelViewInterface = null;
 		private var mBannerViewListener:IBannerViewInterface = null;
 		private var mFlexiViewListener:IFlexiViewInterface = null;
+		private var mGeneralEventListener:IGeneralEventInterface = null;
 		 	
 		// Used for Panel interface listener
 		private static const PANEL_VIEW_EVENT:String = "PANEL_VIEW_EVENT"; 
@@ -73,6 +74,11 @@ package com.kidoz.sdk.api.platforms
 		private static const FLEXI_VIEW_EVENT_READY:String = "FLEXI_VIEW_EVENT_READY"; 
 		private static const FLEXI_VIEW_EVENT_VISIBLE:String = "FLEXI_VIEW_EVENT_VISIBLE"; 
 		private static const FLEXI_VIEW_EVENT_HIDDEN:String = "FLEXI_VIEW_EVENT_HIDDEN"; 
+		
+		// Used General events interface listener
+		private static const GENERAL_VIEW_EVENT:String = "GENERAL_VIEW_EVENT"; 
+		private static const PLAYER_EVENT_OPEN:String = "PLAYER_EVENT_OPEN";
+		private static const PLAYER_EVENT_CLOSE:String = "PLAYER_EVENT_CLOSE";
 	 
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
@@ -151,6 +157,15 @@ package com.kidoz.sdk.api.platforms
 						mFlexiViewListener.onFlexiViewVisible();
 					}else if(event.level == FLEXI_VIEW_EVENT_HIDDEN){
 						mFlexiViewListener.onFlexiViewHidden();
+					}
+				}
+			}
+			else if(event.code == GENERAL_VIEW_EVENT){	
+				if(mGeneralEventListener) {
+					if(event.level == PLAYER_EVENT_OPEN) {
+						mGeneralEventListener.onPlayerOpened();
+					}else if(event.level == PLAYER_EVENT_CLOSE){
+						mGeneralEventListener.onPlayerClosed();
 					}
 				}
 			}
@@ -397,6 +412,16 @@ package com.kidoz.sdk.api.platforms
 		public function setOnFlexiViewEventListener(listener:IFlexiViewInterface):void {
 			mFlexiViewListener = listener;
 		}
+		
+		/**
+		 * Set on General event listener
+		 * Used to catch sdk general event (Player opened,Player closed)
+		 * 
+		 * @param listener class that implemets "IGeneralEventInterface" interface 
+		 */
+		public function setOnGeneralEventListener(listener:IGeneralEventInterface):void {
+			mGeneralEventListener = listener;
+		}		
 		
 		/**
 		 * Cleans up the instance of the native extension. 
