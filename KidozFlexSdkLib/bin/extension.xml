@@ -1,0 +1,24 @@
+<extension xmlns="http://ns.adobe.com/air/extension/20.0">
+    <id>com.kidoz.sdk.api.platforms</id>
+    <versionNumber>0.0.1</versionNumber>
+    <platforms>
+        
+        <platform name="iPhone-ARM">
+            <applicationDeployment>
+                <nativeLibrary>libKidozSDK.a</nativeLibrary>
+                <initializer>VolumeExtensionInitializer</initializer>
+                
+            </applicationDeployment>
+        </platform>
+        <platform name="Android-ARM">
+            <applicationDeployment>
+                <nativeLibrary>kidozsdkair.jar</nativeLibrary>
+                <initializer>com.kidoz.sdk.api.platforms.KidozAirBridgeExtension</initializer>
+                <finalizer>com.kidoz.sdk.api.platforms.KidozAirBridgeExtension</finalizer>
+            </applicationDeployment>
+        </platform>
+        <platform name="default">
+            <applicationDeployment/>
+        </platform>     
+    </platforms>
+</extension>
