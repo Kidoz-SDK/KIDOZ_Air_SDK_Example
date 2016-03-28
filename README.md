@@ -62,18 +62,23 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 
 
 #### App Manifest Defenitions:  `..-app.xml` (IMPORTANT)
-For correct flow of the SDK add the folowing lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
+For correct flow of the SDK add the following lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
 
 ```xml
- 	<manifest android:installLocation="auto">	
+ <manifest android:installLocation="auto">	
  	     <!-- SDK Requierd  permissions -->
 	    <uses-permission android:name="android.permission.INTERNET"/>
 	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	    
-	     <!-- Config changes requiered for correct SDK flow -->
-	    <activity android:configChanges="screenLayout|screenSize|orientation|keyboard"/> 
-	    
-	    <!-- SDK DEFENITIONS -->
+     <application>
+              <activity
+            ...
+               android:configChanges="screenLayout|screenSize|orientation|keyboardHidden|keyboard"
+            ...
+               >
+            </activity>
+
+        ...
         <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
@@ -81,9 +86,11 @@ For correct flow of the SDK add the folowing lines in the `<android>` section of
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+        ...
+    </application>
         
         <!-- SDK DEFENITIONS -->
-	</manifest>
+</manifest>
 ``` 
 
 
