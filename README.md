@@ -71,7 +71,7 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	    
      <application>
-              <activity
+            <activity
             ...
                android:configChanges="screenLayout|screenSize|orientation|keyboardHidden|keyboard"
             ...
