@@ -228,7 +228,9 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function addPanleView(panel_type:Number,handle_position:Number):void {
 			if(extContext != null) {
+				trace ("oooOrioooooo");
 				extContext.call("addPanelView",panel_type,handle_position);
+				trace ("oooOri+------++");
 			}			
 		}
 		
@@ -250,8 +252,8 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function changePanelVisivilityState(visible:Boolean):void {
 			if(extContext != null) {
-				extContext.call("changePanelVisibility",visible);
-			}			
+				extContext.call("changePanelVisibility",visible);//changePanelVisivilityState//changePanelVisibility
+			}					 
 		}
 		
 		/**

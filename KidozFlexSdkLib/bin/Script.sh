@@ -22,5 +22,5 @@ unzip -q -o "$SWC"
 rm $"catalog.xml"
 
 echo "Compiling..."
-"$ADT" -package -target ane $ANE extension.xml -swc $SWC -platform iPhone-ARM $IOS -platform default $DEFAULT -platform Android-ARM -platformoptions platform.xml  -C android .
+"$ADT" -package -target ane $ANE extension.xml -swc $SWC -platform iPhone-ARM $IOS -platform default $DEFAULT -platform Android-ARM -platformoptions platform.xml  -C android . 
 echo "Finished!"

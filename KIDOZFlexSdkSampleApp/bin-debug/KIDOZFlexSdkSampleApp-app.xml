@@ -15,7 +15,7 @@
 
 	<!-- A universally unique application identifier. Must be unique across all AIR applications.
 	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-	<id>com.kidoz.air.sample</id>
+	<id>com.kidoz.air.debugflex</id>
 
 	<!-- Used as the filename for the application. Required. -->
 	<filename>KIDOZFlexSdkSampleApp</filename>
@@ -309,6 +309,12 @@
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
+
+
+
+
+
+
 
 <extensions>
         <extensionID>com.kidoz.sdk.api.platforms</extensionID>

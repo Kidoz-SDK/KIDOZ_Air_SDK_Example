@@ -17,6 +17,8 @@
 		<s:Button id="add_FlexiView" label="Add Flexi" click="addFlexiView();"/> 
 		<s:Button id="show_FlexiView" label="show Flexi" click="showFlexiView();"/> 
 		<s:Button id="hide_FlexiView" label="hide Flexi" click="hideFlexiView();"/>
+		<s:Button id="hide_Panel" label="hide panel" click="hidePanelView();"/>
+		<s:Button id="show_Panel" label="show panel" click="showPanelView();"/>
 		<s:Button id="is_FlexiViewVisible" label="Get Flexi State" click="checkFlexiViewStatus();"/> 	
 	</s:VGroup>
 	
@@ -73,7 +75,7 @@
 			controller.addFeedButton(20,60);	
 			
 			/** Add feed Panel to View  */
-			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
+			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_CENTER);	
 			
 			/** Set desired panel color (Optional) */
 			controller.setPanelViewColor("#FF9F3087");
@@ -83,9 +85,8 @@
 			 * */
 			private function showView():void {			
 				controller.showFeedView();	
-//				controller.setVolume(0.5);
-//				controller.addFeedButton(0,0);
-				trace("test test test");
+
+				
 			}
 			
 			/**
@@ -180,7 +181,25 @@
 			 *  */
 			private function hideFlexiView():void {	
 				
-				controller.hideFlexiView();
+				controller.hideFlexiView(); 
+				
+			}
+			
+			/**
+			 * Hide panel view
+			 *  */
+			private function hidePanelView():void {	
+				
+				controller.changePanelVisivilityState(false);
+			}
+			
+			
+			/**
+			 * show panel view
+			 *  */
+			private function showPanelView():void {	
+				
+				controller.changePanelVisivilityState(true);
 			}
 			
 			/**

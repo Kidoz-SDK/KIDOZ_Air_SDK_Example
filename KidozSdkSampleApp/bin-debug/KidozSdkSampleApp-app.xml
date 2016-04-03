@@ -15,7 +15,7 @@
 
 	<!-- A universally unique application identifier. Must be unique across all AIR applications.
 	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-	<id>com.kidoz.air.sdk.sample.debug</id>
+	<id>com.kidoz.air.sdk.original</id>
 
 	<!-- Used as the filename for the application. Required. -->
 	<filename>KidozSdkSampleApp</filename>
@@ -310,4 +310,7 @@
 
 
     
+<extensions>
+        <extensionID>com.kidoz.sdk.api.platforms</extensionID>
+    </extensions>
 </application>
