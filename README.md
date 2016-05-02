@@ -73,7 +73,6 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 		    
         <application android:hardwareAccelerated="true">		
 	    			  				 	   
-	        <!-- SDK DEFENITIONS -->			    
 	        <activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
 	          android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
 	          android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
@@ -85,7 +84,6 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 	                <data android:scheme="package" />
 	            </intent-filter>
 	        </receiver>		
-            <!-- SDK DEFENITIONS -->  
             
         </application>
  
