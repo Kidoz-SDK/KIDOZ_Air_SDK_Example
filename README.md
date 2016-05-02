@@ -65,32 +65,32 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 For correct flow of the SDK add the following lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
 
 ```xml
- <manifest android:installLocation="auto">	
- 	     <!-- SDK Requierd  permissions -->
-	    <uses-permission android:name="android.permission.INTERNET"/>
-	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	    
-     <application>
-            <activity
-            ...
-               android:configChanges="screenLayout|screenSize|orientation|keyboardHidden|keyboard"
-            ...
-               >
-            </activity>
-
-        ...
-        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-        ...
-    </application>
-        
-        <!-- SDK DEFENITIONS -->
-</manifest>
+<manifestAdditions><![CDATA[
+    <manifest android:installLocation="auto">		
+	 
+	<uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>		
+		    
+        <application android:hardwareAccelerated="true">		
+	    			  				 	   
+	        <!-- SDK DEFENITIONS -->			    
+	        <activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
+	          android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+	          android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+	        </activity> 
+	        	    
+	        <receiver android:name="com.kidoz.sdk.api.receivesrs.SdkReceiver" >
+	            <intent-filter>
+	                <action android:name="android.intent.action.PACKAGE_ADDED" />		
+	                <data android:scheme="package" />
+	            </intent-filter>
+	        </receiver>		
+            <!-- SDK DEFENITIONS -->  
+            
+        </application>
+ 
+   </manifest>
+]]></manifestAdditions>
 ``` 
 
 
