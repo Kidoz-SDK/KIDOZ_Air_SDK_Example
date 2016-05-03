@@ -2,17 +2,17 @@
 
 KIDOZ SDK + Sample Application (ANE)
 =================================
-**KIDOZ SDK Android Extension (ANE) compatible with Android 4.0 (API level 14) and above. Sample app is compiled with Air SDK 19.0 on   Flash Builder 4.7**
+**KIDOZ SDK Android Extension (ANE) compatible with Android 4.0 (API level 14) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
 *Updated to KIDOZ SDK version 0.4.2*
 
 This Flex Mobile application  project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
 The example application contains the following creative tools:
-* KIDOZ's Feed view (+Family) content tool - the `FeedView`
+* KIDOZ's Feed view (+Family) content tool - the `FeedView` 
 * KIDOZ's Panel view (+Family) content tool - the `PanelView`
-* KIDOZ's Banner view  content tool - the `KidozBanner`
-* KIDOZ's Flexi Point view content tool - the `FlexiView`
+* KIDOZ's Banner view  content tool - the `KidozBanner` (Android only)
+* KIDOZ's Flexi Point view content tool - the `FlexiView` (Android only)
 
 
 The sample application `KidozSdkSampleApp` containes the `KidozSdkAir.ane` file which is the `Android Native Extension (ANE)` for KIDOZ SDK, this file should be downloaded and copied to your project to integrate the KIDOZ SDK.
@@ -62,28 +62,33 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 
 
 #### App Manifest Defenitions:  `..-app.xml` (IMPORTANT)
-For correct flow of the SDK add the folowing lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
+For correct flow of the SDK add the following lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
 
 ```xml
- 	<manifest android:installLocation="auto">	
- 	     <!-- SDK Requierd  permissions -->
-	    <uses-permission android:name="android.permission.INTERNET"/>
-	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	    
-	     <!-- Config changes requiered for correct SDK flow -->
-	    <activity android:configChanges="screenLayout|screenSize|orientation|keyboard"/> 
-	    
-	    <!-- SDK DEFENITIONS -->
-        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
+<manifestAdditions><![CDATA[
+	<manifest android:installLocation="auto">		
+			 
+	        <uses-permission android:name="android.permission.INTERNET"/>
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>		
+				    
+	        <application android:hardwareAccelerated="true">		
+			    			  				 	   				    
+			<activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
+	                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+	                  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+	                </activity> 
+	                	    
+		        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
+		            <intent-filter>
+		                <action android:name="android.intent.action.PACKAGE_ADDED" />		
+		                <data android:scheme="package" />
+		            </intent-filter>
+		        </receiver>		
+			                
+		</application>
 
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-        
-        <!-- SDK DEFENITIONS -->
 	</manifest>
+]]></manifestAdditions>
 ``` 
 
 
@@ -257,7 +262,7 @@ You can also call the `Feed View` by adding the `Feed Button` - in this case the
 It's recommended to use KIDOZ's default button - the `Feed Button` which is a custom animatable button.
 
 
-#KIDOZ Banner
+#KIDOZ Banner (Android only)
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_banner_preview.png" align="right" height="80" width="445" ></a>
 
 `KidozBanner` is a customized interactive banner view with standard size of `320 * 50` dp
@@ -357,7 +362,7 @@ controller.setOnBannerViewEventListener(new BannerViewActionListener(controller)
 ```
 
 
-#KIDOZ Flexi Point View
+#KIDOZ Flexi Point View (Android only)
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/flexi_sample_preview.png" align="right" height="300" width="300" ></a>
 
 `FlexiView` is a small interactable single content view , that hovers over the screen content.  
