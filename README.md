@@ -66,28 +66,28 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 
 ```xml
 <manifestAdditions><![CDATA[
-    <manifest android:installLocation="auto">		
-	 
-	<uses-permission android:name="android.permission.INTERNET"/>
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>		
-		    
-        <application android:hardwareAccelerated="true">		
-	    			  				 	   
-	        <activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
-	          android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-	          android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-	        </activity> 
-	        	    
-	        <receiver android:name="com.kidoz.sdk.api.receivesrs.SdkReceiver" >
-	            <intent-filter>
-	                <action android:name="android.intent.action.PACKAGE_ADDED" />		
-	                <data android:scheme="package" />
-	            </intent-filter>
-	        </receiver>		
-            
-        </application>
- 
-   </manifest>
+	<manifest android:installLocation="auto">		
+			 
+	        <uses-permission android:name="android.permission.INTERNET"/>
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>		
+				    
+	        <application android:hardwareAccelerated="true">		
+			    			  				 	   				    
+			<activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
+	                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+	                  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+	                </activity> 
+	                	    
+		        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
+		            <intent-filter>
+		                <action android:name="android.intent.action.PACKAGE_ADDED" />		
+		                <data android:scheme="package" />
+		            </intent-filter>
+		        </receiver>		
+			                
+		</application>
+
+	</manifest>
 ]]></manifestAdditions>
 ``` 
 
