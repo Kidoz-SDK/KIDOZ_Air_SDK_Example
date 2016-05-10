@@ -212,7 +212,7 @@
 	<!-- </fileTypes> -->
 
     <!-- iOS specific capabilities -->
-	<!-- <iPhone> -->
+	 <!--  <iPhone> -->
 		<!-- A list of plist key/value pairs to be added to the application Info.plist -->
 		<!-- <InfoAdditions>
             <![CDATA[
@@ -227,6 +227,16 @@
                 <string>YES</string>
             ]]>
         </InfoAdditions> -->
+        <!-- 
+        <InfoAdditions>
+            <![CDATA[
+                <key>NSAppTransportSecurity</key>
+				<dict>
+				<key>NSAllowsArbitraryLoads</key><true/>
+				</dict>
+            ]]>
+        </InfoAdditions> 
+         -->
         <!-- A list of plist key/value pairs to be added to the application Entitlements.plist -->
 		<!-- <Entitlements>
             <![CDATA[
@@ -306,9 +316,18 @@
 				<string>1</string>
 				<string>2</string>
 			</array>
+			<key>NSAppTransportSecurity</key>
+				<dict>
+				<key>NSAllowsArbitraryLoads</key><true/>
+				</dict>
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
+
+
+
+
+
 
 
 

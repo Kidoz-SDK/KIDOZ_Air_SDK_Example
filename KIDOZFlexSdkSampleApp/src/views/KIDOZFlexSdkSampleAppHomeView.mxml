@@ -19,7 +19,8 @@
 		<s:Button id="hide_FlexiView" label="hide Flexi" click="hideFlexiView();"/>
 		<s:Button id="hide_Panel" label="hide panel" click="hidePanelView();"/>
 		<s:Button id="show_Panel" label="show panel" click="showPanelView();"/>
-		<s:Button id="is_FlexiViewVisible" label="Get Flexi State" click="checkFlexiViewStatus();"/> 	
+		<s:Button id="is_FlexiViewVisible" label="Get Flexi State" click="checkFlexiViewStatus();"/> 
+		<s:Button id="show_InterstitialView" label="show Interstitial view" click="showInterstitialView();"/> 
 	</s:VGroup>
 	
 	
@@ -190,7 +191,7 @@
 			 *  */
 			private function hidePanelView():void {	
 				
-				controller.changePanelVisivilityState(false);
+				controller.changePanelVisibilityState(false);
 			}
 			
 			
@@ -199,7 +200,7 @@
 			 *  */
 			private function showPanelView():void {	
 				
-				controller.changePanelVisivilityState(true);
+				controller.changePanelVisibilityState(true);
 			}
 			
 			/**
@@ -213,6 +214,15 @@
 					controller.printToastDebugLog("FlexiView Status : HIDDEN");
 				}		
 			}
+			
+			/**
+			 * show interstitial view
+			 *  */
+			private function showInterstitialView():void {	
+				
+				controller.showInterstitialView();
+			}
+			
 		]]>
 	</fx:Script>
 </s:View>
