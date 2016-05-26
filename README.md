@@ -6,7 +6,7 @@ KIDOZ SDK + Sample Application (ANE)
 
 *Updated to KIDOZ SDK version 0.5.6*
 
-### [Javadoc](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/index.html)
+### [Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/index.html)
 
 This Flex Mobile application  project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
