@@ -15,13 +15,18 @@ package
 		 	
 		/** On Panel view expanded callback */
 		public function onClosed():void {
-			mController.printToastDebugLog("Interstitial Opened");
+			mController.printToastDebugLog("Interstitial Closed");
 		} 
 		
 		/** On Panel view collapsed callback */
 		public function onOpened():void {
-			mController.printToastDebugLog("Interstitial Closed");
+			mController.printToastDebugLog("Interstitial Opened");
 		} 
-		 
+		
+		/** On Panel view collapsed callback */
+		public function onReady():void {
+			mController.printToastDebugLog("Interstitial Ready");
+		} 
+		
 	}
 }

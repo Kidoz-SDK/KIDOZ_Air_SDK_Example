@@ -285,30 +285,31 @@
 	<!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
 
 <android>
-        <colorDepth>16bit</colorDepth>
-        <manifestAdditions><![CDATA[
-			<manifest android:installLocation="auto">
-			    <!--See the Adobe AIR documentation for more information about setting Google Android permissions-->
-			    <!--Removing the permission android.permission.INTERNET will have the side effect
-					of preventing you from debugging your application on your device-->
+		<colorDepth>16bit</colorDepth>
+		<manifestAdditions><![CDATA[
+			<manifest android:installLocation="auto">		
+			 
 			    <uses-permission android:name="android.permission.INTERNET"/>
-			    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
-			    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
-			    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
-			    <!--The DISABLE_KEYGUARD and WAKE_LOCK permissions should be toggled together
-					in order to access AIR's SystemIdleMode APIs-->
-			    <!--<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>-->
-			    <!--<uses-permission android:name="android.permission.WAKE_LOCK"/>-->
-			    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
-			    <!--<uses-permission android:name="android.permission.RECORD_AUDIO"/>-->
-			    <!--The ACCESS_NETWORK_STATE and ACCESS_WIFI_STATE permissions should be toggled
-					together in order to use AIR's NetworkInfo APIs-->
-			    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
-			    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
+		        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>		
+				    
+			    <application android:hardwareAccelerated="true">		
+			    			  				 	   				    
+				    <activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
+	                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
+	                </activity> 
+	                	    
+			        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
+			            <intent-filter>
+			                <action android:name="android.intent.action.PACKAGE_ADDED" />		
+			                <data android:scheme="package" />
+			            </intent-filter>
+			        </receiver>		
+			                
+		        </application>
+
 			</manifest>
-			
 		]]></manifestAdditions>
-    </android>
+	</android>
     <iPhone>
         <InfoAdditions><![CDATA[
 			<key>UIDeviceFamily</key>
@@ -323,6 +324,9 @@
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
+
+
+
 
 
 
