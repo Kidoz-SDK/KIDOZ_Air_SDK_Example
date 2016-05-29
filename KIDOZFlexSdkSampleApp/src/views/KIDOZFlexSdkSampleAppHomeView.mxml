@@ -19,7 +19,9 @@
 		<s:Button id="hide_FlexiView" label="hide Flexi" click="hideFlexiView();"/>
 		<s:Button id="hide_Panel" label="hide panel" click="hidePanelView();"/>
 		<s:Button id="show_Panel" label="show panel" click="showPanelView();"/>
-		<s:Button id="is_FlexiViewVisible" label="Get Flexi State" click="checkFlexiViewStatus();"/> 	
+		<s:Button id="is_FlexiViewVisible" label="Get Flexi State" click="checkFlexiViewStatus();"/> 
+		<s:Button id="load_InterstitialView" label="load Interstitial view" click="loadInterstitialView();"/> 
+		<s:Button id="show_InterstitialView" label="show Interstitial view" click="showInterstitialView();"/> 
 	</s:VGroup>
 	
 	
@@ -69,6 +71,12 @@
 			 *  */
 			controller.setOnGeneralEventListener(new GeneralEventActionListener(controller));
 			
+			
+			/**
+			 * Set Interstitial events listener
+			 * Used to catch interstitial SDK events. 
+			 *  */
+			controller.setOnInterstitialEventListener(new InterstitialViewActionListener(controller));
 			
 			// For example purposes we add Feed Button And Panel View on application Start
 			/** Add feed default Button to view */
@@ -190,7 +198,7 @@
 			 *  */
 			private function hidePanelView():void {	
 				
-				controller.changePanelVisivilityState(false);
+				controller.changePanelVisibilityState(false);
 			}
 			
 			
@@ -199,7 +207,7 @@
 			 *  */
 			private function showPanelView():void {	
 				
-				controller.changePanelVisivilityState(true);
+				controller.changePanelVisibilityState(true);
 			}
 			
 			/**
@@ -213,6 +221,23 @@
 					controller.printToastDebugLog("FlexiView Status : HIDDEN");
 				}		
 			}
+			
+			/**
+			 * show interstitial view
+			 *  */
+			private function showInterstitialView():void {	
+				
+				controller.showInterstitialView();
+			}
+			
+			/**
+			 * load interstitial ad
+			 *  */
+			private function loadInterstitialView():void {	
+				
+				controller.loadInterstitialView(false);
+			}
+			
 		]]>
 	</fx:Script>
 </s:View>

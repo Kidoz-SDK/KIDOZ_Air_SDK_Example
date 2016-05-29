@@ -5,10 +5,38 @@ package com.kidoz.sdk.api.platforms
 	import flash.external.ExtensionContext;
 	
 	/**
-	 * Sdk Controller Version 0.4.0
+	 * Sdk Controller Version 0.5.6
 	 * */
 	public class SdkController  extends EventDispatcher
 	{
+		private static const FK_INIT_SDK:String = "initSdk";
+		private static const FK_ADD_FEED_BUTTON:String = "addFeedButton";
+		private static const FK_ADD_FEED_BUTTON_WITH_SIZE:String = "addFeedButtonWithSize";
+		private static const FK_SHOW_FEED_VIEW:String = "showFeedView";
+		private static const FK_DISMISS_FEED_VIEW:String = "dismissFeedView";
+		private static const FK_ADD_PANEL:String = "addPanelView";
+		private static const FK_CHANGE_FEED_VISIBILITY:String = "changeFeedButtonVisibility";
+		private static const FK_CHANGE_PANEL_VISIBILITY:String = "changePanelVisibility";
+		private static const FK_COLLAPSE_PANEL:String = "collapsePanelView";
+		private static const FK_EXPAND_PANEL:String = "expandPanelView";
+		private static const FK_SET_PANEL_VIEW_COLOR:String = "setPanelViewColor";
+		private static const FK_IS_PANEL_EXPANDED:String = "isPanelExpanded";
+		private static const FK_ADD_BANNER_VIEW:String = "addBannerView";
+		private static const FK_ADD_BANNER_VIEW_EXTENDED:String = "addBannerViewExtended";
+		private static const FK_CHANGE_BANNER_POSITION:String = "changeBannerPosition";
+		private static const FK_SHOW_BANNER_VIEW:String = "showBannerView";
+		private static const FK_HIDE_BANNER_VIEW:String = "hideBannerView";
+		private static const FK_ADD_FLEXI_VIEW:String = "addFlexiView";
+		private static const FK_SHOW_FLEXI_VIEW:String = "showFlexiView";
+		private static const FK_HIDE_FLEXI_VIEW:String = "hideFlexiView";
+		private static const FK_GET_IS_FLEXI_VIEW_VISIBLE:String = "getIsFlexiViewVisible";
+		private static const FK_SET_FLEXI_DRAGGABLE:String = "setFlexiDraggable";
+		private static const FK_SET_FLEXI_CLOSABLE:String = "setFlexiClosable";
+		private static const FK_SHOW_INTERSTITIAL:String = "showInterstitial";
+		private static const FK_LOAD_INTERSTITIAL:String = "loadInterstitial";
+		private static const FK_IS_INTERSTITIAL_LOADED:String = "isInterstitialLoaded";
+		private static const FK_PRINT_TOAST_LOG:String = "printToastLog";
+		
 		// Panel Types
 		public static const PANEL_TYPE_BOTTOM:int = 0; 
 		public static const PANEL_TYPE_TOP:int = 1; 		
@@ -49,7 +77,8 @@ package com.kidoz.sdk.api.platforms
 		private var mBannerViewListener:IBannerViewInterface = null;
 		private var mFlexiViewListener:IFlexiViewInterface = null;
 		private var mGeneralEventListener:IGeneralEventInterface = null;
-		
+		private var mInterstitialEventListener:IInterstitialEventInterface = null;
+		 	
 		// Used for Panel interface listener
 		private static const PANEL_VIEW_EVENT:String = "PANEL_VIEW_EVENT"; 
 		private static const PANEL_VIEW_EVENT_EXPANDED:String = "PANEL_VIEW_EVENT_EXPANDED";
@@ -76,18 +105,21 @@ package com.kidoz.sdk.api.platforms
 		private static const FLEXI_VIEW_EVENT_VISIBLE:String = "FLEXI_VIEW_EVENT_VISIBLE"; 
 		private static const FLEXI_VIEW_EVENT_HIDDEN:String = "FLEXI_VIEW_EVENT_HIDDEN"; 
 		
-		// Used General events interface listener
+		// General events interface listener
 		private static const GENERAL_VIEW_EVENT:String = "GENERAL_VIEW_EVENT"; 
 		private static const PLAYER_EVENT_OPEN:String = "PLAYER_EVENT_OPEN";
 		private static const PLAYER_EVENT_CLOSE:String = "PLAYER_EVENT_CLOSE";
 		
+		// Intesrtitial events interface listener
+		private static const INTERSTITIAL_VIEW_EVENT:String = "INTERSTITIAL_VIEW_EVENT";
+		private static const INTERSTITIAL_EVENT_OPENED:String = "INTERSTITIAL_EVENT_OPENED";
+		private static const INTERSTITIAL_EVENT_CLOSED:String = "INTERSTITIAL_EVENT_CLOSED";
+		private static const INTERSTITIAL_EVENT_READY:String = "INTERSTITIAL_EVENT_READY";
+	 
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
 		{
-			
-			trace("oooOri VolumeController");
-			extContext = ExtensionContext.createExtensionContext("com.kidoz.sdk.api.platforms","");
-			trace("oooOri SdkController?: "+extContext);
+			extContext = ExtensionContext.createExtensionContext("com.kidoz.sdk.api.platforms","KidozAirBridgeExtension");
 			if(extContext) {
 				// Add events listener from android native extension
 				extContext.addEventListener( StatusEvent.STATUS,onStatusEventHandler);
@@ -97,6 +129,7 @@ package com.kidoz.sdk.api.platforms
 				throw new Error( "Volume native extension is not supported on this platform." );
 			}
 		} 
+		
 		
 		/**
 		 * Initiate Kidoz sdk controller
@@ -109,25 +142,25 @@ package com.kidoz.sdk.api.platforms
 			mToken = token;
 			if (instance == null) {
 				instance = new SdkController( new SingletonEnforcer());		
-								if(instance) {
-									extContext.call( "initSdk",publisher_id,token);
-								}				
+				if(instance) {
+					extContext.call(FK_INIT_SDK,publisher_id,token);
+				}				
 			}		
 			return instance;
 		}
-		
+		 	
 		/**
 		 * Status event handler , to handle events from native android extension
 		 */
 		private function onStatusEventHandler(event : StatusEvent ):void {
 			if(event.code == FEED_VIEW_EVENT) {				
-				if(mFeedViewListener) {
-					if(event.level == FEED_VIEW_EVENT_READY_TOSHOW) {
-						mFeedViewListener.onReadyToShow();
-					}else if(event.level == FEED_VIEW_EVENT_DISMISS){
-						mFeedViewListener.onDismissView();
-					}
-				}
+				 if(mFeedViewListener) {
+					 if(event.level == FEED_VIEW_EVENT_READY_TOSHOW) {
+						 mFeedViewListener.onReadyToShow();
+					 }else if(event.level == FEED_VIEW_EVENT_DISMISS){
+						 mFeedViewListener.onDismissView();
+					 }
+				 }
 			}else if(event.code == PANEL_VIEW_EVENT){			
 				if(mPanelViewListener) {
 					if(event.level == PANEL_VIEW_EVENT_EXPANDED) {
@@ -173,7 +206,19 @@ package com.kidoz.sdk.api.platforms
 					}
 				}
 			}
+			else if(event.code == INTERSTITIAL_VIEW_EVENT){	
+				if(mInterstitialEventListener) {
+					if(event.level == INTERSTITIAL_EVENT_OPENED) {
+						mInterstitialEventListener.onOpened();
+					}else if(event.level == INTERSTITIAL_EVENT_CLOSED){
+						mInterstitialEventListener.onClosed();
+					}else if(event.level == INTERSTITIAL_EVENT_READY){
+						mInterstitialEventListener.onReady();
+					}
+				}
+			}
 		} 
+	 
 		
 		/**
 		 * Add feed button to view
@@ -183,10 +228,10 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function addFeedButton(x_coord:Number,y_coord:Number):void {
 			if(extContext != null) {
-				extContext.call("addFeedButton",x_coord,y_coord);
+				extContext.call(FK_ADD_FEED_BUTTON,x_coord,y_coord);
 			}			
 		}
-		
+			 
 		
 		/**
 		 * Add feed button with size
@@ -197,7 +242,7 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function addFeedButtonWithSize(x_coord:Number,y_coord:Number,button_size:Number):void {
 			if(extContext != null) {
-				extContext.call("addFeedButtonWithSize",x_coord,y_coord,button_size);
+				extContext.call(FK_ADD_FEED_BUTTON_WITH_SIZE,x_coord,y_coord,button_size);
 			}			
 		}
 		
@@ -206,7 +251,7 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function showFeedView():void {
 			if(extContext != null) {
-				extContext.call("showFeedView");
+				extContext.call(FK_SHOW_FEED_VIEW);
 			}			
 		}	
 		
@@ -215,11 +260,10 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function dismissFeedView():void {
 			if(extContext != null) {
-				extContext.call("dismissFeedView");
+				extContext.call(FK_DISMISS_FEED_VIEW);
 			}			
 		}
-		
-		
+	 
 		/**
 		 * Add feed panel view to screen
 		 * 
@@ -228,42 +272,56 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function addPanleView(panel_type:Number,handle_position:Number):void {
 			if(extContext != null) {
-				trace ("oooOrioooooo");
-				extContext.call("addPanelView",panel_type,handle_position);
-				trace ("oooOri+------++");
+				extContext.call(FK_ADD_PANEL,panel_type,handle_position,true,-1,-1);
 			}			
 		}
 		
 		
 		/**
-		 * Set panl view color in hexa representation 
+		 * Add panel view to screen with additional properties
+		 * 
+		 * @param panel_type panel type (TOP,BOTTOM,RIGHT,LEFT)
+		 * @param handle_position handle position (CENTER,START,STOP)
+		 * @param autoVisible     make panel visible on prepared and ready
+     	 * @param startDelay      delay in seconds before automatic invocation of panel expand , pass -1 to  disable
+     	 * @param showPeriod      period in seconds to show the panel before closing it, pass -1 to  disable
+		 */
+		public function addPanleViewExtended(panel_type:Number,handle_position:Number,autoVisible:Boolean,starDelay:Number,showPeriod:Number):void {
+			if(extContext != null) {
+				extContext.call(FK_ADD_PANEL,panel_type,handle_position,autoVisible,starDelay,showPeriod);
+			}			
+		}
+		
+		
+		/**
+		 * Set panel view color in hexa representation 
 		 * 
 		 * @param color_hexa color in hexa representation (Example : "#ffffff")
 		 */
 		public function setPanelViewColor(color_hexa:String):void {
-			extContext.call("setPanelViewColor",color_hexa);
+			extContext.call(FK_SET_PANEL_VIEW_COLOR,color_hexa);
 		}
-		
+			
 		
 		/**
 		 * Change panel visibility state
 		 * 
 		 * @param visible
 		 */
-		public function changePanelVisivilityState(visible:Boolean):void {
+		public function changePanelVisibilityState(visible:Boolean):void {
 			if(extContext != null) {
-				extContext.call("changePanelVisibility",visible);//changePanelVisivilityState//changePanelVisibility
-			}					 
+				extContext.call(FK_CHANGE_PANEL_VISIBILITY,visible);
+			}			
 		}
-		
+ 
 		/**
 		 * Change feed button visibility state
 		 * 
 		 * @param visible
 		 */
-		public function changeFeedButtonVisivilityState(visible:Boolean):void {
+		public function changeFeedButtonVisibilityState(visible:Boolean):void {
 			if(extContext != null) {
-				extContext.call("changeFeedButtonVisibility",visible);
+				extContext.call(FK_CHANGE_FEED_VISIBILITY,visible);
 			}			
 		}
 		
@@ -272,7 +330,7 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function collapsePanelView():void {
 			if(extContext != null) {
-				extContext.call("collapsePanelView");
+				extContext.call(FK_COLLAPSE_PANEL);
 			}			
 		}
 		
@@ -281,22 +339,23 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function expandPanelView():void {
 			if(extContext != null) {
-				extContext.call("expandPanelView");
+				extContext.call(FK_EXPAND_PANEL);
 			}			
 		}
 		
 		/**
-		 * Get panel viee current state (Expanded/Collapsed)
+		 * Get panel view current state (Expanded/Collapsed)
 		 * 
 		 * @return if panel expanded or not
 		 */
 		public function isPanelExpanded():Boolean {
 			if(extContext != null) {
-				return extContext.call("isPanelExpanded");
+				return extContext.call(FK_IS_PANEL_EXPANDED);
 			}else {
 				return false;
 			}
 		}
+				
 		
 		/**
 		 * Add Banner view to screen
@@ -305,9 +364,22 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function addBannerView(banner_anchor_pos:Number):void {
 			if(extContext != null) {
-				extContext.call("addBannerView",banner_anchor_pos);
+				 extContext.call(FK_ADD_BANNER_VIEW,banner_anchor_pos);
 			} 
 		}
+		
+		/**
+		 * Add Banner view to screen
+		 * 
+		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
+		 * @param auto_show is auto show banner on ready
+		 */
+		public function addBannerViewExtended(banner_anchor_pos:Number,auto_show:Boolean):void {
+			if(extContext != null) {
+				extContext.call(FK_ADD_BANNER_VIEW_EXTENDED,banner_anchor_pos,auto_show);
+			} 
+		}
+		
 		
 		/**
 		 * Change Banner view anchor position on screen
@@ -316,16 +388,16 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function changeBannerViewPosition(banner_anchor_pos:Number):void {
 			if(extContext != null) {
-				extContext.call("changeBannerPosition",banner_anchor_pos);
+				extContext.call(FK_CHANGE_BANNER_POSITION,banner_anchor_pos);
 			} 
 		}	
-		
+ 
 		/**
 		 * Show banner view		 
 		 */
 		public function showBannerView():void {
 			if(extContext != null) {
-				extContext.call("showBannerView");
+				extContext.call(FK_SHOW_BANNER_VIEW);
 			}
 		}
 		
@@ -334,10 +406,10 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function hideBannerView():void {
 			if(extContext != null) {
-				extContext.call("hideBannerView");
+				extContext.call(FK_HIDE_BANNER_VIEW);
 			}
 		}
-		
+			
 		/**
 		 * Add Flexi point view to screen
 		 * 
@@ -346,46 +418,100 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function addFlexiView(isAutoShow:Boolean,initial_pos:Number):void {
 			if(extContext != null) {
-				extContext.call("addFlexiView",isAutoShow,initial_pos);
+				extContext.call(FK_ADD_FLEXI_VIEW,isAutoShow,initial_pos);
 			} 
 		}
-		
-		
+				
 		/**
 		 * Show and make visible flexi view on screen
 		 */
 		public function showFlexiView():void {
 			if(extContext != null) {
-				extContext.call("showFlexiView");
+				extContext.call(FK_SHOW_FLEXI_VIEW);
 			} 
 		}
-		
 		
 		/**
 		 * Hide and make invisible flexi point view 
 		 */
 		public function hideFlexiView():void {
 			if(extContext != null) {
-				extContext.call("hideFlexiView");
+				extContext.call(FK_HIDE_FLEXI_VIEW);
 			} 
 		}
 		
 		/**
-		 * Get is felxi ciew currently visible
+		 * Get is felxi view currently visible
 		 */
 		public function getIsFlexiViewVisible():Boolean {
 			if(extContext != null) {
-				return extContext.call("getIsFlexiViewVisible");
+				return extContext.call(FK_GET_IS_FLEXI_VIEW_VISIBLE);
+			}else {
+				return false;
+			}
+		}
+		
+		/**
+		 * Get is felxi view can be draggable
+		 * 
+		 * @param is draggable
+		 */
+		public function setFlexiViewDraggable(draggable:Boolean):void {
+			if(extContext != null) {
+			     extContext.call(FK_SET_FLEXI_DRAGGABLE,draggable);
+			} 
+		}	
+		 
+		/**
+		 * Get is felxi view can be closable
+		 * 
+		 * @param closable set is closable
+		 */
+		public function setFlexiViewClosable(closable:Boolean):void {
+			if(extContext != null) {
+				extContext.call(FK_SET_FLEXI_CLOSABLE,closable);
+			}
+		}		
+		
+		/**
+		 * Show interstitial view		 
+		 */
+		public function showInterstitialView():void {
+			if(extContext != null) {
+				extContext.call(FK_SHOW_INTERSTITIAL);
+			}
+		}	
+		
+		/**
+		 * Load and preapre interstitial view ad
+		 * (This function also used for reloading the ad)
+		 * 
+		 * @param auto_show is auto show interstitial on ready
+		 */
+		public function loadInterstitialView(auto_show:Boolean):void {
+			if(extContext != null) {
+				extContext.call(FK_LOAD_INTERSTITIAL,auto_show);
+			}
+		}	
+		
+		/**
+		 * Get is interstitial ad is loaded and ready
+		 * 
+		 * @return loaded state
+		 */
+		public function getIsInterstitialLoaded():Boolean {
+			if(extContext != null) {
+				return extContext.call(FK_IS_INTERSTITIAL_LOADED);
 			}else {
 				return false;
 			}
 		}	
 		
-		
+	 	
 		/**
 		 * Set on panel view event listener
 		 * 
-		 * @param listener class that implemets "IPanelViewInterface" interface
+		 * @param listener class that implements "IPanelViewInterface" interface
 		 */
 		public function setOnPanelViewEventListener(listener:IPanelViewInterface):void {
 			mPanelViewListener = listener;
@@ -394,7 +520,7 @@ package com.kidoz.sdk.api.platforms
 		/**
 		 * Set on feed view event listener
 		 * 
-		 * @param listener class that implemets "IFeedViewIntefrace" interface 
+		 * @param listener class that implements "IFeedViewIntefrace" interface 
 		 */
 		public function setOnFeedViewEventListener(listener:IFeedViewIntefrace):void {
 			mFeedViewListener = listener;
@@ -403,7 +529,7 @@ package com.kidoz.sdk.api.platforms
 		/**
 		 * Set on Banner view event listener
 		 * 
-		 * @param listener class that implemets "IBannerViewInterface" interface 
+		 * @param listener class that implements "IBannerViewInterface" interface 
 		 */
 		public function setOnBannerViewEventListener(listener:IBannerViewInterface):void {
 			mBannerViewListener = listener;
@@ -413,7 +539,7 @@ package com.kidoz.sdk.api.platforms
 		/**
 		 * Set on Flexi view event listener
 		 * 
-		 * @param listener class that implemets "IFlexiViewInterface" interface 
+		 * @param listener class that implements "IFlexiViewInterface" interface 
 		 */
 		public function setOnFlexiViewEventListener(listener:IFlexiViewInterface):void {
 			mFlexiViewListener = listener;
@@ -423,11 +549,20 @@ package com.kidoz.sdk.api.platforms
 		 * Set on General event listener
 		 * Used to catch sdk general event (Player opened,Player closed)
 		 * 
-		 * @param listener class that implemets "IGeneralEventInterface" interface 
+		 * @param listener class that implements "IGeneralEventInterface" interface 
 		 */
 		public function setOnGeneralEventListener(listener:IGeneralEventInterface):void {
 			mGeneralEventListener = listener;
-		}		
+		}	
+		
+		/**
+		 * Set on Interstitial event listener
+		 * 
+		 * @param listener class that implements "IInterstitialEventInterface" interface 
+		 */
+		public function setOnInterstitialEventListener(listener:IInterstitialEventInterface):void {
+			mInterstitialEventListener = listener;
+		}	
 		
 		/**
 		 * Cleans up the instance of the native extension. 
@@ -435,18 +570,17 @@ package com.kidoz.sdk.api.platforms
 		public function dispose():void { 
 			extContext.dispose(); 
 		}
-		
+			
 		/**
 		 * Print function for debuging purposes
 		 * 
 		 * @text some thext to print
 		 */		
 		public function printToastDebugLog(text:String):void {
-			extContext.call("printToastLog",text);
+			extContext.call(FK_PRINT_TOAST_LOG,text);
 		}
 	}	
 }
-
 
 internal class SingletonEnforcer { }
 
