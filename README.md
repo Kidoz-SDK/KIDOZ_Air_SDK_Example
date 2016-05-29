@@ -4,7 +4,9 @@ KIDOZ SDK + Sample Application (ANE)
 =================================
 **KIDOZ SDK Android Extension (ANE) compatible with Android 4.0 (API level 14) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ SDK version 0.4.2*
+*Updated to KIDOZ SDK version 0.5.6*
+
+### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
 
 This Flex Mobile application  project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
@@ -74,8 +76,7 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 	        <application android:hardwareAccelerated="true">		
 			    			  				 	   				    
 			<activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
-	                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-	                  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+	                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
 	                </activity> 
 	                	    
 		        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
