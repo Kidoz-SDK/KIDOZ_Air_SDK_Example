@@ -10,14 +10,14 @@ KIDOZ SDK + Sample Application (ANE)
 
 This Flex Mobile application  project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
-The example application contains the following creative tools:
-* KIDOZ's Feed view (+Family) content tool - the `FeedView` 
-* KIDOZ's Panel view (+Family) content tool - the `PanelView`
-* KIDOZ's Banner view  content tool - the `KidozBanner` (Android only)
-* KIDOZ's Flexi Point view content tool - the `FlexiView` (Android only)
+The example application containes the following creative tools:
+* KIDOZ Feed view (+Family) content tool - the `FeedView` 
+* KIDOZ Panel view (+Family) content tool - the `PanelView`
+* KIDOZ Banner view  content tool - the `KidozBanner` (Android only)
+* KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
 
 
-The sample application `KidozSdkSampleApp` containes the `KidozSdkAir.ane` file which is the `Android Native Extension (ANE)` for KIDOZ SDK, this file should be downloaded and copied to your project to integrate the KIDOZ SDK.
+The sample application `KidozSdkSampleApp` containes the `KidozSdkAir.ane` file which is the `Android Native Extension (ANE)` for KIDOZ SDK: this file should be downloaded and copied to your project to integrate the KIDOZ SDK.
 
 ###Running the sample app
 
@@ -42,10 +42,10 @@ You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SD
 Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 
 1. Right click on the project and select `Properties`.
-2. In opened widnow Select `Flex Build Path` and then click `Native Extensions`. ( Figure 1).
+2. In opened window Select `Flex Build Path` and then click `Native Extensions`. (Figure 1).
 3. Click (Add ANE) and select `KidozSdkAir.ane` file .
-4. Select `Flex Build Packaging` and then click `Native Extensions` and check the empty box of recently added ANE. ( Figure 2).
-5. Add to compiler arguments `-swf-version` that adjusted to currently used Air SDK. For Air SDK version `19.0` set `-swf-version 30` (Figure 3)
+4. Select `Flex Build Packaging` and then click `Native Extensions` and check the empty box of recently added ANE. (Figure 2).
+5. Add to compiler arguments `-swf-version` that is adjusted to currently used Air SDK. For Air SDK version `19.0` set `-swf-version 30` (Figure 3)
 
 
 
@@ -63,8 +63,8 @@ Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
 </br>
 
 
-#### App Manifest Defenitions:  `..-app.xml` (IMPORTANT)
-For correct flow of the SDK add the following lines in the `<android>` section of your `..-app.xml` file ( Application defenition xml file) located in the root of the `src` folder of you project.
+#### App Manifest Definitions:  `..-app.xml` (IMPORTANT)
+For correct flow of the SDK add the following lines in the `<android>` section of your `..-app.xml` file (Application defenition xml file) located in the root of the `src` folder of you project.
 
 ```xml
 <manifestAdditions><![CDATA[
@@ -94,8 +94,8 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 
 
 #Initializing the SDK
-Sdk should be initialized only once
-When initializing the SDK, please make sure to use your given `publisherID` and `securityToken`, which can be retrieve by contacting with SDK@kidoz.net.
+SDK should be initialized only once.
+When initializing the SDK, please make sure to use your given `publisherID` and `securityToken`, which can be retrieved by contacting SDK@kidoz.net.
 
 Initiate SDK by creating `SdkControler` instance
 
@@ -112,16 +112,16 @@ Initiate SDK by creating `SdkControler` instance
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/panel_view_sample_image.png" align="right" height="121" width="200" ></a>
 
 `PanelView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
-The `PanelView` can be place on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`,`PANEL_TYPE.RIGHT`,`PANEL_TYPE.LEFT` 
+The `PanelView` can be placed on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`,`PANEL_TYPE.RIGHT`,`PANEL_TYPE.LEFT` 
 </br>
-The `PanelView` can be controled via a special `Handle` button can that can be located in any of the 3 following positions -  
-`HANDLE_POSITION.START`,`HANDLE_POSITION.CENTER`,`HANDLE_POSITION.END` depending on the `PaneView` initial Screen location.
+The `PanelView` can be controlled via a special `Handle` button can that can be located in any of the 3 following positions -  
+`HANDLE_POSITION.START`,`HANDLE_POSITION.CENTER`,`HANDLE_POSITION.END` depending on the `PanelView` initial Screen location.
 </br>
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_panel_layout.jpg" align="center" height="500" width="433" ></a>
 </br>
 
-Kidoz Panel View support 2 modes `Normal Panel View` and `Family Panel View` 
-`Family Panel View` is a unit designed to comply with Google's Designed for Families Policy
+KIDOZ Panel View support 2 modes `Normal PanelView` and `Family PanelView`.
+`Family PanelView` is a unit designed to comply with Google's Designed for Families Policy.
 
 #####To add the Normal Panel to your view use : 
 
@@ -216,7 +216,7 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
  	controller.showFeedView();
 ```
 
-You can implement `IFeedViewIntefrace` interface if you want to be informed when the `FeedView` is dismissed and/or about to be open by creating a class that implements the interface.
+You can implement `IFeedViewInterface` interface if you want to be informed when the `FeedView` is dismissed and/or about to be open by creating a class that implements the interface.
 
 ```javascript
  	import com.kidoz.sdk.api.platforms.IFeedViewIntefrace;
@@ -260,8 +260,7 @@ You can also call the `Feed View` by adding the `Feed Button` - in this case the
 	controller.addFeedButton(20,90);	
 ```
 
-It's recommended to use KIDOZ's default button - the `Feed Button` which is a custom animatable button.
-
+It's recommended to use KIDOZ default button - the `Feed Button` which is a customizable animatable button.
 
 #KIDOZ Banner (Android only)
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_banner_preview.png" align="right" height="80" width="445" ></a>
