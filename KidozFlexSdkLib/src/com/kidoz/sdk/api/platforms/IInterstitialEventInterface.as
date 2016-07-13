@@ -4,6 +4,7 @@ package com.kidoz.sdk.api.platforms
 	{
 		function onOpened():void; 
 		function onClosed():void;	 
-		function onReady():void;	 
+		function onReady():void;
+		function onLoadFailed():void;
 	}
 }

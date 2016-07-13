@@ -78,7 +78,7 @@ package com.kidoz.sdk.api.platforms
 		private var mFlexiViewListener:IFlexiViewInterface = null;
 		private var mGeneralEventListener:IGeneralEventInterface = null;
 		private var mInterstitialEventListener:IInterstitialEventInterface = null;
-		 	
+		
 		// Used for Panel interface listener
 		private static const PANEL_VIEW_EVENT:String = "PANEL_VIEW_EVENT"; 
 		private static const PANEL_VIEW_EVENT_EXPANDED:String = "PANEL_VIEW_EVENT_EXPANDED";
@@ -115,7 +115,8 @@ package com.kidoz.sdk.api.platforms
 		private static const INTERSTITIAL_EVENT_OPENED:String = "INTERSTITIAL_EVENT_OPENED";
 		private static const INTERSTITIAL_EVENT_CLOSED:String = "INTERSTITIAL_EVENT_CLOSED";
 		private static const INTERSTITIAL_EVENT_READY:String = "INTERSTITIAL_EVENT_READY";
-	 
+		private static const INTERSTITIAL_EVENT_LOAD_FAILED:String = "INTERSTITIAL_EVENT_LOAD_FAILED";
+		
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
 		{
@@ -148,19 +149,19 @@ package com.kidoz.sdk.api.platforms
 			}		
 			return instance;
 		}
-		 	
+		
 		/**
 		 * Status event handler , to handle events from native android extension
 		 */
 		private function onStatusEventHandler(event : StatusEvent ):void {
 			if(event.code == FEED_VIEW_EVENT) {				
-				 if(mFeedViewListener) {
-					 if(event.level == FEED_VIEW_EVENT_READY_TOSHOW) {
-						 mFeedViewListener.onReadyToShow();
-					 }else if(event.level == FEED_VIEW_EVENT_DISMISS){
-						 mFeedViewListener.onDismissView();
-					 }
-				 }
+				if(mFeedViewListener) {
+					if(event.level == FEED_VIEW_EVENT_READY_TOSHOW) {
+						mFeedViewListener.onReadyToShow();
+					}else if(event.level == FEED_VIEW_EVENT_DISMISS){
+						mFeedViewListener.onDismissView();
+					}
+				}
 			}else if(event.code == PANEL_VIEW_EVENT){			
 				if(mPanelViewListener) {
 					if(event.level == PANEL_VIEW_EVENT_EXPANDED) {
@@ -214,11 +215,13 @@ package com.kidoz.sdk.api.platforms
 						mInterstitialEventListener.onClosed();
 					}else if(event.level == INTERSTITIAL_EVENT_READY){
 						mInterstitialEventListener.onReady();
-					}
+					}else if(event.level == INTERSTITIAL_EVENT_LOAD_FAILED){
+						mInterstitialEventListener.onLoadFailed();
+					}	
 				}
 			}
 		} 
-	 
+		
 		
 		/**
 		 * Add feed button to view
@@ -231,7 +234,7 @@ package com.kidoz.sdk.api.platforms
 				extContext.call(FK_ADD_FEED_BUTTON,x_coord,y_coord);
 			}			
 		}
-			 
+		
 		
 		/**
 		 * Add feed button with size
@@ -263,7 +266,7 @@ package com.kidoz.sdk.api.platforms
 				extContext.call(FK_DISMISS_FEED_VIEW);
 			}			
 		}
-	 
+		
 		/**
 		 * Add feed panel view to screen
 		 * 
@@ -283,8 +286,8 @@ package com.kidoz.sdk.api.platforms
 		 * @param panel_type panel type (TOP,BOTTOM,RIGHT,LEFT)
 		 * @param handle_position handle position (CENTER,START,STOP)
 		 * @param autoVisible     make panel visible on prepared and ready
-     	 * @param startDelay      delay in seconds before automatic invocation of panel expand , pass -1 to  disable
-     	 * @param showPeriod      period in seconds to show the panel before closing it, pass -1 to  disable
+		 * @param startDelay      delay in seconds before automatic invocation of panel expand , pass -1 to  disable
+		 * @param showPeriod      period in seconds to show the panel before closing it, pass -1 to  disable
 		 */
 		public function addPanleViewExtended(panel_type:Number,handle_position:Number,autoVisible:Boolean,starDelay:Number,showPeriod:Number):void {
 			if(extContext != null) {
@@ -301,7 +304,7 @@ package com.kidoz.sdk.api.platforms
 		public function setPanelViewColor(color_hexa:String):void {
 			extContext.call(FK_SET_PANEL_VIEW_COLOR,color_hexa);
 		}
-			
+		
 		
 		/**
 		 * Change panel visibility state
@@ -313,7 +316,7 @@ package com.kidoz.sdk.api.platforms
 				extContext.call(FK_CHANGE_PANEL_VISIBILITY,visible);
 			}			
 		}
- 
+		
 		/**
 		 * Change feed button visibility state
 		 * 
@@ -355,7 +358,7 @@ package com.kidoz.sdk.api.platforms
 				return false;
 			}
 		}
-				
+		
 		
 		/**
 		 * Add Banner view to screen
@@ -364,7 +367,7 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function addBannerView(banner_anchor_pos:Number):void {
 			if(extContext != null) {
-				 extContext.call(FK_ADD_BANNER_VIEW,banner_anchor_pos);
+				extContext.call(FK_ADD_BANNER_VIEW,banner_anchor_pos);
 			} 
 		}
 		
@@ -391,7 +394,7 @@ package com.kidoz.sdk.api.platforms
 				extContext.call(FK_CHANGE_BANNER_POSITION,banner_anchor_pos);
 			} 
 		}	
- 
+		
 		/**
 		 * Show banner view		 
 		 */
@@ -409,7 +412,7 @@ package com.kidoz.sdk.api.platforms
 				extContext.call(FK_HIDE_BANNER_VIEW);
 			}
 		}
-			
+		
 		/**
 		 * Add Flexi point view to screen
 		 * 
@@ -421,7 +424,7 @@ package com.kidoz.sdk.api.platforms
 				extContext.call(FK_ADD_FLEXI_VIEW,isAutoShow,initial_pos);
 			} 
 		}
-				
+		
 		/**
 		 * Show and make visible flexi view on screen
 		 */
@@ -458,10 +461,10 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function setFlexiViewDraggable(draggable:Boolean):void {
 			if(extContext != null) {
-			     extContext.call(FK_SET_FLEXI_DRAGGABLE,draggable);
+				extContext.call(FK_SET_FLEXI_DRAGGABLE,draggable);
 			} 
 		}	
-		 
+		
 		/**
 		 * Get is felxi view can be closable
 		 * 
@@ -507,7 +510,7 @@ package com.kidoz.sdk.api.platforms
 			}
 		}	
 		
-	 	
+		
 		/**
 		 * Set on panel view event listener
 		 * 
@@ -570,7 +573,7 @@ package com.kidoz.sdk.api.platforms
 		public function dispose():void { 
 			extContext.dispose(); 
 		}
-			
+		
 		/**
 		 * Print function for debuging purposes
 		 * 

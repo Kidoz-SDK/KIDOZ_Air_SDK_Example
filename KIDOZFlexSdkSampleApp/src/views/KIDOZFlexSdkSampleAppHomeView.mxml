@@ -11,24 +11,23 @@
 		<s:Button id="colapsePanel" label="Close Panel" click="colapsePanelView();"/>		 	 
 		<s:Button id="panelStatus" label="Get Panel Status" click="checkPanelViewStatus();"/>
 		<s:Button id="addBanner" label="Add Banner" click="addBannerView();"/> 
-		<s:Button id="changePos" label="Change Banner Pos" click="changeBannerAnchorPosition();"/> 
-		<s:Button id="hide_Banner" label="Show Banner" click="showBanner();"/> 
-		<s:Button id="show_Banner" label="Hide Banner" click="hideBanner();"/> 
-		<s:Button id="add_FlexiView" label="Add Flexi" click="addFlexiView();"/> 
-		<s:Button id="show_FlexiView" label="show Flexi" click="showFlexiView();"/> 
-		<s:Button id="hide_FlexiView" label="hide Flexi" click="hideFlexiView();"/>
+		<s:Button id="load_InterstitialView" label="load Interstitial view" click="loadInterstitialView();"/> 
+		<s:Button id="show_InterstitialView" label="show Interstitial view" click="showInterstitialView();"/> 
 		<s:Button id="hide_Panel" label="hide panel" click="hidePanelView();"/>
 		<s:Button id="show_Panel" label="show panel" click="showPanelView();"/>
 		<s:Button id="is_FlexiViewVisible" label="Get Flexi State" click="checkFlexiViewStatus();"/> 
-		<s:Button id="load_InterstitialView" label="load Interstitial view" click="loadInterstitialView();"/> 
-		<s:Button id="show_InterstitialView" label="show Interstitial view" click="showInterstitialView();"/> 
+		<s:Button id="show_FlexiView" label="show Flexi" click="showFlexiView();"/> 
+		<s:Button id="hide_FlexiView" label="hide Flexi" click="hideFlexiView();"/>
+		<s:Button id="changePos" label="Change Banner Pos" click="changeBannerAnchorPosition();"/> 
+		<s:Button id="add_FlexiView" label="Add Flexi" click="addFlexiView();"/> 
 	</s:VGroup>
 	
 	
 	<fx:Script>		
 		<![CDATA[
 			
-			import com.kidoz.sdk.api.platforms.SdkController;
+			import com.kidoz.sdk.api.platforms.SdkController; 
+			
 			//import com.kidoz.sdk.api.platforms.SdkController;
 			
 			/** Initiate Kidoz SDK by creating an SdkControler instance
@@ -38,7 +37,7 @@
 			 *  */
 			//static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");				
 			static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
-			
+
 			/**
 			 * Set Feed events listener
 			 * Used to catch feed view events (Show/Dismiss)
@@ -83,10 +82,13 @@
 			controller.addFeedButton(20,60);	
 			
 			/** Add feed Panel to View  */
-			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_CENTER);	
+			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
 			
 			/** Set desired panel color (Optional) */
 			controller.setPanelViewColor("#FF9F3087");
+			
+			
+
 			
 			/**
 			 * Lounch feed view programmatically
@@ -237,6 +239,8 @@
 				
 				controller.loadInterstitialView(false);
 			}
+			
+			//oooOri debug function
 			
 		]]>
 	</fx:Script>

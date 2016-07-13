@@ -13,19 +13,24 @@ package
 			mController = controller;
 		}
 		 	
-		/** On Panel view expanded callback */
+		/** On intersitial view expanded callback */
 		public function onClosed():void {
 			mController.printToastDebugLog("Interstitial Closed");
 		} 
 		
-		/** On Panel view collapsed callback */
+		/** On intersitial view collapsed callback */
 		public function onOpened():void {
 			mController.printToastDebugLog("Interstitial Opened");
 		} 
 		
-		/** On Panel view collapsed callback */
+		/** On intersitial view collapsed callback */
 		public function onReady():void {
 			mController.printToastDebugLog("Interstitial Ready");
+		} 
+		
+		/** On interstitial fail callback */
+		public function onLoadFailed():void {
+			mController.printToastDebugLog("Interstitial onLoadFailed");
 		} 
 		
 	}
