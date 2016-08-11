@@ -4,15 +4,17 @@ KIDOZ SDK + Sample Application (ANE)
 =================================
 **KIDOZ SDK Android Extension (ANE) compatible with Android 4.0 (API level 14) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ SDK version 0.5.6*
+*Updated to KIDOZ Android SDK version 0.5.8*
+*Updated to KIDOZ iOS SDK version 0.5.3*
 
 ### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
 
 This Flex Mobile application project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
 The example application contains the following creative tools:
-* KIDOZ Feed view (+Family) content tool - the `FeedView` 
 * KIDOZ Panel view (+Family) content tool - the `PanelView`
+* KIDOZ Interstitial view content tool - the `InterstitialView`
+* KIDOZ Feed view (+Family) content tool - the `FeedView` 
 * KIDOZ Banner view  content tool - the `KidozBanner` (Android only)
 * KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
 
@@ -39,11 +41,11 @@ You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SD
 
 ####Include the library
 
-Copy `KidozSdkAir.ane` file from SampleApplication to YOUR project.
+Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplication to YOUR project.
 
 1. Right click on the project and select `Properties`.
 2. In opened window select `Flex Build Path` and then click `Native Extensions`. (Figure 1).
-3. Click (Add ANE) and select `KidozSdkAir.ane` file.
+3. Click (Add ANE) and select `KidozFlexSdkLib.ane` file and the `supportV4Air.ane` file.
 4. Select `Flex Build Packaging` and then click `Native Extensions` and check the empty box of recently added ANE. (Figure 2).
 5. Add to compiler arguments `-swf-version` that is adjusted to currently used Air SDK. For Air SDK version `19.0` set `-swf-version 30` (Figure 3)
 
@@ -208,6 +210,51 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 	controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
 ```
 
+#KIDOZ Interstitial
+##Generating the interstitial object
+```javascript
+	import com.kidoz.sdk.api.platforms.SdkController; 
+	controller.loadInterstitialView(false);
+```
+##showing the interstitial
+After receiving the interstitial reay event it is possible to call the show function
+```javascript
+	/** Show kidoz feed view */
+ 	controller.showInterstitialView();
+```
+
+##Setting the listeners 
+```javascript
+	/** Show kidoz feed view */
+ 	controller.setOnInterstitialEventListener(new InterstitialViewActionListener(controller));
+```
+The supported listeners are:
+```javascript
+public function InterstitialViewActionListener(controller:SdkController)
+		{
+			mController = controller;
+		}
+		 	
+		/** On intersitial view expanded callback */
+		public function onClosed():void {
+			mController.printToastDebugLog("Interstitial Closed");
+		} 
+		
+		/** On intersitial view collapsed callback */
+		public function onOpened():void {
+			mController.printToastDebugLog("Interstitial Opened");
+		} 
+		
+		/** On intersitial view collapsed callback */
+		public function onReady():void {
+			mController.printToastDebugLog("Interstitial Ready");
+		} 
+		
+		/** On interstitial fail callback */
+		public function onLoadFailed():void {
+			mController.printToastDebugLog("Interstitial onLoadFailed");
+		} 
+```
 
 #KIDOZ Feed
 ##Calling the Feed View Programmatically
@@ -215,6 +262,7 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 	/** Show kidoz feed view */
  	controller.showFeedView();
 ```
+
 
 You can implement `IFeedViewInterface` interface if you want to be informed when the `FeedView` is dismissed and/or about to be opened by creating a class that implements the interface.
 
