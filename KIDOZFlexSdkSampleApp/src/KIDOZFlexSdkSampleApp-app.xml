@@ -340,9 +340,10 @@
 
 <extensions>
         
-        <extensionID>com.kidoz.sdk.api.platforms</extensionID>
+        
     
         
     <extensionID>com.support.v4.air.extension</extensionID>
+    <extensionID>com.kidoz.sdk.api.platforms</extensionID>
     </extensions>
 </application>

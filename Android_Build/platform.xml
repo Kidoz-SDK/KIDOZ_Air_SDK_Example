@@ -1,9 +1,8 @@
 <platform xmlns="http://ns.adobe.com/air/extension/19.0">
     <packagedDependencies>
-		<packagedDependency>okhttp-3.0.1.jar</packagedDependency>
-		<packagedDependency>okio-1.6.0.jar</packagedDependency>
-		<packagedDependency>eventbus-2.4.1.jar</packagedDependency>
-		<packagedDependency>android-support-v4.jar</packagedDependency>
+		<packagedDependency>okhttp-3.4.1.jar</packagedDependency>
+		<packagedDependency>okio-1.9.0.jar</packagedDependency>
+		<packagedDependency>eventbus-3.0.0.jar</packagedDependency>
 		<packagedDependency>android-support-v7-recyclerview.jar</packagedDependency>		
     </packagedDependencies>
 
