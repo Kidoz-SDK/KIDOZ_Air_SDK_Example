@@ -15,7 +15,6 @@ The example application contains the following creative tools:
 * KIDOZ Panel view (+Family) content tool - the `PanelView`
 * KIDOZ Interstitial view content tool - the `InterstitialView`
 * KIDOZ Feed view (+Family) content tool - the `FeedView` 
-* KIDOZ Banner view  content tool - the `KidozBanner` (Android only)
 * KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
 
 
@@ -310,104 +309,6 @@ You can also call the `Feed View` by adding the `Feed Button` - in this case the
 
 We recommend using KIDOZ default button - the `Feed Button`, which is a customizable animated button.
 
-#KIDOZ Banner (Android only)
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_banner_preview.png" align="right" height="80" width="445" ></a>
-
-`KidozBanner` is a customized interactive banner view with standard size of `320 * 50` dp
-
-##Adding the Banner View Programmatically
-
-Banner view accepts an anchor position; there are 6 positions available
-
-```javascript
-	SdkController.BANNER_POSITION_TOP
-	SdkController.BANNER_POSITION_BOTTOM 
-	SdkController.BANNER_POSITION_TOP_LEFT	
-	SdkController.BANNER_POSITION_TOP_RIGHT		
-	SdkController.BANNER_POSITION_BOTTOM_LEFT	
-	SdkController.BANNER_POSITION_BOTTOM_RIGHT
- ```
-
-
-```javascript
-/**
- * Add banner view
- * */
-controller.addBannerView(SdkController.BANNER_POSITION_TOP_RIGHT);
-```
-
-- To change banner anchor position on runtime use:
-```javascript
-/**
- * Change banner position
- *  */
-controller.changeBannerViewPosition(SdkController.BANNER_POSITION_BOTTOM_RIGHT);
-```
-
-- To Show / Hide Banner view use:
-```javascript
-/**
- * Show banner view (Make it visible)
- *  */
-controller.showBannerView();
-
- /**
- * Hide banner view (Make it visible)
- *  */
-controller.hideBannerView();
-```
-
-You can implement `IBannerViewInterface` interface if you want to be informed of `Banner View` events by creating a class that implements the interface.
-
-```javascript
- 	import com.kidoz.sdk.api.platforms.IBannerViewInterface;
-	import com.kidoz.sdk.api.platforms.SdkController;
-	
-	/** Example Implementation of the Banner events listener  */
-	public class BannerViewActionListener implements IBannerViewInterface
-	{		
-		var mController:SdkController;
-		
-		public function BannerViewActionListener(controller:SdkController)
-		{
-			mController = controller;
-		}
-		
-		/** On Banner ready callback */
-		public function onBannerReady():void {
-			mController.printToastDebugLog("Banner Ready");
-		} 
-		
-		/** On Banner show callback */
-		public function onBannerShow():void {
-			mController.printToastDebugLog("Banner Show");
-		} 
-		
-		/** On Banner hide callback */
-		public function onBannerHide():void {
-			mController.printToastDebugLog("Banner Hide");
-		} 
-		
-		/** On Banner content loaded callback */
-		public function onBannerContentLoaded():void {
-			mController.printToastDebugLog("Banner Content Loaded");
-		} 
-		
-		/** On Banner load failed callback */
-		public function onBannerContentLoadFailed():void {
-			mController.printToastDebugLog("Banner Content Load Failed");
-		} 
-	}
-```
-
-- Set interface by:
-```javascript
-/**
- * Set Banner View events listener
- * Used to catch banner view events
- */
-controller.setOnBannerViewEventListener(new BannerViewActionListener(controller));
-```
 
 
 #KIDOZ Flexi Point View (Android only)
