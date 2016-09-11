@@ -18,7 +18,7 @@ The example application contains the following creative tools:
 * KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
 
 
-The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, which is the `Android Native Extension (ANE)` for KIDOZ SDK: this file should be downloaded and copied to your project to integrate the KIDOZ SDK.
+The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, which is the `Android Native Extension (ANE)` for KIDOZ SDK: this file should be downloaded and copied to your project to integrate the KIDOZ SDK.  
 
 ###Running the sample app
 
@@ -26,7 +26,7 @@ The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, 
 2. Add it to your Flash® Builder™® 
 3. Run the application as a mobile android application (Only `Google Android` Target platform And `On Device` Launch method are supported).
 
-</br>
+<br/>
 
 KIDOZ SDK - Getting Started
 =================================
@@ -40,7 +40,8 @@ You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SD
 
 ####Include the library
 
-Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplication to YOUR project.
+Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplication to YOUR project. <br/>
+In case there is some other ane files that already includes the V4 libary (getting errors during build phase) then you should not add the supportV4Air to your project. 
 
 1. Right click on the project and select `Properties`.
 2. In opened window select `Flex Build Path` and then click `Native Extensions`. (Figure 1).
