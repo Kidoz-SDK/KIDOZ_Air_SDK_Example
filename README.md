@@ -31,11 +31,6 @@ The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, 
 KIDOZ SDK - Getting Started
 =================================
 You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SDK/Documentation/wiki)
- 
-1. Copy `KidozSdkAir.ane` android extension file from the sample application to your project.
-2. Include the `KidozSdkAir.ane  (KIDOZ SDK)` library inside your project
-3. Initalize the `SdkController`
-4. Open the `Feed View` programmatically, add the `KIDOZ Feed Button` or `KIDOZ Panel/Family View` to your `Main Activity`
 
 
 ####Include the library
