@@ -45,7 +45,7 @@ In case there is some other ane files that already includes the V4 libary (getti
 5. Add to compiler arguments `-swf-version` that is adjusted to currently used Air SDK. For Air SDK version `19.0` set `-swf-version 30` (Figure 3)
 
 <br/>
-example for adding only the KIDOZ SDK ane
+Example for adding only the KIDOZ SDK ane
 
 </br>
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_1.jpg" align="left" height="564" width="975" ></a>
