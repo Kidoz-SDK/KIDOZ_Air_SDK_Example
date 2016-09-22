@@ -5,7 +5,7 @@ package com.kidoz.sdk.api.platforms
 	import flash.external.ExtensionContext;
 	
 	/**
-	 * Sdk Controller Version 0.5.6
+	 * Sdk Controller Version 0.6.0
 	 * */
 	public class SdkController  extends EventDispatcher
 	{
@@ -361,7 +361,8 @@ package com.kidoz.sdk.api.platforms
 		
 		
 		/**
-		 * Add Banner view to screen
+		 * @Deprecated  Will be removed in the future releases
+		 * Add Banner view to screen  
 		 * 
 		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
 		 */
@@ -372,6 +373,8 @@ package com.kidoz.sdk.api.platforms
 		}
 		
 		/**
+		 * @Deprecated  Will be removed in the future releases
+		 * 
 		 * Add Banner view to screen
 		 * 
 		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
@@ -385,6 +388,8 @@ package com.kidoz.sdk.api.platforms
 		
 		
 		/**
+		 * @Deprecated  Will be removed in the future releases
+		 * 
 		 * Change Banner view anchor position on screen
 		 * 
 		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
@@ -396,6 +401,8 @@ package com.kidoz.sdk.api.platforms
 		}	
 		
 		/**
+		 * @Deprecated  Will be removed in the future releases
+		 * 
 		 * Show banner view		 
 		 */
 		public function showBannerView():void {
@@ -405,6 +412,8 @@ package com.kidoz.sdk.api.platforms
 		}
 		
 		/**
+		 * @Deprecated  Will be removed in the future releases
+		 * 
 		 * Hide banner view		 
 		 */
 		public function hideBannerView():void {
@@ -530,6 +539,8 @@ package com.kidoz.sdk.api.platforms
 		}
 		
 		/**
+		 * @Deprecated  Will be removed in the future releases
+		 * 
 		 * Set on Banner view event listener
 		 * 
 		 * @param listener class that implements "IBannerViewInterface" interface 
