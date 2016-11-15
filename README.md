@@ -206,13 +206,18 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 	controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
 ```
 
-#KIDOZ Interstitial
-##Generating the interstitial object
+#KIDOZ Interstitial / Rewarded
+##Request interstitial ad 
 ```javascript
 	import com.kidoz.sdk.api.platforms.SdkController; 
 	controller.loadInterstitialView(false);
 ```
-##showing the interstitial
+##Request rewarded ad 
+```javascript
+	import com.kidoz.sdk.api.platforms.SdkController; 
+	controller.loadRewardedVideoView(false);
+```
+##showing the interstitial / rewarded ad
 After receiving the interstitial reay event it is possible to call the show function
 ```javascript
 	/** Show kidoz feed view */
@@ -246,9 +251,14 @@ public function InterstitialViewActionListener(controller:SdkController)
 			mController.printToastDebugLog("Interstitial Ready");
 		} 
 		
-		/** On interstitial fail callback */
+		/** On interstitial//rewarded fail callback */
 		public function onLoadFailed():void {
 			mController.printToastDebugLog("Interstitial onLoadFailed");
+		} 
+		
+		/** On rewarded end callback */
+		public function onRewarded():void {
+			
 		} 
 ```
 
