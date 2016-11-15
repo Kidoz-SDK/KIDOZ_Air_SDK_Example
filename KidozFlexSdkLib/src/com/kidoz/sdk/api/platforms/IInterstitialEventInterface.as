@@ -6,5 +6,7 @@ package com.kidoz.sdk.api.platforms
 		function onClosed():void;	 
 		function onReady():void;
 		function onLoadFailed():void;
+		function onRewarded():void;
+		function onRewardedVideoStarted():void;
 	}
 }

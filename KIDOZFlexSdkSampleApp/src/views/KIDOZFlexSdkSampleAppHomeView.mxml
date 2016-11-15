@@ -10,8 +10,9 @@
 		<s:Button id="expandPanel" label="Expand Panel" click="expandPanelView();"/>
 		<s:Button id="colapsePanel" label="Close Panel" click="colapsePanelView();"/>		 	 
 		<s:Button id="panelStatus" label="Get Panel Status" click="checkPanelViewStatus();"/>
-		<s:Button id="addBanner" label="Add Banner" click="addBannerView();"/> 
+		<s:Button id="show_video" label="Show Video Unit" click="showVideoUnit();"/> 
 		<s:Button id="load_InterstitialView" label="load Interstitial view" click="loadInterstitialView();"/> 
+		<s:Button id="load_RewardedView" label="load rewarded view" click="loadRewardedView();"/> 
 		<s:Button id="show_InterstitialView" label="show Interstitial view" click="showInterstitialView();"/> 
 		<s:Button id="hide_Panel" label="hide panel" click="hidePanelView();"/>
 		<s:Button id="show_Panel" label="show panel" click="showPanelView();"/>
@@ -28,6 +29,7 @@
 			
 			import com.kidoz.sdk.api.platforms.SdkController; 
 			
+			var mInterstitialLoaded = false;
 			//import com.kidoz.sdk.api.platforms.SdkController;
 			
 			/** Initiate Kidoz SDK by creating an SdkControler instance
@@ -75,7 +77,15 @@
 			 * Set Interstitial events listener
 			 * Used to catch interstitial SDK events. 
 			 *  */
-			controller.setOnInterstitialEventListener(new InterstitialViewActionListener(controller));
+			static var mInterstitialIntefaceObject:InterstitialViewActionListener = new InterstitialViewActionListener(controller);
+			controller.setOnInterstitialEventListener(mInterstitialIntefaceObject);
+			
+			
+			/**
+			 * Set Interstitial events listener
+			 * Used to catch interstitial SDK events. 
+			 *  */
+			controller.setOnVideoUnitEventListener(new VideoUnitActionListener(controller));
 			
 			// For example purposes we add Feed Button And Panel View on application Start
 			/** Add feed default Button to view */
@@ -228,8 +238,10 @@
 			 * show interstitial view
 			 *  */
 			private function showInterstitialView():void {	
-				
-				controller.showInterstitialView();
+				if (mInterstitialIntefaceObject.mReady == true)
+				{
+					controller.showInterstitialView();
+				}
 			}
 			
 			/**
@@ -240,7 +252,22 @@
 				controller.loadInterstitialView(false);
 			}
 			
-			//oooOri debug function
+			/**
+			 * load rewarded ad
+			 *  */
+			private function loadRewardedView():void {	
+				
+				controller.loadRewardedVideoView(false);
+			}
+			
+			
+			private function showVideoUnit():void
+			{
+				controller.showVideoUnit();
+			}
+			
+			
+			
 			
 		]]>
 	</fx:Script>

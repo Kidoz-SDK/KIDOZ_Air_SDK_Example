@@ -30,11 +30,11 @@ package com.kidoz.sdk.api.platforms
 		private static const FK_SHOW_FLEXI_VIEW:String = "showFlexiView";
 		private static const FK_HIDE_FLEXI_VIEW:String = "hideFlexiView";
 		private static const FK_GET_IS_FLEXI_VIEW_VISIBLE:String = "getIsFlexiViewVisible";
-		private static const FK_SET_FLEXI_DRAGGABLE:String = "setFlexiDraggable";
-		private static const FK_SET_FLEXI_CLOSABLE:String = "setFlexiClosable";
+	 
 		private static const FK_SHOW_INTERSTITIAL:String = "showInterstitial";
 		private static const FK_LOAD_INTERSTITIAL:String = "loadInterstitial";
 		private static const FK_IS_INTERSTITIAL_LOADED:String = "isInterstitialLoaded";
+		private static const FK_SHOW_VIDEO_UNIT:String = "showVideoUnit";
 		private static const FK_PRINT_TOAST_LOG:String = "printToastLog";
 		
 		// Panel Types
@@ -78,6 +78,7 @@ package com.kidoz.sdk.api.platforms
 		private var mFlexiViewListener:IFlexiViewInterface = null;
 		private var mGeneralEventListener:IGeneralEventInterface = null;
 		private var mInterstitialEventListener:IInterstitialEventInterface = null;
+		private var mVideoUnitEventListener:IVideoUnitInterface = null;
 		
 		// Used for Panel interface listener
 		private static const PANEL_VIEW_EVENT:String = "PANEL_VIEW_EVENT"; 
@@ -116,6 +117,15 @@ package com.kidoz.sdk.api.platforms
 		private static const INTERSTITIAL_EVENT_CLOSED:String = "INTERSTITIAL_EVENT_CLOSED";
 		private static const INTERSTITIAL_EVENT_READY:String = "INTERSTITIAL_EVENT_READY";
 		private static const INTERSTITIAL_EVENT_LOAD_FAILED:String = "INTERSTITIAL_EVENT_LOAD_FAILED";
+		private static const INTERSTITIAL_EVENT_REWARDED:String = "INTERSTITIAL_EVENT_REWARDED";	
+		private static const INTERSTITIAL_EVENT_REWARDED_VIDEO_STARTED:String = "INTERSTITIAL_EVENT_REWARDED_VIDEO_STARTED";
+		
+		// Video Unit Events
+		private static const VIDEO_UNIT_EVENT:String = "VIDEO_UNIT_EVENT";
+		private static const VIDEO_UNIT_EVENT_OPEN:String = "VIDEO_UNIT_EVENT_OPEN";
+		private static const VIDEO_UNIT_EVENT_CLOSE:String = "VIDEO_UNIT_EVENT_CLOSE";
+		private static const VIDEO_UNIT_EVENT_READY:String = "VIDEO_UNIT_EVENT_READY";
+		 
 		
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
@@ -217,7 +227,11 @@ package com.kidoz.sdk.api.platforms
 						mInterstitialEventListener.onReady();
 					}else if(event.level == INTERSTITIAL_EVENT_LOAD_FAILED){
 						mInterstitialEventListener.onLoadFailed();
-					}	
+					}	else if(event.level == INTERSTITIAL_EVENT_REWARDED){
+						mInterstitialEventListener.onRewarded();
+					}else if(event.level == INTERSTITIAL_EVENT_REWARDED_VIDEO_STARTED){
+						mInterstitialEventListener.onRewardedVideoStarted();
+					}								 
 				}
 			}
 		} 
@@ -241,11 +255,12 @@ package com.kidoz.sdk.api.platforms
 		 * 
 		 * @param x_coord the x coordinate of the view position
 		 * @param y_coord the y coordinate of the view position 
-		 * @param button_size button new size
+		 * 
+		 * @param (DEPRECATED) button_size button new size
 		 */
 		public function addFeedButtonWithSize(x_coord:Number,y_coord:Number,button_size:Number):void {
 			if(extContext != null) {
-				extContext.call(FK_ADD_FEED_BUTTON_WITH_SIZE,x_coord,y_coord,button_size);
+				extContext.call(FK_ADD_FEED_BUTTON_WITH_SIZE,x_coord,y_coord,-1);
 			}			
 		}
 		
@@ -286,23 +301,25 @@ package com.kidoz.sdk.api.platforms
 		 * @param panel_type panel type (TOP,BOTTOM,RIGHT,LEFT)
 		 * @param handle_position handle position (CENTER,START,STOP)
 		 * @param autoVisible     make panel visible on prepared and ready
-		 * @param startDelay      delay in seconds before automatic invocation of panel expand , pass -1 to  disable
-		 * @param showPeriod      period in seconds to show the panel before closing it, pass -1 to  disable
+		 * 
+		 * @param (DEPRECATED) startDelay delay in seconds before automatic invocation of panel expand , pass -1 to  disable
+		 * @param  (DEPRECATED) showPeriod period in seconds to show the panel before closing it, pass -1 to  disable
 		 */
 		public function addPanleViewExtended(panel_type:Number,handle_position:Number,autoVisible:Boolean,starDelay:Number,showPeriod:Number):void {
 			if(extContext != null) {
-				extContext.call(FK_ADD_PANEL,panel_type,handle_position,autoVisible,starDelay,showPeriod);
+				extContext.call(FK_ADD_PANEL,panel_type,handle_position,autoVisible,-1,-1);
 			}			
 		}
 		
 		
 		/**
+		 * @Deprecated  Will be remived in the future releases
 		 * Set panel view color in hexa representation 
 		 * 
 		 * @param color_hexa color in hexa representation (Example : "#ffffff")
 		 */
 		public function setPanelViewColor(color_hexa:String):void {
-			extContext.call(FK_SET_PANEL_VIEW_COLOR,color_hexa);
+			 
 		}
 		
 		
@@ -356,24 +373,23 @@ package com.kidoz.sdk.api.platforms
 				return extContext.call(FK_IS_PANEL_EXPANDED);
 			}else {
 				return false;
+				
 			}
 		}
 		
 		
 		/**
-		 * @Deprecated  Will be removed in the future releases
+		 * @Deprecated  Will be remived in the future releases
 		 * Add Banner view to screen  
 		 * 
 		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
 		 */
 		public function addBannerView(banner_anchor_pos:Number):void {
-			if(extContext != null) {
-				extContext.call(FK_ADD_BANNER_VIEW,banner_anchor_pos);
-			} 
+			  
 		}
 		
 		/**
-		 * @Deprecated  Will be removed in the future releases
+		 * @Deprecated  Will be remived in the future releases
 		 * 
 		 * Add Banner view to screen
 		 * 
@@ -381,45 +397,37 @@ package com.kidoz.sdk.api.platforms
 		 * @param auto_show is auto show banner on ready
 		 */
 		public function addBannerViewExtended(banner_anchor_pos:Number,auto_show:Boolean):void {
-			if(extContext != null) {
-				extContext.call(FK_ADD_BANNER_VIEW_EXTENDED,banner_anchor_pos,auto_show);
-			} 
+			 
 		}
 		
 		
 		/**
-		 * @Deprecated  Will be removed in the future releases
+		 * @Deprecated  Will be remived in the future releases
 		 * 
 		 * Change Banner view anchor position on screen
 		 * 
 		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
 		 */
 		public function changeBannerViewPosition(banner_anchor_pos:Number):void {
-			if(extContext != null) {
-				extContext.call(FK_CHANGE_BANNER_POSITION,banner_anchor_pos);
-			} 
+			 
 		}	
 		
 		/**
-		 * @Deprecated  Will be removed in the future releases
+		 * @Deprecated  Will be remived in the future releases
 		 * 
 		 * Show banner view		 
 		 */
 		public function showBannerView():void {
-			if(extContext != null) {
-				extContext.call(FK_SHOW_BANNER_VIEW);
-			}
+			 
 		}
 		
 		/**
-		 * @Deprecated  Will be removed in the future releases
+		 * @Deprecated  Will be remived in the future releases
 		 * 
 		 * Hide banner view		 
 		 */
 		public function hideBannerView():void {
-			if(extContext != null) {
-				extContext.call(FK_HIDE_BANNER_VIEW);
-			}
+			 
 		}
 		
 		/**
@@ -464,25 +472,23 @@ package com.kidoz.sdk.api.platforms
 		}
 		
 		/**
-		 * Get is felxi view can be draggable
+		 * @Deprecated  Will be remived in the future releases
+		 * Set is felxi view can be draggable
 		 * 
 		 * @param is draggable
 		 */
 		public function setFlexiViewDraggable(draggable:Boolean):void {
-			if(extContext != null) {
-				extContext.call(FK_SET_FLEXI_DRAGGABLE,draggable);
-			} 
+			 
 		}	
 		
 		/**
-		 * Get is felxi view can be closable
+		 * @Deprecated  Will be remived in the future releases
+		 * Set is felxi view can be closable
 		 * 
 		 * @param closable set is closable
 		 */
 		public function setFlexiViewClosable(closable:Boolean):void {
-			if(extContext != null) {
-				extContext.call(FK_SET_FLEXI_CLOSABLE,closable);
-			}
+			
 		}		
 		
 		/**
@@ -500,11 +506,24 @@ package com.kidoz.sdk.api.platforms
 		 * 
 		 * @param auto_show is auto show interstitial on ready
 		 */
-		public function loadInterstitialView(auto_show:Boolean):void {
+		public function loadRewardedVideoView(auto_show:Boolean):void {
 			if(extContext != null) {
-				extContext.call(FK_LOAD_INTERSTITIAL,auto_show);
+				extContext.call(FK_LOAD_INTERSTITIAL,auto_show,1); // 1- for rewarded video ad type
 			}
 		}	
+		
+		/**
+		 * Load and preapre interstitial view ad
+		 * (This function also used for reloading the ad)
+		 * 
+		 * @param auto_show is auto show interstitial on ready
+		 */
+		public function loadInterstitialView(auto_show:Boolean):void {
+			if(extContext != null) {
+				extContext.call(FK_LOAD_INTERSTITIAL,auto_show,0); // 0 - for interstitial ad type
+			}
+		}	
+		
 		
 		/**
 		 * Get is interstitial ad is loaded and ready
@@ -517,6 +536,17 @@ package com.kidoz.sdk.api.platforms
 			}else {
 				return false;
 			}
+		}	
+		
+		/**
+		 * Show video unit view
+		 * 
+		 * @return loaded state
+		 */
+		public function showVideoUnit():void {
+			if(extContext != null) {
+				extContext.call(FK_SHOW_VIDEO_UNIT);
+			} 
 		}	
 		
 		
@@ -539,7 +569,7 @@ package com.kidoz.sdk.api.platforms
 		}
 		
 		/**
-		 * @Deprecated  Will be removed in the future releases
+		 * @Deprecated  Will be remived in the future releases
 		 * 
 		 * Set on Banner view event listener
 		 * 
@@ -577,6 +607,16 @@ package com.kidoz.sdk.api.platforms
 		public function setOnInterstitialEventListener(listener:IInterstitialEventInterface):void {
 			mInterstitialEventListener = listener;
 		}	
+		
+		/**
+		 * Set on video unit event listener
+		 * 
+		 * @param listener class that implements "IVideoUnitInterface" interface 
+		 */
+		public function setOnVideoUnitEventListener(listener:IVideoUnitInterface):void {
+			mVideoUnitEventListener = listener;
+		}	
+		
 		
 		/**
 		 * Cleans up the instance of the native extension. 

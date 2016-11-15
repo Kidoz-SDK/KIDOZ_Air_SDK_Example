@@ -15,7 +15,7 @@
 
 	<!-- A universally unique application identifier. Must be unique across all AIR applications.
 	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-	<id>com.kidoz.air.debugflex</id>
+	<id>com.kidoz.air.KIDOZFlexSdkSampleApp.debug</id>
 
 	<!-- Used as the filename for the application. Required. -->
 	<filename>KIDOZFlexSdkSampleApp</filename>
@@ -297,7 +297,12 @@
 				    <activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
 	                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
 	                </activity> 
-	                	    
+	                
+	                 <activity android:name="com.kidoz.sdk.api.ui_views.video_unit.VideoUnitActivity"
+                       android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+                       android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
+                     </activity> 
+                     	    
 			        <receiver android:name="com.kidoz.sdk.api.receivers.SdkReceiver" >
 			            <intent-filter>
 			                <action android:name="android.intent.action.PACKAGE_ADDED" />		
@@ -342,8 +347,8 @@
 
 
 
-
 <extensions>
+        <extensionID>com.support.v4.air.extension</extensionID>
         <extensionID>com.kidoz.sdk.api.platforms</extensionID>
     </extensions>
 </application>
