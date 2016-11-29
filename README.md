@@ -32,14 +32,12 @@ KIDOZ SDK - Getting Started
 =================================
 You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SDK/Documentation/wiki)
 
-
-####Include the library
-
-Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplication to YOUR project. <br/>
-
 ###IMPORTANT!
-In case there is some other `.ANE` files that already includes the V4 libary (getting errors during build phase) such as (Google Play Service, AdMob or othe libs) then you should NOT add the `supportV4Air.ane` to your project. 
+In case there is some other `.ANE` files that already includes the V4 libary (getting errors during build phase) such as (Google Play Service, AdMob or othe libs) then you should NOT include the `supportV4Air.ane` file to your project only the `KidozFlexSdkLib.ane`. 
 <br>
+
+###Include the library
+Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplication to YOUR project. <br/>
 
 1. Right click on the project and select `Properties`.
 2. In opened window select `Flex Build Path` and then click `Native Extensions`. (Figure 1).
