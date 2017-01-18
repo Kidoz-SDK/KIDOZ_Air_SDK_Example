@@ -28,8 +28,8 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/Documents/Git/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/SupportV4Air.ane"/>
-      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/Documents/Git/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/SupportV4Air.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -47,7 +47,7 @@
       <airSettings airCertificatePath="/Users/orikam/Documents/signing/Kidoz_Dev_2016.p12" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
-          <anePathEntry path="/Users/orikam/Documents/Git/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
         </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
@@ -61,8 +61,8 @@
       <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
-          <anePathEntry path="/Users/orikam/Documents/Git/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/SupportV4Air.ane"/>
-          <anePathEntry path="/Users/orikam/Documents/Git/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/SupportV4Air.ane"/>
         </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
