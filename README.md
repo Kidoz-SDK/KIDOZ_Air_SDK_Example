@@ -14,6 +14,7 @@ This Flex Mobile application project provides an example of the [KIDOZ](http://w
 The example application contains the following creative tools:
 * KIDOZ Panel view (+Family) content tool - the `PanelView`
 * KIDOZ Interstitial view content tool - the `InterstitialView`
+* KIDOZ Rewarded view content tool - the `RewardedView`
 * KIDOZ Feed view (+Family) content tool - the `FeedView` 
 * KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
 
@@ -352,12 +353,12 @@ controller.addFlexiView(true,SdkController.FLEXI_VIEW_POSITION_TOP_START);
 - To Show / Hide Flexi View use:
 ```javascript
 /**
- * Show banner view (Make it visible)
+ * Show flexi view (Make it visible)
  *  */
 controller.showFlexiView();
 
  /**
- * Hide banner view (Make it visible)
+ * Hide flexi view (Make it visible)
  *  */
 controller.hideFlexiView();
 ```
