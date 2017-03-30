@@ -12,16 +12,18 @@ KIDOZ SDK + Sample Application (ANE)
 This Flex Mobile application project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
 The example application contains the following creative tools:
+Recommended units:
 * KIDOZ Panel view (+Family) content tool - the `PanelView`
 * KIDOZ Interstitial view content tool - the `InterstitialView`
 * KIDOZ Rewarded view content tool - the `RewardedView`
-* KIDOZ Feed view (+Family) content tool - the `FeedView` 
+Deprecated units:
+* KIDOZ Feed view content tool - the `FeedView` 
 * KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
 
 
 The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, which is the `Android Native Extension (ANE)` for KIDOZ SDK: this file should be downloaded and copied to your project to integrate the KIDOZ SDK.  
 
-###Running the sample app
+Running the sample app
 
 1. Download / Clone the `KidozSdkSampleApp`
 2. Add it to your Flash® Builder™® 
@@ -37,7 +39,7 @@ You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SD
 In case there is some other `.ANE` files that already includes the V4 libary (getting errors during build phase) such as (Google Play Service, AdMob or othe libs) then you should NOT include the `supportV4Air.ane` file to your project only the `KidozFlexSdkLib.ane`. 
 <br>
 
-###Include the library
+Include the library
 Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplication to YOUR project. <br/>
 
 1. Right click on the project and select `Properties`.
@@ -108,7 +110,7 @@ Initiate SDK by creating `SdkControler` instance
 	static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
 ```
 
-#KIDOZ Panel
+KIDOZ Panel
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/panel_view_sample_image.png" align="right" height="121" width="200" ></a>
 
 `PanelView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
