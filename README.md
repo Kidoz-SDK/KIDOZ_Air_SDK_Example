@@ -15,8 +15,9 @@ The example application contains the following creative tools:
 
 Recommended units:
 * KIDOZ Panel view content tool - the `PanelView`
-* KIDOZ Interstitial view content tool - the `InterstitialView`
-* KIDOZ Rewarded view content tool - the `RewardedView`
+* KIDOZ Interstitial/Rewarded view content tool - the `InterstitialView`/`RewardedView`
+
+** Note that you need to select either Interstital OR Rewarded during application lifetime.
 
 Deprecated units:
 * KIDOZ Feed view content tool - the `FeedView` 
@@ -67,7 +68,7 @@ Example for adding only the KIDOZ SDK ane
 </br>
 
 
-#### App Manifest Definitions:  `..-app.xml` (IMPORTANT)
+App Manifest Definitions:  `..-app.xml` (IMPORTANT)
 For correct flow of the SDK add the following lines in the `<android>` section of your `..-app.xml` file (Application definition xml file) located in the root of the `src` folder of you project.
 
 ```xml
@@ -112,11 +113,12 @@ Initiate SDK by creating `SdkControler` instance
 	static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
 ```
 
-KIDOZ Panel
+# KIDOZ Panel
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/panel_view_sample_image.png" align="right" height="121" width="200" ></a>
 
 `PanelView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
-The `PanelView` can be placed on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`,`PANEL_TYPE.RIGHT`,`PANEL_TYPE.LEFT` 
+The `PanelView` can be placed on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`
+
 </br>
 The `PanelView` can be controlled via a special `Handle` button that can be located in any of the 3 following positions -  
 `HANDLE_POSITION.START`,`HANDLE_POSITION.CENTER`,`HANDLE_POSITION.END` depending on the `PanelView` initial screen location.
@@ -124,17 +126,7 @@ The `PanelView` can be controlled via a special `Handle` button that can be loca
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_panel_layout.jpg" align="center" height="500" width="433" ></a>
 </br>
 
-KIDOZ Panel View support 2 modes `Normal PanelView` and `Family PanelView`.
-`Family PanelView` is a unit designed to comply with Google's Designed for Families Policy.
-
-#####To add the Normal Panel to your view use: 
-
-```javascript
-     /** Add Panel to View  */
-     controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END,false);	
-```
-
-#####To add the Family Panel to your view use: 
+# To add the Panel to your view use: 
 
 ```javascript
      /** Add Panel to View  */
@@ -212,25 +204,25 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 	controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
 ```
 
-#KIDOZ Interstitial / Rewarded
-##Request interstitial ad 
+# KIDOZ Interstitial / Rewarded
+## Request interstitial ad 
 ```javascript
 	import com.kidoz.sdk.api.platforms.SdkController; 
 	controller.loadInterstitialView(false);
 ```
-##Request rewarded ad 
+## Request rewarded ad 
 ```javascript
 	import com.kidoz.sdk.api.platforms.SdkController; 
 	controller.loadRewardedVideoView(false);
 ```
-##showing the interstitial / rewarded ad
+## Showing the interstitial / rewarded ad
 After receiving the interstitial reay event it is possible to call the show function
 ```javascript
 	/** Show kidoz feed view */
  	controller.showInterstitialView();
 ```
 
-##Setting the listeners 
+## Setting the listeners 
 ```javascript
 	/** Show kidoz feed view */
  	controller.setOnInterstitialEventListener(new InterstitialViewActionListener(controller));
@@ -268,8 +260,8 @@ public function InterstitialViewActionListener(controller:SdkController)
 		} 
 ```
 
-#KIDOZ Feed
-##Calling the Feed View Programmatically
+# KIDOZ Feed
+## Calling the Feed View Programmatically
 ```javascript
 	/** Show kidoz feed view */
  	controller.showFeedView();
