@@ -12,10 +12,12 @@ KIDOZ SDK + Sample Application (ANE)
 This Flex Mobile application project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
 The example application contains the following creative tools:
+
 Recommended units:
-* KIDOZ Panel view (+Family) content tool - the `PanelView`
+* KIDOZ Panel view content tool - the `PanelView`
 * KIDOZ Interstitial view content tool - the `InterstitialView`
 * KIDOZ Rewarded view content tool - the `RewardedView`
+
 Deprecated units:
 * KIDOZ Feed view content tool - the `FeedView` 
 * KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
