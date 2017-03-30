@@ -302,7 +302,7 @@ You can implement `IFeedViewInterface` interface if you want to be informed when
 ```
 
 ## Adding the KIDOZ Feed Button
-<a href="url"><img src="https://kidoz-cdn.s3.amazonaws.com/sdk/btn_animation.gif" align="right" height="96" width="96" ></a>
+
 You can also call the `Feed View` by adding the `Feed Button` - in this case the `Feed View` will be shown following a click on the `Feed Button`. 
 
 - 	Add `FeedButton` by:
