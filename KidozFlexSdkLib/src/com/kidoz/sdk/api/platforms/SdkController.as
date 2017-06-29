@@ -80,6 +80,7 @@ package com.kidoz.sdk.api.platforms
 		private static var extContext:ExtensionContext = null;	
 		private static var mPublisher_id:String;
 		private static var mToken:String;		
+		private var mInitListener:ISDKInitIntefrace = null;
 		private var mFeedViewListener:IFeedViewIntefrace = null;
 		private var mPanelViewListener:IPanelViewInterface = null;
 		private var mBannerViewListener:IBannerViewInterface = null;
@@ -88,6 +89,11 @@ package com.kidoz.sdk.api.platforms
 		private var mInterstitialEventListener:IInterstitialEventInterface = null;
 		private var mRewardedEventListener:IRewardedEventInterface = null;
 		private var mVideoUnitEventListener:IVideoUnitInterface = null;
+		
+		// Used for SDK init listener
+		private static const SDK_INIT_EVENT:String = "SDK_INIT_EVENT";
+		private static const SDK_INIT_EVENT_SUCCESS:String = "SDK_INIT_EVENT_SUCCESS";
+		private static const SDK_INIT_EVENT_ERROR:String = "SDK_INIT_EVENT_ERROR";
 		
 		// Used for Panel interface listener
 		private static const PANEL_VIEW_EVENT:String = "PANEL_VIEW_EVENT"; 
@@ -183,6 +189,15 @@ package com.kidoz.sdk.api.platforms
 		 * Status event handler , to handle events from native android extension
 		 */
 		private function onStatusEventHandler(event : StatusEvent ):void {
+			if(event.code == SDK_INIT_EVENT) {
+				if (mInitListener) {
+					if(event.level == SDK_INIT_EVENT_SUCCESS) {
+						mInitListener.onInitSuccess();
+					}else if(event.level == SDK_INIT_EVENT_ERROR) {
+						mInitListener.onInitError();
+					}
+				}
+			}
 			if(event.code == FEED_VIEW_EVENT) {				
 				if(mFeedViewListener) {
 					if(event.level == FEED_VIEW_EVENT_READY_TOSHOW) {
@@ -619,6 +634,12 @@ package com.kidoz.sdk.api.platforms
 			} 
 		}	
 		
+		/**
+		 * Set SDK init listener
+		 */
+		public function setSDKInitListener(listener:ISDKInitIntefrace):void {
+			mInitListener = listener;	
+		}
 		
 		/**
 		 * Set on panel view event listener

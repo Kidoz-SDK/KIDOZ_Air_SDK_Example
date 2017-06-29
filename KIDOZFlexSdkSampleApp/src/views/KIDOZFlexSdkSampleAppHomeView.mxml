@@ -11,7 +11,7 @@
 				<!-- 0 rotation creates left to right gradient -->
 				<s:LinearGradient rotation="0">
 					<s:GradientEntry color="0xEBEF8B"/>
-					<s:GradientEntry color="0xF2F76F"/>
+					<s:GradientEntry color="0xD2D75F"/>
 				</s:LinearGradient>
 			</s:backgroundFill>
 			<s:layout>
@@ -66,6 +66,11 @@
 			 * (Please Set you our developer id and security token provided !!)
 			 *  */			
 			static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
+		
+			/**
+			 * Set SDK Init listener to catch when the sdk finished init 
+			 */
+			controller.setSDKInitListener(new SDKInitListener(controller));
 			
 			/**
 			 * Set Feed events listener
