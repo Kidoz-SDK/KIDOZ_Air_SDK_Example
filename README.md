@@ -3,9 +3,9 @@
 
 KIDOZ SDK + Sample Application (ANE)
 =================================
-** KIDOZ SDK Android Extension (ANE) compatible with Android 4.0 (API level 14) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
+** KIDOZ SDK Android Extension (ANE) compatible with Android 4.2 (API level 17) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ Android SDK version 0.7.4*
+*Updated to KIDOZ Android SDK version 0.8.0.5*
 *Updated to KIDOZ iOS SDK version 0.5.9*
 
 ### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
@@ -113,6 +113,24 @@ Initiate SDK by creating `SdkControler` instance
 	 *  */
 	static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
 ```
+# KIDOZ SDK Init
+## General
+You can now register to be notified of successfuly sdk init event. If a problem occured during init an error event would fire.
+
+## Setting the listeners 
+```javascript
+	controller.setSDKInitListener(new SDKInitListener(controller));	
+```
+SDKInitListener is just an object that implements the ISDKInitIntefrace interface. It's events:
+```javascript
+		/** On SDK Init Success callback */
+		public function onInitSuccess():void {		
+		}
+		
+		/** On SDK Init Error callback */
+		public function onInitError():void {
+		}
+```
 
 # KIDOZ Panel
 <a href="url"><img src="http://kidoz-cdn.s3.amazonaws.com/media/Panel%20Github.jpeg" align="right" height="121" width="200" ></a>
@@ -214,52 +232,84 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 ## Request rewarded ad 
 ```javascript
 	import com.kidoz.sdk.api.platforms.SdkController; 
-	controller.loadRewardedVideoView(false);
+	controller.loadRewardedView(false);
 ```
 ## Showing the interstitial / rewarded ad
 After receiving the interstitial reay event it is possible to call the show function
 ```javascript
 	/** Show kidoz feed view */
  	controller.showInterstitialView();
+	controller.showRewardedView();
 ```
 
 ## Setting the listeners 
 ```javascript
-	/** Show kidoz feed view */
  	controller.setOnInterstitialEventListener(new InterstitialViewActionListener(controller));
+	controller.setOnRewardedEventListener(new RewardedViewActionListener(controller));	
 ```
-The supported listeners are:
+
+Interstitial Listener:
 ```javascript
+import com.kidoz.sdk.api.platforms.IInterstitialEventInterface;
 public function InterstitialViewActionListener(controller:SdkController)
-		{
-			mController = controller;
-		}
-		 	
 		/** On intersitial view expanded callback */
 		public function onClosed():void {
-			mController.printToastDebugLog("Interstitial Closed");
 		} 
 		
 		/** On intersitial view collapsed callback */
 		public function onOpened():void {
-			mController.printToastDebugLog("Interstitial Opened");
 		} 
 		
 		/** On intersitial view collapsed callback */
 		public function onReady():void {
-			mController.printToastDebugLog("Interstitial Ready");
 		} 
 		
-		/** On interstitial//rewarded fail callback */
+		/** On interstitial fail callback */
 		public function onLoadFailed():void {
-			mController.printToastDebugLog("Interstitial onLoadFailed");
 		} 
 		
-		/** On rewarded end callback */
-		public function onRewarded():void {
-			
-		} 
+		/** On Interstitial no offers callback */
+		public function onInterstitialNoOffers():void {
+		} 	
+		
 ```
+
+
+Rewarded Listener:
+```javascript
+import com.kidoz.sdk.api.platforms.IRewardedEventInterface;
+public function InterstitialViewActionListener(controller:SdkController)
+/** On Rewarded view expanded callback */
+		public function onClosed():void {
+		} 
+		
+		/** On Rewarded view collapsed callback */
+		public function onOpened():void {
+		} 
+		
+		/** On Rewarded view collapsed callback */
+		public function onReady():void {
+		} 
+		
+		/** On Rewarded fail callback */
+		public function onLoadFailed():void {
+		} 
+
+		
+		/** On rewarded callback */
+		public function onRewarded():void {
+		} 
+		
+		/** On rewarded movie started callback */
+		public function onRewardedVideoStarted():void {
+		}
+		
+		/** On Rewarded no offers callback */
+		public function onRewardedNoOffers():void {
+		} 
+		
+```
+
 ## _Deprecated units_:
 
 # KIDOZ Feed
