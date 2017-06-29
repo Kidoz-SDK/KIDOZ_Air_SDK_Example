@@ -1,10 +1,11 @@
 <a href="url"><img src="https://github.com/Kidoz-SDK/Kidoz_Android_SDK_Example/blob/master/graphics/App%20icon.png" align="left" height="72" width="72" ></a>
 [<img src="https://kidoz-cdn.s3.amazonaws.com/wordpress/kidoz_small.gif" width="533px" height="300px">](https://www.youtube.com/watch?v=-ljFjRn7jeM)
+
 KIDOZ SDK + Sample Application (ANE)
 =================================
-**KIDOZ SDK Android Extension (ANE) compatible with Android 4.0 (API level 14) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
+** KIDOZ SDK Android Extension (ANE) compatible with Android 4.0 (API level 14) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ Android SDK version 0.7.2*
+*Updated to KIDOZ Android SDK version 0.7.4*
 *Updated to KIDOZ iOS SDK version 0.5.9*
 
 ### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
@@ -12,15 +13,21 @@ KIDOZ SDK + Sample Application (ANE)
 This Flex Mobile application project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
 The example application contains the following creative tools:
-* KIDOZ Panel view (+Family) content tool - the `PanelView`
-* KIDOZ Interstitial view content tool - the `InterstitialView`
-* KIDOZ Feed view (+Family) content tool - the `FeedView` 
+
+_Recommended units_:
+* KIDOZ Panel view content tool - the `PanelView`
+* KIDOZ Interstitial/Rewarded view content tool - the `InterstitialView`/`RewardedView`
+
+** Note that you need to select either Interstital OR Rewarded during application lifetime.
+
+_Deprecated units_:
+* KIDOZ Feed view content tool - the `FeedView` 
 * KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
 
 
 The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, which is the `Android Native Extension (ANE)` for KIDOZ SDK: this file should be downloaded and copied to your project to integrate the KIDOZ SDK.  
 
-###Running the sample app
+## Running the sample app
 
 1. Download / Clone the `KidozSdkSampleApp`
 2. Add it to your Flash® Builder™® 
@@ -28,15 +35,15 @@ The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, 
 
 <br/>
 
-KIDOZ SDK - Getting Started
+# KIDOZ SDK - Getting Started
 =================================
 You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SDK/Documentation/wiki)
 
-###IMPORTANT!
+### IMPORTANT!
 In case there is some other `.ANE` files that already includes the V4 libary (getting errors during build phase) such as (Google Play Service, AdMob or othe libs) then you should NOT include the `supportV4Air.ane` file to your project only the `KidozFlexSdkLib.ane`. 
 <br>
 
-###Include the library
+Include the library
 Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplication to YOUR project. <br/>
 
 1. Right click on the project and select `Properties`.
@@ -62,7 +69,7 @@ Example for adding only the KIDOZ SDK ane
 </br>
 
 
-#### App Manifest Definitions:  `..-app.xml` (IMPORTANT)
+App Manifest Definitions:  `..-app.xml` (IMPORTANT)
 For correct flow of the SDK add the following lines in the `<android>` section of your `..-app.xml` file (Application definition xml file) located in the root of the `src` folder of you project.
 
 ```xml
@@ -92,7 +99,7 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 ``` 
 
 
-#Initializing the SDK
+# Initializing the SDK
 SDK should be initialized only once.
 When initializing the SDK, please make sure to use your given `publisherID` and `securityToken`, which can be retrieved by contacting SDK@kidoz.net.
 
@@ -107,29 +114,20 @@ Initiate SDK by creating `SdkControler` instance
 	static var controller:SdkController = SdkController.initSdkContoller("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
 ```
 
-#KIDOZ Panel
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/panel_view_sample_image.png" align="right" height="121" width="200" ></a>
+# KIDOZ Panel
+<a href="url"><img src="http://kidoz-cdn.s3.amazonaws.com/media/Panel%20Github.jpeg" align="right" height="121" width="200" ></a>
 
 `PanelView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
-The `PanelView` can be placed on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`,`PANEL_TYPE.RIGHT`,`PANEL_TYPE.LEFT` 
+The `PanelView` can be placed on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`
+
 </br>
 The `PanelView` can be controlled via a special `Handle` button that can be located in any of the 3 following positions -  
 `HANDLE_POSITION.START`,`HANDLE_POSITION.CENTER`,`HANDLE_POSITION.END` depending on the `PanelView` initial screen location.
 </br>
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/sdk_panel_layout.jpg" align="center" height="500" width="433" ></a>
+<a href="url"><img src="http://kidoz-cdn.s3.amazonaws.com/media/Panel%20Position%20Github.jpg" align="center" height="500" width="433" ></a>
 </br>
 
-KIDOZ Panel View support 2 modes `Normal PanelView` and `Family PanelView`.
-`Family PanelView` is a unit designed to comply with Google's Designed for Families Policy.
-
-#####To add the Normal Panel to your view use: 
-
-```javascript
-     /** Add Panel to View  */
-     controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END,false);	
-```
-
-#####To add the Family Panel to your view use: 
+# To add the Panel to your view use: 
 
 ```javascript
      /** Add Panel to View  */
@@ -207,25 +205,25 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 	controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
 ```
 
-#KIDOZ Interstitial / Rewarded
-##Request interstitial ad 
+# KIDOZ Interstitial / Rewarded
+## Request interstitial ad 
 ```javascript
 	import com.kidoz.sdk.api.platforms.SdkController; 
 	controller.loadInterstitialView(false);
 ```
-##Request rewarded ad 
+## Request rewarded ad 
 ```javascript
 	import com.kidoz.sdk.api.platforms.SdkController; 
 	controller.loadRewardedVideoView(false);
 ```
-##showing the interstitial / rewarded ad
+## Showing the interstitial / rewarded ad
 After receiving the interstitial reay event it is possible to call the show function
 ```javascript
 	/** Show kidoz feed view */
  	controller.showInterstitialView();
 ```
 
-##Setting the listeners 
+## Setting the listeners 
 ```javascript
 	/** Show kidoz feed view */
  	controller.setOnInterstitialEventListener(new InterstitialViewActionListener(controller));
@@ -262,9 +260,10 @@ public function InterstitialViewActionListener(controller:SdkController)
 			
 		} 
 ```
+## _Deprecated units_:
 
-#KIDOZ Feed
-##Calling the Feed View Programmatically
+# KIDOZ Feed
+## Calling the Feed View Programmatically
 ```javascript
 	/** Show kidoz feed view */
  	controller.showFeedView();
@@ -304,8 +303,8 @@ You can implement `IFeedViewInterface` interface if you want to be informed when
 	controller.setOnFeedViewEventListener(new FeedActionListener(controller));
 ```
 
-##Adding the KIDOZ Feed Button
-<a href="url"><img src="https://kidoz-cdn.s3.amazonaws.com/sdk/btn_animation.gif" align="right" height="96" width="96" ></a>
+## Adding the KIDOZ Feed Button
+
 You can also call the `Feed View` by adding the `Feed Button` - in this case the `Feed View` will be shown following a click on the `Feed Button`. 
 
 - 	Add `FeedButton` by:
@@ -319,12 +318,12 @@ We recommend using KIDOZ default button - the `Feed Button`, which is a customiz
 
 
 
-#KIDOZ Flexi Point View (Android only)
+# KIDOZ Flexi Point View (Android only)
 <a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/flexi_sample_preview.png" align="right" height="300" width="300" ></a>
 
 `FlexiView` is a small interactive single content view, which hovers over the screen content.  
 
-##Adding the Flexi View Programmatically
+## Adding the Flexi View Programmatically
 
 `FlexiView` accepts an anchor position; there are 8 initial positions available:
 
@@ -352,12 +351,12 @@ controller.addFlexiView(true,SdkController.FLEXI_VIEW_POSITION_TOP_START);
 - To Show / Hide Flexi View use:
 ```javascript
 /**
- * Show banner view (Make it visible)
+ * Show flexi view (Make it visible)
  *  */
 controller.showFlexiView();
 
  /**
- * Hide banner view (Make it visible)
+ * Hide flexi view (Make it visible)
  *  */
 controller.hideFlexiView();
 ```
@@ -404,7 +403,7 @@ You can implement `IFlexiViewInterface` interface if you want to be informed of 
 	controller.setOnFlexiViewEventListener(new FlexiViewActionListener(controller));
 ```
 
-For any question or assistance, please contact us at SDK@kidoz.net.
+# For any question or assistance, please contact us at SDK@kidoz.net.
 </br>
 
 License
