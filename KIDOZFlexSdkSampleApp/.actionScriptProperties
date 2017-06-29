@@ -28,7 +28,7 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/SupportV4Air.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/SupportV4Air.ane"/>
       <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
@@ -59,7 +59,7 @@
       <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
-          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/SupportV4Air.ane"/>
+          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/SupportV4Air.ane"/>
           <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
         </anePaths>
         <newLaunchParams/>

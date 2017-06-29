@@ -13,7 +13,7 @@ package
 			mController = controller;
 			mReady = false;
 		}
-		 	
+		
 		/** On intersitial view expanded callback */
 		public function onClosed():void {
 			mController.printToastDebugLog("Interstitial Closed");
@@ -40,21 +40,12 @@ package
 			trace("Interstitial onLoadFailed");
 		} 
 		
-		
-		/** On rewarded callback */
-		public function onRewarded():void {
-			mReady = true;
-			mController.printToastDebugLog("onRewarded");
-			trace("onRewarded");
+		/** On Interstitial no offers callback */
+		public function onInterstitialNoOffers():void {
+			mReady = false;
+			mController.printToastDebugLog("Interstitial onInterstitialNoOffers");
+			trace("v onInterstitialNoOffers");
 		} 
-		
-		/** On rewarded movie started callback */
-		public function onRewardedVideoStarted():void {
-			mController.printToastDebugLog("onRewardedVideoStarted");
-			trace("onRewardedVideoStarted");
-		} 
-		
-		
-		
+
 	}
 }

@@ -31,9 +31,17 @@ package com.kidoz.sdk.api.platforms
 		private static const FK_HIDE_FLEXI_VIEW:String = "hideFlexiView";
 		private static const FK_GET_IS_FLEXI_VIEW_VISIBLE:String = "getIsFlexiViewVisible";
 	 
+		//interstitial native calls
 		private static const FK_SHOW_INTERSTITIAL:String = "showInterstitial";
 		private static const FK_LOAD_INTERSTITIAL:String = "loadInterstitial";
 		private static const FK_IS_INTERSTITIAL_LOADED:String = "isInterstitialLoaded";
+		
+		//rewarded native calls
+		private static const FK_SHOW_REWARDED:String = "showRewarded";
+		private static const FK_LOAD_REWARDED:String = "loadRewarded";
+		private static const FK_IS_REWARDED_LOADED:String = "isRewardedLoaded";
+	
+		
 		private static const FK_SHOW_VIDEO_UNIT:String = "showVideoUnit";
 		private static const FK_PRINT_TOAST_LOG:String = "printToastLog";
 		
@@ -41,12 +49,12 @@ package com.kidoz.sdk.api.platforms
 		public static const PANEL_TYPE_BOTTOM:int = 0; 
 		public static const PANEL_TYPE_TOP:int = 1; 		
 		public static const PANEL_TYPE_LEFT:int = 2; 
-		public static const PANEL_TYPE_RIGHT:int = 3; 
+		public static const PANEL_TYPE_RIGHT:int = 3;
 		
 		// Panel Handle Positions
-		public static const HANDLE_POSITION_START:int = 0; 
-		public static const HANDLE_POSITION_CENTER:int = 1; 
-		public static const HANDLE_POSITION_END:int = 2; 		
+		public static const HANDLE_POSITION_START:int = 0;
+		public static const HANDLE_POSITION_CENTER:int = 1;
+		public static const HANDLE_POSITION_END:int = 2;
 		
 		// Banner Anchor Position
 		public static const BANNER_POSITION_TOP:int = 0; 
@@ -78,6 +86,7 @@ package com.kidoz.sdk.api.platforms
 		private var mFlexiViewListener:IFlexiViewInterface = null;
 		private var mGeneralEventListener:IGeneralEventInterface = null;
 		private var mInterstitialEventListener:IInterstitialEventInterface = null;
+		private var mRewardedEventListener:IRewardedEventInterface = null;
 		private var mVideoUnitEventListener:IVideoUnitInterface = null;
 		
 		// Used for Panel interface listener
@@ -117,9 +126,19 @@ package com.kidoz.sdk.api.platforms
 		private static const INTERSTITIAL_EVENT_CLOSED:String = "INTERSTITIAL_EVENT_CLOSED";
 		private static const INTERSTITIAL_EVENT_READY:String = "INTERSTITIAL_EVENT_READY";
 		private static const INTERSTITIAL_EVENT_LOAD_FAILED:String = "INTERSTITIAL_EVENT_LOAD_FAILED";
-		private static const INTERSTITIAL_EVENT_REWARDED:String = "INTERSTITIAL_EVENT_REWARDED";	
-		private static const INTERSTITIAL_EVENT_REWARDED_VIDEO_STARTED:String = "INTERSTITIAL_EVENT_REWARDED_VIDEO_STARTED";
+		private static const INTERSTITIAL_EVENT_NO_OFFERS:String = "INTERSTITIAL_EVENT_NO_OFFERS";
 		
+		// Rewarded events interface listener
+		private static const REWARDED_VIEW_EVENT:String = "REWARDED_VIEW_EVENT";
+		private static const REWARDED_EVENT_OPENED:String = "REWARDED_EVENT_OPENED";
+		private static const REWARDED_EVENT_CLOSED:String = "REWARDED_EVENT_CLOSED";
+		private static const REWARDED_EVENT_READY:String = "REWARDED_EVENT_READY";
+		private static const REWARDED_EVENT_LOAD_FAILED:String = "REWARDED_EVENT_LOAD_FAILED";
+		private static const REWARDED_EVENT_REWARDED:String = "REWARDED_EVENT_REWARDED";
+		private static const REWARDED_EVENT_REWARDED_VIDEO_STARTED:String = "REWARDED_EVENT_REWARDED_VIDEO_STARTED";
+		private static const REWARDED_EVENT_NO_OFFERS:String = "REWARDED_EVENT_NO_OFFERS";
+		
+	
 		// Video Unit Events
 		private static const VIDEO_UNIT_EVENT:String = "VIDEO_UNIT_EVENT";
 		private static const VIDEO_UNIT_EVENT_OPEN:String = "VIDEO_UNIT_EVENT_OPEN";
@@ -129,7 +148,7 @@ package com.kidoz.sdk.api.platforms
 		
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
-		{
+		{			
 			extContext = ExtensionContext.createExtensionContext("com.kidoz.sdk.api.platforms","KidozAirBridgeExtension");
 			if(extContext) {
 				// Add events listener from android native extension
@@ -156,7 +175,7 @@ package com.kidoz.sdk.api.platforms
 				if(instance) {
 					extContext.call(FK_INIT_SDK,publisher_id,token);
 				}				
-			}		
+			}
 			return instance;
 		}
 		
@@ -227,11 +246,26 @@ package com.kidoz.sdk.api.platforms
 						mInterstitialEventListener.onReady();
 					}else if(event.level == INTERSTITIAL_EVENT_LOAD_FAILED){
 						mInterstitialEventListener.onLoadFailed();
-					}	else if(event.level == INTERSTITIAL_EVENT_REWARDED){
-						mInterstitialEventListener.onRewarded();
-					}else if(event.level == INTERSTITIAL_EVENT_REWARDED_VIDEO_STARTED){
-						mInterstitialEventListener.onRewardedVideoStarted();
-					}								 
+					}else if(event.level == INTERSTITIAL_EVENT_NO_OFFERS){
+						mInterstitialEventListener.onInterstitialNoOffers();
+					}						 
+				}
+			}
+			else if(event.code == REWARDED_VIEW_EVENT){
+				if(event.level == REWARDED_EVENT_OPENED) {
+					mRewardedEventListener.onOpened();
+				}else if(event.level == REWARDED_EVENT_CLOSED){
+					mRewardedEventListener.onClosed();
+				}else if(event.level == REWARDED_EVENT_READY){
+					mRewardedEventListener.onReady();
+				}else if(event.level == REWARDED_EVENT_LOAD_FAILED){
+					mRewardedEventListener.onLoadFailed();
+				}	else if(event.level == REWARDED_EVENT_LOAD_FAILED){
+					mRewardedEventListener.onRewarded();
+				}else if(event.level == REWARDED_EVENT_LOAD_FAILED){
+					mRewardedEventListener.onRewardedVideoStarted();
+				}else if(event.level == REWARDED_EVENT_NO_OFFERS){
+					mRewardedEventListener.onRewardedNoOffers();
 				}
 			}
 		} 
@@ -491,6 +525,10 @@ package com.kidoz.sdk.api.platforms
 			
 		}		
 		
+		/****************
+		 * Interstitial *
+		 ****************/
+		
 		/**
 		 * Show interstitial view		 
 		 */
@@ -500,17 +538,6 @@ package com.kidoz.sdk.api.platforms
 			}
 		}	
 		
-		/**
-		 * Load and preapre interstitial view ad
-		 * (This function also used for reloading the ad)
-		 * 
-		 * @param auto_show is auto show interstitial on ready
-		 */
-		public function loadRewardedVideoView(auto_show:Boolean):void {
-			if(extContext != null) {
-				extContext.call(FK_LOAD_INTERSTITIAL,auto_show,1); // 1- for rewarded video ad type
-			}
-		}	
 		
 		/**
 		 * Load and preapre interstitial view ad
@@ -520,7 +547,7 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function loadInterstitialView(auto_show:Boolean):void {
 			if(extContext != null) {
-				extContext.call(FK_LOAD_INTERSTITIAL,auto_show,0); // 0 - for interstitial ad type
+				extContext.call(FK_LOAD_INTERSTITIAL,auto_show);
 			}
 		}	
 		
@@ -537,6 +564,49 @@ package com.kidoz.sdk.api.platforms
 				return false;
 			}
 		}	
+		
+		/************
+		 * Rewarded *
+		 ************/
+		
+		/**
+		 * Show Rewarded view		 
+		 */
+		public function showRewardedView():void {
+			if(extContext != null) {
+				extContext.call(FK_SHOW_REWARDED);
+			}
+		}	
+		
+		/**
+		 * Load and preapre Rewarded view ad
+		 * (This function also used for reloading the ad)
+		 * 
+		 * @param auto_show is auto show Rewarded on ready
+		 */
+		public function loadRewardedView(auto_show:Boolean):void {
+			if(extContext != null) {
+				extContext.call(FK_LOAD_REWARDED,auto_show);
+			}
+		}	
+		
+		
+		/**
+		 * Get is Rewarded ad is loaded and ready
+		 * 
+		 * @return loaded state
+		 */
+		public function getIsRewardedLoaded():Boolean {
+			if(extContext != null) {
+				return extContext.call(FK_IS_REWARDED_LOADED);
+			}else {
+				return false;
+			}
+		}	
+		
+		/*************
+		 * VideoUnit *
+		 *************/
 		
 		/**
 		 * Show video unit view
@@ -606,6 +676,15 @@ package com.kidoz.sdk.api.platforms
 		 */
 		public function setOnInterstitialEventListener(listener:IInterstitialEventInterface):void {
 			mInterstitialEventListener = listener;
+		}	
+		
+		/**
+		 * Set on Rewarded event listener
+		 * 
+		 * @param listener class that implements "IRewardedEventInterface" interface 
+		 */
+		public function setOnRewardedEventListener(listener:IRewardedEventInterface):void {
+			mRewardedEventListener = listener;
 		}	
 		
 		/**
