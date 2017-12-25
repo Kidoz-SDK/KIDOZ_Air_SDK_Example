@@ -21,10 +21,7 @@
 					paddingTop="25"
 					paddingBottom="25"/>				
 			</s:layout>
-			
-				<s:Label text="FeedView"/>
-				<s:Button id="showFeedView" label="Show Feed" click="showView();"/>		
-				
+						
 				<s:Label text="VideoView"/>
 				<s:Button id="show_video" label="Show Video Unit" click="showVideoUnit();"/> 
 				
@@ -72,12 +69,7 @@
 			 */
 			controller.setSDKInitListener(new SDKInitListener(controller));
 			
-			/**
-			 * Set Feed events listener
-			 * Used to catch feed view events (Show/Dismiss)
-			 *  */
-			controller.setOnFeedViewEventListener(new FeedActionListener(controller));
-			
+		
 			/**
 			 * Set Panel View events listener
 			 * Used to catch panel view events (Expand/Collaps)
@@ -128,8 +120,7 @@
 			controller.setOnVideoUnitEventListener(new VideoUnitActionListener(controller));
 			
 			// For example purposes we add Feed Button And Panel View on application Start
-			/** Add feed default Button to view */
-			controller.addFeedButton(480,100);	
+	
 			
 			/** Add feed Panel to View  */
 			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
@@ -139,16 +130,6 @@
 			
 			
 
-			
-			/**
-			 * Lounch feed view programmatically
-			 * */
-			private function showView():void {			
-				controller.showFeedView();	
-
-				
-			}
-			
 			/**
 			 * Expand panel view programmatically
 			 * */
