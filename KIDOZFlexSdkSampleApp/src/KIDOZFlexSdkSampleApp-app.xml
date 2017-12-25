@@ -348,8 +348,12 @@
         
     
         
-    <extensionID>com.support.v4.air.extension</extensionID>
+    
     
     <extensionID>com.kidoz.sdk.api.platforms</extensionID>
+    
+    
+    <extensionID>com.fyber.playservices</extensionID>
+    <extensionID>com.support.v4.air.extension</extensionID>
     </extensions>
 </application>

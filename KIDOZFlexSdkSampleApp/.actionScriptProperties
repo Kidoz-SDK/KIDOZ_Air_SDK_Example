@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="KIDOZFlexSdkSampleApp.mxml" projectUUID="25ea7cc0-9732-42a3-9148-7a001d445b54" version="11">
-  <compiler additionalCompilerArguments="-locale en_US -swf-version 30" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale en_US -swf-version 30" autoRSLOrdering="true" copyDependentFiles="true" flexSDK="Flex 4.6.0 (build 23201)" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="4" path="">
@@ -28,8 +28,9 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/SupportV4Air.ane"/>
       <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/playservices-8.3.0.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/SupportV4Air.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

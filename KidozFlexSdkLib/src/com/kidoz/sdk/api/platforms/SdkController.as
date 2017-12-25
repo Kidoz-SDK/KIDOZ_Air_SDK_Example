@@ -79,7 +79,7 @@ package com.kidoz.sdk.api.platforms
 		private static var instance:SdkController;
 		private static var extContext:ExtensionContext = null;	
 		private static var mPublisher_id:String;
-		private static var mToken:String;		
+		private static var mToken:String;
 		private var mInitListener:ISDKInitIntefrace = null;
 		private var mFeedViewListener:IFeedViewIntefrace = null;
 		private var mPanelViewListener:IPanelViewInterface = null;
@@ -150,7 +150,7 @@ package com.kidoz.sdk.api.platforms
 		private static const VIDEO_UNIT_EVENT_OPEN:String = "VIDEO_UNIT_EVENT_OPEN";
 		private static const VIDEO_UNIT_EVENT_CLOSE:String = "VIDEO_UNIT_EVENT_CLOSE";
 		private static const VIDEO_UNIT_EVENT_READY:String = "VIDEO_UNIT_EVENT_READY";
-		 
+				
 		
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
@@ -292,6 +292,7 @@ package com.kidoz.sdk.api.platforms
 		 * @param x_coord the x coordinate of the view position
 		 * @param y_coord the y coordinate of the view position
 		 */
+	    [Deprecated (message="FeedButton is deprecated, please use other widget types") ]
 		public function addFeedButton(x_coord:Number,y_coord:Number):void {
 			if(extContext != null) {
 				extContext.call(FK_ADD_FEED_BUTTON,x_coord,y_coord);
@@ -307,6 +308,7 @@ package com.kidoz.sdk.api.platforms
 		 * 
 		 * @param (DEPRECATED) button_size button new size
 		 */
+		[Deprecated (message="FeedButton is deprecated, please use other widget types") ]
 		public function addFeedButtonWithSize(x_coord:Number,y_coord:Number,button_size:Number):void {
 			if(extContext != null) {
 				extContext.call(FK_ADD_FEED_BUTTON_WITH_SIZE,x_coord,y_coord,-1);
@@ -316,6 +318,8 @@ package com.kidoz.sdk.api.platforms
 		/**
 		 * Show feed view on screen
 		 */
+		
+		[Deprecated (message="Feed is deprecated, please use other widget types") ]
 		public function showFeedView():void {
 			if(extContext != null) {
 				extContext.call(FK_SHOW_FEED_VIEW);
@@ -325,6 +329,7 @@ package com.kidoz.sdk.api.platforms
 		/**
 		 * Dismiss feed view
 		 */
+		[Deprecated (message="Feed is deprecated, please use other widget types") ]
 		public function dismissFeedView():void {
 			if(extContext != null) {
 				extContext.call(FK_DISMISS_FEED_VIEW);
@@ -388,6 +393,7 @@ package com.kidoz.sdk.api.platforms
 		 * 
 		 * @param visible
 		 */
+		[Deprecated (message="FeedButton is deprecated, please use other widget types") ]
 		public function changeFeedButtonVisibilityState(visible:Boolean):void {
 			if(extContext != null) {
 				extContext.call(FK_CHANGE_FEED_VISIBILITY,visible);
@@ -655,6 +661,7 @@ package com.kidoz.sdk.api.platforms
 		 * 
 		 * @param listener class that implements "IFeedViewIntefrace" interface 
 		 */
+		[Deprecated (message="Feed is deprecated, please use other widget types") ]
 		public function setOnFeedViewEventListener(listener:IFeedViewIntefrace):void {
 			mFeedViewListener = listener;
 		}
