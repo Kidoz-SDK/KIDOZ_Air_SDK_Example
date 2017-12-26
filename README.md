@@ -5,7 +5,7 @@ KIDOZ SDK + Sample Application (ANE)
 =================================
 ** KIDOZ SDK Android Extension (ANE) compatible with Android 4.2 (API level 17) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ Android SDK version 0.8.0.5*
+*Updated to KIDOZ Android SDK version 0.8.3.2*
 *Updated to KIDOZ iOS SDK version 0.5.9*
 
 ### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
