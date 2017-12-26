@@ -275,9 +275,9 @@ package com.kidoz.sdk.api.platforms
 					mRewardedEventListener.onReady();
 				}else if(event.level == REWARDED_EVENT_LOAD_FAILED){
 					mRewardedEventListener.onLoadFailed();
-				}	else if(event.level == REWARDED_EVENT_LOAD_FAILED){
+				}	else if(event.level == REWARDED_EVENT_REWARDED){
 					mRewardedEventListener.onRewarded();
-				}else if(event.level == REWARDED_EVENT_LOAD_FAILED){
+				}else if(event.level == REWARDED_EVENT_REWARDED_VIDEO_STARTED){
 					mRewardedEventListener.onRewardedVideoStarted();
 				}else if(event.level == REWARDED_EVENT_NO_OFFERS){
 					mRewardedEventListener.onRewardedNoOffers();
@@ -285,6 +285,8 @@ package com.kidoz.sdk.api.platforms
 			}
 		} 
 		
+		
+
 		
 		/**
 		 * Add feed button to view
