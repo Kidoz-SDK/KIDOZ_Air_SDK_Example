@@ -1,3 +1,4 @@
+
 <a href="url"><img src="https://github.com/Kidoz-SDK/Kidoz_Android_SDK_Example/blob/master/graphics/App%20icon.png" align="left" height="72" width="72" ></a>
 [<img src="https://kidoz-cdn.s3.amazonaws.com/wordpress/kidoz_small.gif" width="533px" height="300px">](https://www.youtube.com/watch?v=-ljFjRn7jeM)
 
@@ -5,8 +6,11 @@ KIDOZ SDK + Sample Application (ANE)
 =================================
 ** KIDOZ SDK Android Extension (ANE) compatible with Android 4.2 (API level 17) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ Android SDK version 0.8.3.2*
+*Updated to KIDOZ Android SDK version 0.8.5.1*
 *Updated to KIDOZ iOS SDK version 0.5.9*
+
+Due to new regulation by Google Play Design for Family policy , all references to YouTube were removed from the SDK.
+
 
 ### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
 
@@ -20,9 +24,9 @@ _Recommended units_:
 
 ** Note that you need to select either Interstital OR Rewarded during application lifetime.
 
-_Deprecated units_:
+Removed units:
 * KIDOZ Feed view content tool - the `FeedView` 
-* KIDOZ Flexi Point view content tool - the `FlexiView` (Android only)
+* KIDOZ Flexi Point view content tool - the `FlexiView` 
 
 
 The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, which is the `Android Native Extension (ANE)` for KIDOZ SDK: this file should be downloaded and copied to your project to integrate the KIDOZ SDK.  
@@ -76,9 +80,7 @@ For correct flow of the SDK add the following lines in the `<android>` section o
 <manifestAdditions><![CDATA[
 	<manifest android:installLocation="auto">		
 			 
-	        <uses-permission android:name="android.permission.INTERNET"/>
-		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>		
-				    
+	        <uses-permission android:name="android.permission.INTERNET"/>				    
 	        <application android:hardwareAccelerated="true">		
 			    			  				 	   				    
 			<activity android:name="com.kidoz.sdk.api.ui_views.interstitial.KidozAdActivity"
@@ -309,150 +311,6 @@ public function InterstitialViewActionListener(controller:SdkController)
 		} 
 		
 ```
-
-## _Deprecated units_:
-
-# KIDOZ Feed
-## Calling the Feed View Programmatically
-```javascript
-	/** Show kidoz feed view */
- 	controller.showFeedView();
-```
-
-
-You can implement `IFeedViewInterface` interface if you want to be informed when the `FeedView` is dismissed and/or about to be opened by creating a class that implements the interface.
-
-```javascript
- 	import com.kidoz.sdk.api.platforms.IFeedViewIntefrace;
-	import com.kidoz.sdk.api.platforms.SdkController;
-	
-	/** Example Implementation of the Feed events listener  */
-	public class FeedActionListener implements IFeedViewIntefrace
-	{	
-		var mController:SdkController;
-		
-		public function FeedActionListener(controller:SdkController)
-		{
-			mController = controller;
-		}	 		
-		public function onDismissView():void {
-			mController.printToastDebugLog("Feed view dismissed");
-		} 
-		public function onReadyToShow():void {
-			mController.printToastDebugLog("Feed view shown");
-		} 
-	}
-```
-
-- Set interface by:
-```javascript
-        /**
-	 * Set Feed events listener
-	 * Used to catch feed view events (Show/Dismiss)
-	 *  */
-	controller.setOnFeedViewEventListener(new FeedActionListener(controller));
-```
-
-## Adding the KIDOZ Feed Button
-
-You can also call the `Feed View` by adding the `Feed Button` - in this case the `Feed View` will be shown following a click on the `Feed Button`. 
-
-- 	Add `FeedButton` by:
-	
-```javascript
- 	/** Add feed default Button to view  */
-	controller.addFeedButton(20,90);	
-```
-
-We recommend using KIDOZ default button - the `Feed Button`, which is a customizable animated button.
-
-
-
-# KIDOZ Flexi Point View (Android only)
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/flexi_sample_preview.png" align="right" height="300" width="300" ></a>
-
-`FlexiView` is a small interactive single content view, which hovers over the screen content.  
-
-## Adding the Flexi View Programmatically
-
-`FlexiView` accepts an anchor position; there are 8 initial positions available:
-
-```javascript
-	// Flexi View Anchor Position
-	public static const FLEXI_VIEW_POSITION_TOP_START; 
-	public static const FLEXI_VIEW_POSITION_TOP_CENTER; 
-	public static const FLEXI_VIEW_POSITION_TOP_END; 	
-	public static const FLEXI_VIEW_POSITION_MID_START; 		
-	public static const FLEXI_VIEW_POSITION_MID_CENTER; 		
-	public static const FLEXI_VIEW_POSITION_MID_END; 
-	public static const FLEXI_VIEW_POSITION_BOTTOM_START; 		
-	public static const FLEXI_VIEW_POSITION_BOTTOM_CENTER; 		
-	public static const FLEXI_VIEW_POSITION_BOTTOM_END;
- ```
-
-
-```javascript
-/**
- * Add Fexi view
- * */
-controller.addFlexiView(true,SdkController.FLEXI_VIEW_POSITION_TOP_START);
-```
-
-- To Show / Hide Flexi View use:
-```javascript
-/**
- * Show flexi view (Make it visible)
- *  */
-controller.showFlexiView();
-
- /**
- * Hide flexi view (Make it visible)
- *  */
-controller.hideFlexiView();
-```
-
-You can implement `IFlexiViewInterface` interface if you want to be informed of `Flexi View` events by creating a class that implements the interface.
-
-```javascript
- 	import com.kidoz.sdk.api.platforms.IFlexiViewInterface;
-	import com.kidoz.sdk.api.platforms.SdkController;
-	
-	/** Example Implementation of the Flexi View events listener  */
-	public class FlexiViewActionListener implements IFlexiViewInterface
-	{		
-		var mController:SdkController;
-		
-		public function FlexiViewActionListener(controller:SdkController)
-		{
-			mController = controller;
-		}	
-	
-		/** On Flexi view ready callback */
-		public function onFlexiViewReady():void {
-			mController.printToastDebugLog("Flexi view Ready");
-		} 
-		
-		/** On Flexi view visible callback */
-		public function onFlexiViewVisible():void {
-			mController.printToastDebugLog("Flexi view Visible");
-		} 
-		
-		/** On Flexi view hidden callback */
-		public function onFlexiViewHidden():void {
-			mController.printToastDebugLog("Flexi view Hidden");
-		} 
-	}
-```
-
-- Set interface by:
-```javascript
-	/**
-	 * Set Flexi Point View events listener
-	 * Used to catch Flexi point view events
-	 *  */
-	controller.setOnFlexiViewEventListener(new FlexiViewActionListener(controller));
-```
-
 # For any question or assistance, please contact us at SDK@kidoz.net.
 </br>
 
