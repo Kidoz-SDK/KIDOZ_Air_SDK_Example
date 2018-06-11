@@ -10,6 +10,7 @@ package com.kidoz.sdk.api.platforms
 	public class SdkController  extends EventDispatcher
 	{
 		private static const FK_INIT_SDK:String = "initSdk";
+
 		private static const FK_ADD_FEED_BUTTON:String = "addFeedButton";
 		private static const FK_ADD_FEED_BUTTON_WITH_SIZE:String = "addFeedButtonWithSize";
 		private static const FK_SHOW_FEED_VIEW:String = "showFeedView";
@@ -42,7 +43,6 @@ package com.kidoz.sdk.api.platforms
 		private static const FK_IS_REWARDED_LOADED:String = "isRewardedLoaded";
 	
 		
-		private static const FK_SHOW_VIDEO_UNIT:String = "showVideoUnit";
 		private static const FK_PRINT_TOAST_LOG:String = "printToastLog";
 		
 		// Panel Types
@@ -81,14 +81,11 @@ package com.kidoz.sdk.api.platforms
 		private static var mPublisher_id:String;
 		private static var mToken:String;
 		private var mInitListener:ISDKInitIntefrace = null;
-		private var mFeedViewListener:IFeedViewIntefrace = null;
 		private var mPanelViewListener:IPanelViewInterface = null;
 		private var mBannerViewListener:IBannerViewInterface = null;
-		private var mFlexiViewListener:IFlexiViewInterface = null;
 		private var mGeneralEventListener:IGeneralEventInterface = null;
 		private var mInterstitialEventListener:IInterstitialEventInterface = null;
 		private var mRewardedEventListener:IRewardedEventInterface = null;
-		private var mVideoUnitEventListener:IVideoUnitInterface = null;
 		
 		// Used for SDK init listener
 		private static const SDK_INIT_EVENT:String = "SDK_INIT_EVENT";
@@ -100,12 +97,7 @@ package com.kidoz.sdk.api.platforms
 		private static const PANEL_VIEW_EVENT_EXPANDED:String = "PANEL_VIEW_EVENT_EXPANDED";
 		private static const PANEL_VIEW_EVENT_COLLAPSED:String = "PANEL_VIEW_EVENT_COLLAPSED";
 		private static const PANEL_VIEW_EVENT_PANEL_READY:String = "PANEL_VIEW_EVENT_PANEL_READY";
-		
-		// Used for Feed interface listener
-		private static const FEED_VIEW_EVENT:String = "FEED_VIEW_EVENT"; 
-		private static const FEED_VIEW_EVENT_READY_TOSHOW:String = "FEED_VIEW_EVENT_READY_TOSHOW"; 
-		private static const FEED_VIEW_EVENT_DISMISS:String = "FEED_VIEW_EVENT_DISMISS"; 
-		private static const FEED_VIEW_EVENT_OBJECT_READY:String = "FEED_VIEW_EVENT_OBJECT_READY"; 
+	
 		
 		// Used for Banner interface listener
 		private static const BANNER_VIEW_EVENT:String = "BANNER_VIEW_EVENT";
@@ -115,11 +107,7 @@ package com.kidoz.sdk.api.platforms
 		private static const BANNER_VIEW_EVENT_CONTENT_LOADED:String = "BANNER_VIEW_EVENT_CONTENT_LOADED"; 
 		private static const BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED:String = "BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED"; 
 		
-		// Used for Flexi view interface listener
-		private static const FLEXI_VIEW_EVENT:String = "FLEXI_VIEW_EVENT";
-		private static const FLEXI_VIEW_EVENT_READY:String = "FLEXI_VIEW_EVENT_READY"; 
-		private static const FLEXI_VIEW_EVENT_VISIBLE:String = "FLEXI_VIEW_EVENT_VISIBLE"; 
-		private static const FLEXI_VIEW_EVENT_HIDDEN:String = "FLEXI_VIEW_EVENT_HIDDEN"; 
+
 		
 		// General events interface listener
 		private static const GENERAL_VIEW_EVENT:String = "GENERAL_VIEW_EVENT"; 
@@ -145,13 +133,6 @@ package com.kidoz.sdk.api.platforms
 		private static const REWARDED_EVENT_NO_OFFERS:String = "REWARDED_EVENT_NO_OFFERS";
 		
 	
-		// Video Unit Events
-		private static const VIDEO_UNIT_EVENT:String = "VIDEO_UNIT_EVENT";
-		private static const VIDEO_UNIT_EVENT_OPEN:String = "VIDEO_UNIT_EVENT_OPEN";
-		private static const VIDEO_UNIT_EVENT_CLOSE:String = "VIDEO_UNIT_EVENT_CLOSE";
-		private static const VIDEO_UNIT_EVENT_READY:String = "VIDEO_UNIT_EVENT_READY";
-				
-		
 		// Sdk controler constructor
 		function SdkController(enforcer:SingletonEnforcer)
 		{			
@@ -173,17 +154,22 @@ package com.kidoz.sdk.api.platforms
 		 * @param publisher_id
 		 * @param String
 		 */
-		public static function initSdkContoller(publisher_id:String,token:String):SdkController {
+		public static function initSdkContoller(publisher_id:String,token:String,appId:String=""):SdkController {
 			mPublisher_id = publisher_id;
 			mToken = token;
 			if (instance == null) {
 				instance = new SdkController( new SingletonEnforcer());		
 				if(instance) {
-					extContext.call(FK_INIT_SDK,publisher_id,token);
+					if (appId=="")
+						extContext.call(FK_INIT_SDK,publisher_id,token);
+					else
+						extContext.call(FK_INIT_SDK,publisher_id,token,appId);
 				}				
 			}
 			return instance;
 		}
+		
+	
 		
 		/**
 		 * Status event handler , to handle events from native android extension
@@ -198,15 +184,7 @@ package com.kidoz.sdk.api.platforms
 					}
 				}
 			}
-			if(event.code == FEED_VIEW_EVENT) {				
-				if(mFeedViewListener) {
-					if(event.level == FEED_VIEW_EVENT_READY_TOSHOW) {
-						mFeedViewListener.onReadyToShow();
-					}else if(event.level == FEED_VIEW_EVENT_DISMISS){
-						mFeedViewListener.onDismissView();
-					}
-				}
-			}else if(event.code == PANEL_VIEW_EVENT){			
+		  if(event.code == PANEL_VIEW_EVENT){			
 				if(mPanelViewListener) {
 					if(event.level == PANEL_VIEW_EVENT_EXPANDED) {
 						mPanelViewListener.onPanelViewExpanded();
@@ -231,17 +209,7 @@ package com.kidoz.sdk.api.platforms
 					}	
 				}
 			}
-			else if(event.code == FLEXI_VIEW_EVENT){	
-				if(mFlexiViewListener) {
-					if(event.level == FLEXI_VIEW_EVENT_READY) {
-						mFlexiViewListener.onFlexiViewReady();
-					}else if(event.level == FLEXI_VIEW_EVENT_VISIBLE){
-						mFlexiViewListener.onFlexiViewVisible();
-					}else if(event.level == FLEXI_VIEW_EVENT_HIDDEN){
-						mFlexiViewListener.onFlexiViewHidden();
-					}
-				}
-			}
+	
 			else if(event.code == GENERAL_VIEW_EVENT){	
 				if(mGeneralEventListener) {
 					if(event.level == PLAYER_EVENT_OPEN) {
@@ -288,55 +256,7 @@ package com.kidoz.sdk.api.platforms
 		
 
 		
-		/**
-		 * Add feed button to view
-		 * 
-		 * @param x_coord the x coordinate of the view position
-		 * @param y_coord the y coordinate of the view position
-		 */
-	    [Deprecated (message="FeedButton is deprecated, please use other widget types") ]
-		public function addFeedButton(x_coord:Number,y_coord:Number):void {
-			if(extContext != null) {
-				extContext.call(FK_ADD_FEED_BUTTON,x_coord,y_coord);
-			}			
-		}
-		
-		
-		/**
-		 * Add feed button with size
-		 * 
-		 * @param x_coord the x coordinate of the view position
-		 * @param y_coord the y coordinate of the view position 
-		 * 
-		 * @param (DEPRECATED) button_size button new size
-		 */
-		[Deprecated (message="FeedButton is deprecated, please use other widget types") ]
-		public function addFeedButtonWithSize(x_coord:Number,y_coord:Number,button_size:Number):void {
-			if(extContext != null) {
-				extContext.call(FK_ADD_FEED_BUTTON_WITH_SIZE,x_coord,y_coord,-1);
-			}			
-		}
-		
-		/**
-		 * Show feed view on screen
-		 */
-		
-		[Deprecated (message="Feed is deprecated, please use other widget types") ]
-		public function showFeedView():void {
-			if(extContext != null) {
-				extContext.call(FK_SHOW_FEED_VIEW);
-			}			
-		}	
-		
-		/**
-		 * Dismiss feed view
-		 */
-		[Deprecated (message="Feed is deprecated, please use other widget types") ]
-		public function dismissFeedView():void {
-			if(extContext != null) {
-				extContext.call(FK_DISMISS_FEED_VIEW);
-			}			
-		}
+
 		
 		/**
 		 * Add feed panel view to screen
@@ -390,17 +310,7 @@ package com.kidoz.sdk.api.platforms
 			}			
 		}
 		
-		/**
-		 * Change feed button visibility state
-		 * 
-		 * @param visible
-		 */
-		[Deprecated (message="FeedButton is deprecated, please use other widget types") ]
-		public function changeFeedButtonVisibilityState(visible:Boolean):void {
-			if(extContext != null) {
-				extContext.call(FK_CHANGE_FEED_VISIBILITY,visible);
-			}			
-		}
+		
 		
 		/**
 		 * Collapse panel view
@@ -487,66 +397,7 @@ package com.kidoz.sdk.api.platforms
 			 
 		}
 		
-		/**
-		 * Add Flexi point view to screen
-		 * 
-		 * @param isAutoShow notify if to show the flexi view right away when its ready 
-		 * @param initial_pos the initial position of the flexi view on screen (FLEXI_VIEW_POSITION_TOP_START... )
-		 */
-		public function addFlexiView(isAutoShow:Boolean,initial_pos:Number):void {
-			if(extContext != null) {
-				extContext.call(FK_ADD_FLEXI_VIEW,isAutoShow,initial_pos);
-			} 
-		}
-		
-		/**
-		 * Show and make visible flexi view on screen
-		 */
-		public function showFlexiView():void {
-			if(extContext != null) {
-				extContext.call(FK_SHOW_FLEXI_VIEW);
-			} 
-		}
-		
-		/**
-		 * Hide and make invisible flexi point view 
-		 */
-		public function hideFlexiView():void {
-			if(extContext != null) {
-				extContext.call(FK_HIDE_FLEXI_VIEW);
-			} 
-		}
-		
-		/**
-		 * Get is felxi view currently visible
-		 */
-		public function getIsFlexiViewVisible():Boolean {
-			if(extContext != null) {
-				return extContext.call(FK_GET_IS_FLEXI_VIEW_VISIBLE);
-			}else {
-				return false;
-			}
-		}
-		
-		/**
-		 * @Deprecated  Will be remived in the future releases
-		 * Set is felxi view can be draggable
-		 * 
-		 * @param is draggable
-		 */
-		public function setFlexiViewDraggable(draggable:Boolean):void {
-			 
-		}	
-		
-		/**
-		 * @Deprecated  Will be remived in the future releases
-		 * Set is felxi view can be closable
-		 * 
-		 * @param closable set is closable
-		 */
-		public function setFlexiViewClosable(closable:Boolean):void {
-			
-		}		
+	
 		
 		/****************
 		 * Interstitial *
@@ -626,21 +477,7 @@ package com.kidoz.sdk.api.platforms
 				return false;
 			}
 		}	
-		
-		/*************
-		 * VideoUnit *
-		 *************/
-		
-		/**
-		 * Show video unit view
-		 * 
-		 * @return loaded state
-		 */
-		public function showVideoUnit():void {
-			if(extContext != null) {
-				extContext.call(FK_SHOW_VIDEO_UNIT);
-			} 
-		}	
+	
 		
 		/**
 		 * Set SDK init listener
@@ -658,15 +495,7 @@ package com.kidoz.sdk.api.platforms
 			mPanelViewListener = listener;
 		}
 		
-		/**
-		 * Set on feed view event listener
-		 * 
-		 * @param listener class that implements "IFeedViewIntefrace" interface 
-		 */
-		[Deprecated (message="Feed is deprecated, please use other widget types") ]
-		public function setOnFeedViewEventListener(listener:IFeedViewIntefrace):void {
-			mFeedViewListener = listener;
-		}
+	
 		
 		/**
 		 * @Deprecated  Will be remived in the future releases
@@ -680,15 +509,7 @@ package com.kidoz.sdk.api.platforms
 		}
 		
 		
-		/**
-		 * Set on Flexi view event listener
-		 * 
-		 * @param listener class that implements "IFlexiViewInterface" interface 
-		 */
-		public function setOnFlexiViewEventListener(listener:IFlexiViewInterface):void {
-			mFlexiViewListener = listener;
-		}
-		
+	
 		/**
 		 * Set on General event listener
 		 * Used to catch sdk general event (Player opened,Player closed)
@@ -717,15 +538,7 @@ package com.kidoz.sdk.api.platforms
 			mRewardedEventListener = listener;
 		}	
 		
-		/**
-		 * Set on video unit event listener
-		 * 
-		 * @param listener class that implements "IVideoUnitInterface" interface 
-		 */
-		public function setOnVideoUnitEventListener(listener:IVideoUnitInterface):void {
-			mVideoUnitEventListener = listener;
-		}	
-		
+
 		
 		/**
 		 * Cleans up the instance of the native extension. 
