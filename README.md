@@ -1,4 +1,5 @@
 
+
 <a href="url"><img src="https://github.com/Kidoz-SDK/Kidoz_Android_SDK_Example/blob/master/graphics/App%20icon.png" align="left" height="72" width="72" ></a>
 [<img src="https://kidoz-cdn.s3.amazonaws.com/wordpress/kidoz_small.gif" width="533px" height="300px">](https://www.youtube.com/watch?v=-ljFjRn7jeM)
 
@@ -6,11 +7,13 @@ KIDOZ SDK + Sample Application (ANE)
 =================================
 ** KIDOZ SDK Android Extension (ANE) compatible with Android 4.2 (API level 17) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ Android SDK version 0.8.5.1*
+*Updated to KIDOZ Android SDK version 0.8.8.0*
 *Updated to KIDOZ iOS SDK version 0.5.9*
 
 Due to new regulation by Google Play Design for Family policy , all references to YouTube were removed from the SDK.
 
+This SDK version supports secured https protocol only and will resolve Google Play Security alert of Webview that is vulnerable to JavaScript interface injection.
+Note that only secured external and internal events are supported from this version.
 
 ### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
 
