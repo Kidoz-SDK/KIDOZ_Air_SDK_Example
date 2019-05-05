@@ -22,7 +22,7 @@ This Flex Mobile application project provides an example of the [KIDOZ](http://w
 The example application contains the following creative tools:
 
 _Recommended units_:
-* KIDOZ Panel view content tool - the `PanelView`
+* KIDOZ Panel view content tool - the `PanelView` (will be deprecated by Dec 2019)
 * KIDOZ Interstitial/Rewarded view content tool - the `InterstitialView`/`RewardedView`
 
 ** Note that you need to select either Interstital OR Rewarded during application lifetime.
@@ -137,7 +137,7 @@ SDKInitListener is just an object that implements the ISDKInitIntefrace interfac
 		}
 ```
 
-# KIDOZ Panel
+# KIDOZ Panel (will be deprecated by Dec 2019)
 <a href="url"><img src="http://kidoz-cdn.s3.amazonaws.com/media/Panel%20Github.jpeg" align="right" height="121" width="200" ></a>
 
 `PanelView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
