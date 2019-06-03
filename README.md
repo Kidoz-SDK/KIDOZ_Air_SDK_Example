@@ -15,7 +15,7 @@ Due to new regulation by Google Play Design for Family policy , all references t
 This SDK version supports secured https protocol only and will resolve Google Play Security alert of Webview that is vulnerable to JavaScript interface injection.
 Note that only secured external and internal events are supported from this version.
 
-### [API Documentation](https://s3.amazonaws.com/kidoz-cdn/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
+### [API Documentation](https://cdn.kidoz.net/sdk/APIDocumentation/Android/AdobeAirExtension/0.5.6/index.html)
 
 This Flex Mobile application project provides an example of the [KIDOZ](http://www.kidoz.net) SDK integration for Adobe Air applications.
 
@@ -63,16 +63,16 @@ Copy `KidozFlexSdkLib.ane` and the `supportV4Air.ane` files from SampleApplicati
 Example for adding only the KIDOZ SDK ane
 
 </br>
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_1.jpg" align="left" height="564" width="975" ></a>
+<a href="url"><img src="https://cdn.kidoz.net/sdk/air_tut_1.jpg" align="left" height="564" width="975" ></a>
 </br>
 
 
 </br>
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_2.jpg" align="left" height="618" width="980" ></a>
+<a href="url"><img src="https://cdn.kidoz.net/sdk/air_tut_2.jpg" align="left" height="618" width="980" ></a>
 </br>
 
 </br>
-<a href="url"><img src="https://s3.amazonaws.com/kidoz-cdn/sdk/air_tut_3.jpg" align="left" height="564" width="932" ></a>
+<a href="url"><img src="https://cdn.kidoz.net/sdk/air_tut_3.jpg" align="left" height="564" width="932" ></a>
 </br>
 
 
@@ -138,7 +138,7 @@ SDKInitListener is just an object that implements the ISDKInitIntefrace interfac
 ```
 
 # KIDOZ Panel (will be deprecated by Dec 2019)
-<a href="url"><img src="http://kidoz-cdn.s3.amazonaws.com/media/Panel%20Github.jpeg" align="right" height="121" width="200" ></a>
+<a href="url"><img src="https://cdn.kidoz.net/media/Panel%20Github.jpeg" align="right" height="121" width="200" ></a>
 
 `PanelView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
 The `PanelView` can be placed on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`
@@ -147,7 +147,7 @@ The `PanelView` can be placed on one of four sides of the activity screen - `PAN
 The `PanelView` can be controlled via a special `Handle` button that can be located in any of the 3 following positions -  
 `HANDLE_POSITION.START`,`HANDLE_POSITION.CENTER`,`HANDLE_POSITION.END` depending on the `PanelView` initial screen location.
 </br>
-<a href="url"><img src="http://kidoz-cdn.s3.amazonaws.com/media/Panel%20Position%20Github.jpg" align="center" height="500" width="433" ></a>
+<a href="url"><img src="https://cdn.kidoz.net/media/Panel%20Position%20Github.jpg" align="center" height="500" width="433" ></a>
 </br>
 
 # To add the Panel to your view use: 
