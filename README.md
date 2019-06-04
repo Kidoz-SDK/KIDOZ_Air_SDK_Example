@@ -42,8 +42,9 @@ The sample application `KidozSdkSampleApp` contains the `KidozSdkAir.ane` file, 
 
 <br/>
 
-# KIDOZ SDK - Getting Started
+### KIDOZ SDK - Getting Started
 =================================
+
 You can read more about the KIDOZ SDK on [KIDOZ SDK](https://github.com/Kidoz-SDK/Documentation/wiki)
 
 ### IMPORTANT!
