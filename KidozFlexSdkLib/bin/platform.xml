@@ -4,8 +4,6 @@
         <packagedDependency>okio-1.11.0.jar</packagedDependency>
         <packagedDependency>eventbus-3.0.0.jar</packagedDependency>        
     </packagedDependencies>
-
-   
 </platform>
 
 

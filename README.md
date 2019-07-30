@@ -7,7 +7,7 @@ KIDOZ SDK + Sample Application (ANE)
 =================================
 ** KIDOZ SDK Android Extension (ANE) compatible with Android 4.2 (API level 17) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
-*Updated to KIDOZ Android SDK version 0.8.8.0*
+*Updated to KIDOZ Android SDK version 0.8.8.3*
 *Updated to KIDOZ iOS SDK version 0.5.9*
 
 Due to new regulation by Google Play Design for Family policy , all references to YouTube were removed from the SDK.
