@@ -1,0 +1,11 @@
+<platform xmlns="http://ns.adobe.com/air/extension/24.0">
+    <sdkVersion>8.0</sdkVersion>
+    <linkerOptions>
+        <option>-w</option>
+    </linkerOptions>
+    <packagedDependencies>
+    </packagedDependencies>
+</platform>
+
+ 
+ 

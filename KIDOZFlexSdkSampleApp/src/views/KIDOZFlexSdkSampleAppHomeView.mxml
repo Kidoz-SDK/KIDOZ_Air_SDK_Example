@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView">
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Kidoz SDK Adobe Test App ">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -18,27 +18,23 @@
 				<s:VerticalLayout
 					paddingLeft="25"
 					paddingRight="25"
-					paddingTop="25"
-					paddingBottom="25"/>				
+					paddingTop="5"
+					paddingBottom="5"/>				
 			</s:layout>
 						
-	
 				<s:Label text="Interstitial"/>
 				<s:Button id="load_InterstitialView" label="load Interstitial view" click="loadInterstitialView();"/> 
 				<s:Button id="show_InterstitialView" label="show Interstitial view" click="showInterstitialView();"/>
-				
+			
 				<s:Label text="Rewarded"/>
-				<s:Button id="load_RewardedView" label="load rewarded view" click="loadRewardedView();"/>
+				<s:Button id="load_RewardedView" label="load Rewarded view" click="loadRewardedView();"/>
 				<s:Button id="show_RewardedView" label="show Rewarded view" click="showRewardedView();"/>
-				
-				<s:Label text="Panel"/>
-				<s:Button id="expandPanel" label="Expand Panel" click="expandPanelView();"/>
-				<s:Button id="colapsePanel" label="Close Panel" click="colapsePanelView();"/>		 	 
-				<s:Button id="panelStatus" label="Get Panel Status" click="checkPanelViewStatus();"/>
-				<s:Button id="hide_Panel" label="hide panel" click="hidePanelView();"/>
-				<s:Button id="show_Panel" label="show panel" click="showPanelView();"/>
-				
-				<s:Button id="changePos" label="Change Banner Pos" click="changeBannerAnchorPosition();"/> 
+			
+				<s:Label text="Banner"/>
+			    <s:Button id="load_BannerView" label="load Banner view" click="addBannerView();"/>
+		    	<s:Button id="show_BannerView" label="show Banner view" click="showBanner();"/>
+				<s:Button id="hide_BannerView" label="hide Banner view" click="hideBanner();"/>
+
 		</s:BorderContainer>
 	</s:VGroup>
 	
@@ -101,54 +97,16 @@
 			controller.setOnRewardedEventListener(mRewardedIntefaceObject);		
 			
 			
-
-			
-			// For example purposes we add Feed Button And Panel View on application Start
-	
-			
-			/** Add feed Panel to View  */
-			controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END);	
-			
-			/** Set desired panel color (Optional) */
-			controller.setPanelViewColor("#FF9F3087");
-			
-			
-
-			/**
-			 * Expand panel view programmatically
-			 * */
-			private function expandPanelView():void { 				
-				controller.expandPanelView();	
-//				controller.initSDK("5","i0tnrdwdtq0dm36cqcpg6uyuwupkj76s");
-			}
-			
-			/**
-			 * Collapse panel view programmatically
-			 * */
-			private function colapsePanelView():void {						
-				controller.collapsePanelView();
-				trace("oooOri colapsePanelView colapsePanelView colapsePanelView");
-			}	
-			
-			/**
-			 * Check panel view state
-			 * */
-			private function checkPanelViewStatus():void {							
-				if(controller.isPanelExpanded()) {
-					controller.printToastDebugLog("Panel status OPENED");
-				}else {
-					controller.printToastDebugLog("Panel status CLOSED");
-				}
-				
-				trace ("checkPanelViewStatus");
-			}		
-			
-			
+			static var mBannerViewActionListener:BannerViewActionListener = new BannerViewActionListener(controller);
+			controller.setOnBannerViewEventListener(mBannerViewActionListener);
+					
 			/**
 			 * Add banner to view
 			 *  */
-			private function addBannerView():void {					
-				controller.addBannerView(SdkController.BANNER_POSITION_TOP_RIGHT);
+			private function addBannerView():void {	
+				
+				controller.addBannerView(SdkController.BANNER_POSITION_BOTTOM);
+
 			}
 			
 			// Help variable for position changes
@@ -158,12 +116,8 @@
 			 * Example of changing banner anchor position on runtime
 			 *  */
 			private function changeBannerAnchorPosition():void {	
-				currentPosition++;
-				if(currentPosition > SdkController.BANNER_POSITION_BOTTOM_RIGHT) {
-					currentPosition = 0;
-				}
-				controller.changeBannerViewPosition(currentPosition);
-				trace("changeBannerAnchorPosition");
+				controller.changeBannerViewPosition(SdkController.BANNER_POSITION_TOP);
+				trace("changeBannerAnchorPosition"); 
 			}
 			
 			
@@ -182,6 +136,7 @@
 			private function hideBanner():void {	
 				
 				controller.hideBannerView();
+
 			}
 			
 		
@@ -241,7 +196,7 @@
 				controller.loadRewardedView(false);
 			}
 			
-			
+	
 		
 			
 		]]>

@@ -44,10 +44,12 @@
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
-    <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="true" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="/Users/orikam/Documents/signing/air_test.mobileprovision" releasePackageType="">
-      <airSettings airCertificatePath="/Users/orikam/Documents/signing/Kidoz_Dev_2016.p12" airTimestamp="true" anePathSet="true" version="1">
+    <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="true" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="/Users/orikam/Documents/signing/adobeAiriOSTest.mobileprovision" releasePackageType="">
+      <airSettings airCertificatePath="/Users/orikam/Documents/Adobe Flash Builder 4.7/Test.p12" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
-        <anePaths/>
+        <anePaths>
+          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+        </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
         <newPackagingParams/>
@@ -60,8 +62,8 @@
       <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
-          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/SupportV4Air.ane"/>
           <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/KidozFlexSdkLib/bin/KidozAFlexSdkLib.ane"/>
+          <anePathEntry path="/Users/orikam/dev/SDK_GIT/KIDOZ_Air_SDK_Example/SupportV4Air.ane"/>
         </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>

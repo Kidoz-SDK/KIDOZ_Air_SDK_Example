@@ -5,7 +5,8 @@ package com.kidoz.sdk.api.platforms
 		function onBannerReady():void; 
 		function onBannerShow():void;
 		function onBannerHide():void;
-		function onBannerContentLoaded():void;
-		function onBannerContentLoadFailed():void;		
+		function onBannerContentLoadFailed():void;	
+		function onBannerNoOffers():void;		
+
 	}
 }

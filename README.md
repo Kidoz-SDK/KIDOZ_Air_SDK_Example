@@ -1,14 +1,15 @@
 
 
+
 <a href="url"><img src="https://github.com/Kidoz-SDK/Kidoz_Android_SDK_Example/blob/master/graphics/App%20icon.png" align="left" height="72" width="72" ></a>
 [<img src="https://kidoz-cdn.s3.amazonaws.com/wordpress/kidoz_small.gif" width="533px" height="300px">](https://www.youtube.com/watch?v=-ljFjRn7jeM)
 
-KIDOZ SDK + Sample Application (ANE)
+KIDOZ SDK + Sample Application (ANE) 
 =================================
-** KIDOZ SDK Android Extension (ANE) compatible with Android 4.2 (API level 17) and above. Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
+** KIDOZ SDK Android Extension (ANE) compatible with Android 4.2 (API level 17) and above , iOS 8.0 And above . Sample app is compiled with Flex SDK 20.0 on   Flash Builder 4.7**
 
 *Updated to KIDOZ Android SDK version 0.8.8.3*
-*Updated to KIDOZ iOS SDK version 0.5.9*
+*Updated to KIDOZ iOS SDK version 1.3.2*
 
 Due to new regulation by Google Play Design for Family policy , all references to YouTube were removed from the SDK.
 
@@ -22,12 +23,11 @@ This Flex Mobile application project provides an example of the [KIDOZ](http://w
 The example application contains the following creative tools:
 
 _Recommended units_:
-* KIDOZ Panel view content tool - the `PanelView` (will be deprecated by Dec 2019)
+* KIDOZ Banner view content tool - the `BannerView` 
 * KIDOZ Interstitial/Rewarded view content tool - the `InterstitialView`/`RewardedView`
 
-** Note that you need to select either Interstital OR Rewarded during application lifetime.
-
 Removed units:
+* KIDOZ Panel view content tool - the `PanelView`
 * KIDOZ Feed view content tool - the `FeedView` 
 * KIDOZ Flexi Point view content tool - the `FlexiView` 
 
@@ -138,96 +138,7 @@ SDKInitListener is just an object that implements the ISDKInitIntefrace interfac
 		}
 ```
 
-# KIDOZ Panel (will be deprecated by Dec 2019)
-<a href="url"><img src="https://cdn.kidoz.net/media/Panel%20Github.jpeg" align="right" height="121" width="200" ></a>
 
-`PanelView` is a customized special view that can slide in/out of the screen (both in horizontal and vertical layout) with minimal interference to user experience.
-The `PanelView` can be placed on one of four sides of the activity screen - `PANEL_TYPE.TOP`,`PANEL_TYPE.BOTTOM`
-
-</br>
-The `PanelView` can be controlled via a special `Handle` button that can be located in any of the 3 following positions -  
-`HANDLE_POSITION.START`,`HANDLE_POSITION.CENTER`,`HANDLE_POSITION.END` depending on the `PanelView` initial screen location.
-</br>
-<a href="url"><img src="https://cdn.kidoz.net/media/Panel%20Position%20Github.jpg" align="center" height="500" width="433" ></a>
-</br>
-
-# To add the Panel to your view use: 
-
-```javascript
-     /** Add Panel to View  */
-     controller.addPanleView(SdkController.PANEL_TYPE_BOTTOM,SdkController.HANDLE_POSITION_END,true);	
-```
-
-- You can change the color of the Panel on runtime by using:
-```javascript
-     controller.setPanelViewColor("#FF9F3087");
-```
-
-- To invoke `PanelView` programmatically use:
-```javascript
-    /**
-     * Expand panel view programmatically
-     */
-     controller.expandPanelView();	
-```
-and
-
-```javascript
-     /**
-     * Collapse panel view programmatically
-     */
-     controller.collapsePanelView();
-```
-
-- To check the `PanelView` current view state use:
-```javascript
-     /**
-     * Check if panel expanded or colapssed
-     */
-     controller.isPanelExpanded();
-```
-
-You can implement `IPanelViewInterface` interface if you want to be informed when the `PanelView` is Collapsed/Expanded by creating a class that implements the interface.
-
-```javascript
- 	import com.kidoz.sdk.api.platforms.IPanelViewInterface;
-	import com.kidoz.sdk.api.platforms.SdkController;
-	
-	/** Example Implementation of the Panel View events listener  */
-	public class PanelViewActionListener implements IPanelViewInterface
-	{		
-		var mController:SdkController;
-		
-		public function PanelViewActionListener(controller:SdkController)
-		{
-			mController = controller;
-		}
-		
-		/** On Panel view expanded callback */
-		public function onPanelViewExpanded():void {
-			mController.printToastDebugLog("Feed Panel Expanded");
-		} 
-		
-		/** On Panel view collapsed callback */
-		public function onPanelViewCollapsed():void {
-			mController.printToastDebugLog("Feed Panel Collapsed");
-		} 
-		
-		/** On Panel view ready callback */
-		public function onPanelViewReady():void {
-			mController.printToastDebugLog("Feed Panel Ready");
-		} 
-	}
-```
-
-- Set interface by:
-```javascript
-        /**
-	 * Set Panel View events listener
-	 * Used to catch panel view events (Expand/Collaps)
-	 *  */
-	controller.setOnPanelViewEventListener(new PanelViewActionListener(controller));
-```
 
 # KIDOZ Interstitial / Rewarded
 ## Request interstitial ad 
@@ -241,9 +152,9 @@ You can implement `IPanelViewInterface` interface if you want to be informed whe
 	controller.loadRewardedView(false);
 ```
 ## Showing the interstitial / rewarded ad
-After receiving the interstitial reay event it is possible to call the show function
+After receiving the interstitial ready event it is possible to call the show function
 ```javascript
-	/** Show kidoz feed view */
+	/** Show kidoz interstitial / rewarded view */
  	controller.showInterstitialView();
 	controller.showRewardedView();
 ```
@@ -313,6 +224,77 @@ public function InterstitialViewActionListener(controller:SdkController)
 		/** On Rewarded no offers callback */
 		public function onRewardedNoOffers():void {
 		} 
+		
+```
+
+# KIDOZ Banner 
+## Request banner ad 
+
+
+```javascript
+	import com.kidoz.sdk.api.platforms.SdkController; 
+	controller.addBannerView(SdkController.BANNER_POSITION_BOTTOM);
+```
+
+## Request banner ad And Show
+
+
+```javascript
+	import com.kidoz.sdk.api.platforms.SdkController; 
+	controller.addBannerViewExtended(SdkController.BANNER_POSITION_BOTTOM,ture);
+```
+
+The banner can be placed on one of six sides of the screen : `BANNER_POSITION_TOP`, `BANNER_POSITION_BOTTOM` ,`BANNER_POSITION_TOP_LEFT` ,`BANNER_POSITION_TOP_RIGHT` ,`BANNER_POSITION_BOTTOM_LEFT` ,`BANNER_POSITION_BOTTOM_RIGHT`.
+
+
+## Showing the banner ad
+After receiving the banner ready event it is possible to call the show function
+```javascript
+	/** Show kidoz banner view */
+ 	controller.showBannerView();
+```
+
+## Hiding the banner ad
+After the banner is showing it is possible to call the hide function
+```javascript
+	/** Hide kidoz banner view */
+ 	controller.hideBannerView();
+```
+## Change Banner Position
+Before the banner ready event it is possible to call the change Banner Position function
+```javascript
+	/** Change Banner Position */
+ 	controller.changeBannerViewPosition(SdkController.BANNER_POSITION_BOTTOM);
+```
+
+## Setting the listeners 
+```javascript
+ 	controller.setOnBannerViewEventListener(new BannerViewActionListener(controller));
+```
+
+Banner Listener:
+```javascript
+import com.kidoz.sdk.api.platforms.IBannerViewInterface;
+public function BannerViewActionListener(controller:SdkController)
+		/** On banner view ready callback */
+		public function onBannerReady():void {
+		} 
+		
+		/** On banner view show callback */
+		public function onBannerShow():void {
+		} 
+		
+		/** On banner view hide callback */
+		public function onBannerHide():void {
+		} 
+		
+		/** On banner load failed callback */
+		public function onBannerContentLoadFailed():void {
+		} 
+		
+		/** On Banner no offers callback */
+		public function onBannerNoOffers():void {
+		} 	
 		
 ```
 # For any question or assistance, please contact us at SDK@kidoz.net.

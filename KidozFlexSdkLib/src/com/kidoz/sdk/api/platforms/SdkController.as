@@ -22,11 +22,14 @@ package com.kidoz.sdk.api.platforms
 		private static const FK_EXPAND_PANEL:String = "expandPanelView";
 		private static const FK_SET_PANEL_VIEW_COLOR:String = "setPanelViewColor";
 		private static const FK_IS_PANEL_EXPANDED:String = "isPanelExpanded";
+		
+		//banner native calls
 		private static const FK_ADD_BANNER_VIEW:String = "addBannerView";
 		private static const FK_ADD_BANNER_VIEW_EXTENDED:String = "addBannerViewExtended";
 		private static const FK_CHANGE_BANNER_POSITION:String = "changeBannerPosition";
 		private static const FK_SHOW_BANNER_VIEW:String = "showBannerView";
 		private static const FK_HIDE_BANNER_VIEW:String = "hideBannerView";
+		
 		private static const FK_ADD_FLEXI_VIEW:String = "addFlexiView";
 		private static const FK_SHOW_FLEXI_VIEW:String = "showFlexiView";
 		private static const FK_HIDE_FLEXI_VIEW:String = "hideFlexiView";
@@ -106,6 +109,8 @@ package com.kidoz.sdk.api.platforms
 		private static const BANNER_VIEW_EVENT_HIDE:String = "BANNER_VIEW_EVENT_HIDE"; 
 		private static const BANNER_VIEW_EVENT_CONTENT_LOADED:String = "BANNER_VIEW_EVENT_CONTENT_LOADED"; 
 		private static const BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED:String = "BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED"; 
+		private static const BANNER_VIEW_EVENT_NO_OFFERS:String = "BANNER_VIEW_EVENT_NO_OFFERS"; 
+
 		
 
 		
@@ -202,11 +207,11 @@ package com.kidoz.sdk.api.platforms
 						mBannerViewListener.onBannerHide();
 					}else if(event.level == BANNER_VIEW_EVENT_READY){
 						mBannerViewListener.onBannerReady();
-					}else if(event.level == BANNER_VIEW_EVENT_CONTENT_LOADED){
-						mBannerViewListener.onBannerContentLoaded();
 					}else if(event.level == BANNER_VIEW_EVENT_CONTENT_LOAD_FAILED){
 						mBannerViewListener.onBannerContentLoadFailed();
-					}	
+					} else if(event.level == BANNER_VIEW_EVENT_NO_OFFERS) {
+						mBannerViewListener.onBannerNoOffers();
+					}
 				}
 			}
 	
@@ -352,7 +357,9 @@ package com.kidoz.sdk.api.platforms
 		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
 		 */
 		public function addBannerView(banner_anchor_pos:Number):void {
-			  
+			if(extContext != null) {
+				extContext.call(FK_ADD_BANNER_VIEW,banner_anchor_pos);
+			}
 		}
 		
 		/**
@@ -364,7 +371,9 @@ package com.kidoz.sdk.api.platforms
 		 * @param auto_show is auto show banner on ready
 		 */
 		public function addBannerViewExtended(banner_anchor_pos:Number,auto_show:Boolean):void {
-			 
+			if(extContext != null) {
+				extContext.call(FK_ADD_BANNER_VIEW_EXTENDED,banner_anchor_pos,auto_show);
+			}
 		}
 		
 		
@@ -376,7 +385,9 @@ package com.kidoz.sdk.api.platforms
 		 * @param banner_anchor_pos banner anchor position on screen (BANNER_POSITION...)
 		 */
 		public function changeBannerViewPosition(banner_anchor_pos:Number):void {
-			 
+			if(extContext != null) {
+				extContext.call(FK_CHANGE_BANNER_POSITION,banner_anchor_pos);
+			}
 		}	
 		
 		/**
@@ -385,7 +396,7 @@ package com.kidoz.sdk.api.platforms
 		 * Show banner view		 
 		 */
 		public function showBannerView():void {
-			 
+			extContext.call(FK_SHOW_BANNER_VIEW);			 
 		}
 		
 		/**
@@ -394,11 +405,11 @@ package com.kidoz.sdk.api.platforms
 		 * Hide banner view		 
 		 */
 		public function hideBannerView():void {
-			 
+			extContext.call(FK_HIDE_BANNER_VIEW);			 
 		}
 		
 	
-		
+	
 		/****************
 		 * Interstitial *
 		 ****************/

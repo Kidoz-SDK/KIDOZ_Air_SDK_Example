@@ -1,13 +1,11 @@
 <extension xmlns="http://ns.adobe.com/air/extension/24.0">
     <id>com.kidoz.sdk.api.platforms</id>
-    <versionNumber>0.7.1</versionNumber>
+    <versionNumber>1.3.2</versionNumber>
     <platforms>
-        
         <platform name="iPhone-ARM">
             <applicationDeployment>
                 <nativeLibrary>libKidozSDK.a</nativeLibrary>
-                <initializer>VolumeExtensionInitializer</initializer>
-                
+                    <initializer>KidozSDKExtensionInitializer</initializer>                               
             </applicationDeployment>
         </platform>
         <platform name="Android-ARM">

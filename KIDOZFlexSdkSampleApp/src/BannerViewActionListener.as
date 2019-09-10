@@ -28,16 +28,18 @@ package
 			mController.printToastDebugLog("Banner Hide");
 		} 
 		
-		/** On Banner content loaded callback */
-		public function onBannerContentLoaded():void {
-			mController.printToastDebugLog("Banner Content Loaded");
-		} 
 		
 		/** On Banner load failed callback */
 		public function onBannerContentLoadFailed():void {
 			mController.printToastDebugLog("Banner Content Load Failed");
 		} 
+	
+		public function onBannerNoOffers():void {
+			mController.printToastDebugLog("Banner onInterstitialNoOffers");
+		} 
+		
 	}
+	
 }
 
 
